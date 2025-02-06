@@ -1,0 +1,5 @@
+export const SignIn = "/sign-in"
+export const SignUp = "/sign-up"
+export const ForgetPassword = "/forget-my-password"
+export const TermsAndConditions = "/terms-and-conditions"
+export const MyAccount = "my-account"

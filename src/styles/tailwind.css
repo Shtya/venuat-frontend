@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components { 
+    .h0 {
+        @apply font-[600] text-secondry1;
+        font-size: clamp(26px, 5vw, 34px);
+    }
+
+    .h1 {
+        @apply font-[400] text-secondry2;
+        font-size: clamp(18px, 4vw, 24px);
+    }
+
+    .h2 {
+        font-size: clamp(16px, 3vw, 20px);
+    }
+
+    .h3 {
+        font-size: clamp(14px, 2.5vw, 18px);
+    }
+
+    .h4 {
+        font-size: clamp(12px, 2vw, 16px);
+    }
+    .h5 { font-size: clamp(10px, 2vw, 14px); }
+
+    .shadow-custom {
+        box-shadow: 0px 7px 40.2px 0px #1e328b0d;
+    }
+    .shadow-blur {
+        box-shadow: 0px 7px 40.2px 0px #1e328b1a;
+    }
+    .main-shadow {
+        box-shadow: 0px 4px 45.4px 0px #0000000d;
+    }
+    .inner-shadow {
+        box-shadow: 0px 4px 131px -52px #1e328b33 inset;
+    }
+
+    .error {
+        font-size: clamp(8px, 2vw, 10px);
+        @apply text-red1  top-full mt-[2px] rtl:right-[0px] ltr:left-[0px];
+    }
+}
+
+.flatpickr-mobile {
+    display: none !important;
+}
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+/*  Scroll  */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1e328b;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #1e328b9e;
+}
+
+.select ::-webkit-scrollbar {
+    width: 3px !important;
+    height: 3px !important;
+}
+.auth ::-webkit-scrollbar {
+    width: 3px !important;
+    height: 3px !important;
+}
+
+/* !  */
+.custom-prev,
+.custom-next {
+    border-radius: 50%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+}
+
+
+.swiper-button-disabled {
+    stroke: #1e328b !important ;
+    border: 1px solid #1e328b;
+    background-color: transparent !important;
+    opacity: 0.5;
+    cursor: default;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.timeline-container {
+    position: relative;
+    width: 100%;
+    margin: 20px auto;
+    padding: 10px;
+  }
+  
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(30, 1fr); /* Adjust for the number of days */
+    gap: 5px;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  .calendar-cell {
+    text-align: center;
+    padding: 5px;
+    font-size: 12px;
+    color: #666;
+    border-right: 1px solid #eee;
+  }
+  
+  .event-card {
+    position: relative;
+    background-color: #fcdada;
+    color: #333;
+    border: 1px solid #f8b4b4;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  

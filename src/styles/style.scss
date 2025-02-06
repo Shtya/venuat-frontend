@@ -1,0 +1,53 @@
+@import url(https://fonts.googleapis.com/css?family=Alexandria:100,200,300,regular,500,600,700,800,900);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic);
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic);
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+[dir="ltr"] * {
+  font-family: "Open Sans", sans-serif ;
+}
+
+
+[dir="rtl"] * {
+  font-family: "Alexandria" !important;
+}
+
+
+ul li.ar a{ font-family:"Alexandria" !important; }
+ul li.en a{ font-family: "Open Sans", sans-serif !important; }
+
+
+
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: 1440px;
+  width: 100%;
+  margin: auto;
+  padding: 0 20px;
+}
+
+body {
+  background-color: #fff;
+  overflow-x: hidden;
+  
+}
+
+
+.gradient {
+  background: linear-gradient(328.18deg, #1E328B -43.78%, rgba(8, 13, 37, 0) 101.06%);
+}
+
