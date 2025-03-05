@@ -1,32 +1,42 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from "@/components/atoms/Navbar"
 import Footer from "@/components/atoms/Footer"
 import { usePathname } from '@/navigation'
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
 import { useEffect } from 'react';
+import { Toaster } from 'react-hot-toast'
+import { GlobalProvider } from '@/context/GlobalContext'
 
 
-export default function Layout({children}) {
+export default function Layout({children , params }) {
 	const path = usePathname()
-	const pages = ["sign-in", "sign-up" , "forget-my-password"];
-	const isAuth = pages.some((route) => path.endsWith(route));
+	const [show , setShow ] = useState(false)
+
+	useEffect(()=> {
+		if( ["/sign-in" , "/sign-up" , "/forget-my-password"]?.includes(path) || path?.startsWith("/sign-up")  ){
+			setShow(false)
+		}
+		else setShow(true)
+	},[path])
 	
 
 	useEffect(() => {
 		AOS.init({
-			offset: 0,
 		  duration: 500, 
 		  easing: 'ease-in-out', 
 		  once: true, 
 		});
 	  }, []);
   return (
+	<GlobalProvider>
 	<div>
-		{!isAuth && <Navbar />}
+		{show && <Navbar />}
 		<div  > {children} </div>
-		{!isAuth && <Footer />}
+		{show && <Footer />}
+		<Toaster position="top-center" reverseOrder={false} />
 	</div>
+	</GlobalProvider>
   )
 }

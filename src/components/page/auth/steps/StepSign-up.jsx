@@ -5,7 +5,7 @@ import { ImgEmail, ImgPassword, ImgPhone, ImgUser } from '@/constants/imgs';
 import { useTranslations } from 'next-intl';
 import Button from '@/components/atoms/button/Button';
 
-export default function StepSignUp({ errors, register, setstep }) {
+export default function StepSignUp({ loading , errors, register, submit }) {
     const t = useTranslations();
 
     useEffect(() => {
@@ -25,7 +25,7 @@ export default function StepSignUp({ errors, register, setstep }) {
             <Input dataAos='fade-up' error={errors?.phone} register={register('phone')} KEY={'phone'} cnInput='!border-[#E1E6EF] !border-[1px] ' classname='mt-[20px] ' icon={ImgPhone} type={'text'} label={t('phoneNumber')} place={t('phoneNumberPlaceholder')} />
             <Input dataAos='fade-up' error={errors?.email} register={register('email')} KEY={'email'} cnInput='!border-[#E1E6EF] !border-[1px] ' classname='mt-[20px] ' icon={ImgEmail} type={'email'} label={t('email')} place={t('emailPlaceholder')} />
             <Input dataAos='fade-up' error={errors?.password} register={register('password')} KEY={'password'} cnInput='!border-[#E1E6EF] !border-[1px] ' classname='mt-[20px] ' icon={ImgPassword} type={'password'} label={t('password')} place={t('passwordPlaceholder')} />
-            <Button dataAos='fade-up' onClick={() => setstep(1)} name={t('createAccountButton')} classname='mt-[40px]' />
+            <Button dataAos='fade-up' isLoading={loading} onClick={submit} name={t('createAccountButton')} classname='mt-[40px]' />
         </div>
     );
 }

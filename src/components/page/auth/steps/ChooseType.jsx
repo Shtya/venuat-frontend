@@ -2,12 +2,15 @@ import Button from '@/components/atoms/button/Button';
 import Radio from '@/components/atoms/radio/Radio';
 import { SignUpTypeOfClient } from '@/Dummy/dummy'
 import { onEnter } from '@/helper/onEnter';
+import { useRouter } from '@/navigation';
 import { useTranslations } from 'next-intl';
 
 import React, { useState } from 'react';
 
-export default function ChooseType({getValues , setstep , setisClient , setValue }) {
+export default function ChooseType({getValues , setstep , setValue }) {
 	const t = useTranslations()
+	const router = useRouter()
+
 	const [type , settype ] = useState()
 
 	const handleType = (e)=>{
@@ -22,8 +25,8 @@ export default function ChooseType({getValues , setstep , setisClient , setValue
 		if(!getValueOfTypeClient){ seterrorTypeClient("errors.chooseTypeClient") }
 		else{
 			seterrorTypeClient(null)
-			setisClient(type)
-			setstep(2)  }
+			type == "provider" ? router.push("/sign-up/provider?step=1") : router.push("/sign-up/client?step=1")
+		}
 	}
 
 	onEnter(handleGoToNextStep)

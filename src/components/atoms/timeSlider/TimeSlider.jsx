@@ -1,75 +1,45 @@
-import React, { useEffect, useState } from "react";
-import { Range, getTrackBackground } from "react-range";
+'use client';
 
-const TimeSlider = ({ classname }) => {
-  const [values, setValues] = useState([600, 1020]);
+import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
+import RangeSlider from 'react-range-slider-input';
+import 'react-range-slider-input/dist/style.css';
 
-  const formatTime = (minutes) => {
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    const formattedHours = hours < 10 ? `0${hours}` : hours;
-    const formattedMinutes = mins < 10 ? `0${mins}` : mins;
-    return `${formattedHours}:${formattedMinutes}`;
-  };
+const PriceRangeSlider = ({setValue , min, max, loading }) => {
+  const [values, setValues] = useState([min, max]);
+  const t = useTranslations();
+  useEffect(()=> {
+    setValues([min,max])
+  } , [loading])
+  
+    return (
+        <div className='w-full flex flex-col items-center p-4 bg-white rounded-lg shadow-md'>
+            <div className='h2 w-full mb-[20px] font-[700] mt-[30px] '> {t('price2')} </div>
+            {loading ? (
+                <div className='w-full h-[10px] bg-gray-300 animate-pulse rounded-[4px]'></div>
+            ) : (
+                <>
+                    <RangeSlider
+                        min={min}
+                        max={max}
+                        step={50}
+                        value={values}
+                        onInput={values => {
+                            setValues(values);
+                            setValue("price.minPrice" , values[0])
+                            setValue("price.maxPrice" , values[1])
+                        }}
+                        className='w-full'
+                    />
 
-  const onSliderChange = (newValues) => {
-    setValues(newValues);
-  };
-
-  return (
-    <div className={`${classname} w-[300px] range mb-[20px] mr-[20px] max-w-[430px]`}>
-      <p className="flex items-center justify-between">
-        <span className="slider-time P-12">{formatTime(values[0])}</span>
-        <span className="slider-time2 P-12">{formatTime(values[1])}</span>
-      </p>
-      <Range
-        step={15}
-        min={600}
-        max={1020}
-        values={values}
-        onChange={onSliderChange}
-        renderTrack={({ props, children }) => (
-          <div
-            {...props}
-            style={{
-              ...props.style,
-              height: "3px",
-              width: "100%",
-              background: getTrackBackground({
-                values: values,
-                colors: ["#CDCDCD", "#29963e", "#CDCDCD"],
-                min: 600,
-                max: 1020,
-              }),
-            }}
-          >
-            {children}
-          </div>
-        )}
-        renderThumb={({ props, isDragged, index }) => (
-          <div
-            {...props} // Ensure props are passed correctly to avoid overwriting styles
-            key={index} // Ensure each thumb has a unique key
-            style={{
-              ...props.style, // Spread props.style to preserve transform and positioning
-              height: "28px",
-              width: "28px",
-              borderRadius: "50%",
-              backgroundColor: "#FFF",
-              border: "3px solid #CDCDCD",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: isDragged ? "grabbing" : "grab",
-              outline: "none",
-              boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)", // Optional for better visibility
-              zIndex: 1, // Ensure the thumb stays on top of the track
-            }}
-          />
-        )}
-      />
-    </div>
-  );
+                    <div className=' ltr:flex-row-reverse flex justify-between w-full mt-3 text-sm font-semibold text-primary1 '>
+                        <span>{ t("price" , {count : values[1]}) } </span>
+                        <span>{ t("price" , {count : values[0]}) } </span>
+                    </div>
+                </>
+            )}
+        </div>
+    );
 };
 
-export default TimeSlider;
+export default PriceRangeSlider;

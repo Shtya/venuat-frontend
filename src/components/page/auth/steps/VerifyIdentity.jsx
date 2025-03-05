@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 
-export default function VerifyIdentity({ step , setstep }) {
+export default function VerifyIdentity({ step , setstep , loading , CheckCodeOTP, resendGmailMsg }) {
     const t = useTranslations();
 
     useEffect(() => {
@@ -21,8 +21,6 @@ export default function VerifyIdentity({ step , setstep }) {
 
     const [code, setCode] = useState(['', '', '', '', '', '']);
     const inputRefs = useRef([]);
-
-	console.log(code)
 
     const handleChange = (value, index) => {
         if (isNaN(value)) return; // 
@@ -51,7 +49,7 @@ export default function VerifyIdentity({ step , setstep }) {
 
             <div  className='flex flex-col items-center justify-center space-y-4 mt-8'>
 
-                <div data-aos="fade-up" className='flex flex-row-reverse space-x-2'>
+                <div data-aos="fade-up" dir='ltr' className='flex gap-[10px] '>
                     {code.map((digit, index) => (
                         <input key={index}   type='text' value={digit} maxLength={1} onChange={e => handleChange(e.target.value, index)} onKeyDown={e => handleKeyDown(e, index)} ref={el => (inputRefs.current[index] = el)} className={` ${digit && "bg-primary3  border-[#576FDB] "} w-[50px] h-[50px] max-sm:w-[35px] max-sm:h-[35px] text-center text-lg border-[1px] border-gray-300 rounded-md focus:outline-none focus:border-primary1 transition`} />
                     ))}
@@ -59,9 +57,9 @@ export default function VerifyIdentity({ step , setstep }) {
                 <p data-aos="fade-up" className='text-secondry3 text-sm'> {t("verification_code_wait")} </p>
 
                 {/* Resend Code */}
-                <p data-aos="fade-up" className='text-primary1 font-semibold underline  text-sm cursor-pointer hover:underline'> {t("did_not_receive_code")} </p>
+                <p onClick={resendGmailMsg} data-aos="fade-up" className='text-primary1 font-semibold underline  text-sm cursor-pointer hover:underline'> {t("did_not_receive_code")} </p>
 
-                <Button width="max-w-[400px] w-full mx-auto " dataAos={"fade-up"} onClick={()=> setstep(step + 1)} name={t("verify")} />
+                <Button width="max-w-[400px] w-full mx-auto " dataAos={"fade-up"} isLoading={loading} onClick={()=> CheckCodeOTP(code)} name={t("verify")} />
             </div>
         </div>
     );

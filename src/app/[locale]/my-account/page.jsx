@@ -1,16 +1,17 @@
 "use client"
-import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import Breadcrumbs from '@/components/atoms/Breadcrumbs';
 import Sidebar from '@/components/atoms/Sidebar';
 import MyInformation from '@/components/page/profile/MyInformation';
 import HallReservation from '@/components/page/profile/HallReservation';
 import MyQuestion from '@/components/page/profile/MyQuestion';
+import { hookMyAccount } from '@/hooks/hookMyAccount';
 
 const page = () => {
-  const t = useTranslations();
+  const {faqs , loadingfaqs , loadingInfo , loadingPassword , user ,  register , errors , getValues, setValue , SubmitStep , watch , getMe , loading, error } = hookMyAccount()
   const [currentComponent , setcurrentComponent] =useState(1)
 
+  
   const handleCurrentPage = (number)=>{
     setcurrentComponent(number)
     const url = new URL(window.location);
@@ -34,11 +35,11 @@ const page = () => {
       <Breadcrumbs data={[ { name: 'profile', value: '' } ]}  />
 
       <div className='grid grid-cols-[250px,1fr] gap-[30px] max-sm:grid-cols-1 ' >
-        <Sidebar currentComponent={currentComponent} handleCurrentPage={handleCurrentPage} />
+        <Sidebar getMe={getMe} loading={loading} currentComponent={currentComponent} handleCurrentPage={handleCurrentPage} />
 
-        {currentComponent == 1 && <MyInformation /> }
-        {currentComponent == 2 && <HallReservation /> }
-        {currentComponent == 3 && <MyQuestion /> }
+        {currentComponent == 1 && <MyInformation user={user} loadingInfo={loadingInfo} loadingPassword={loadingPassword} SubmitStep={SubmitStep} register={register} errors={errors} getValues={getValues} setValue={setValue} /> }
+        {currentComponent == 2 && <HallReservation getMe={getMe} loading={loading}  /> }
+        {currentComponent == 3 && <MyQuestion faqs={faqs} loadingfaqs={loadingfaqs} /> }
       </div>
     </main>
   );

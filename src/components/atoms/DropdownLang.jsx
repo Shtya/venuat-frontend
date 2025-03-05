@@ -1,8 +1,9 @@
 "use client"
-import { ChevronDown, Globe } from 'lucide-react'
+import { ChevronDown, Globe, Globe2 } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useRouter , usePathname} from '../../navigation'
 import { useLocale } from 'next-intl'
+import Image from 'next/image'
 
 
 
@@ -34,13 +35,14 @@ const DropLang = ( {classname , color , noDir} ) => {
 	};
 
   return (
-    <div ref={selectRef} className={`z-[10000] w-[50px] h-[40px] relative ${classname} `} onClick={_=> setShow(!show)} >
-      <div className={`cursor-pointer flex items-center justify-between gap-[2px] h-full h3 font-semibold uppercase ${color} `}  >  {locale}   <ChevronDown className={`  ${show ? "rotate-[180deg]" : "rotate-[0deg]"} duration-200 w-[17px] `} />  </div>
-
-      <ul className={` ${show ? "fixed" : "hidden"} overflow-hidden w-fit absolute  bg-white shadow-md border-[1px] border-gray1 rounded-[10px] top-[120%]  ${noDir ? noDir : "ltr:left-[0px] rtl:right-[0px] max-lg:rtl:translate-x-[-50%] max-lg:rtl:left-[50%] max-lg:ltr:translate-x-[50%] max-lg:ltr:right-[50%]"}`} >
-        <li className='ar' onClick={_=> handleLanguageChange("ar") }> <Link className={styles.a}  href="" locale="ar" >  العربية  </Link> </li>
-        <li className='en' onClick={_=> handleLanguageChange("en") }> <Link className={styles.a}  href="" locale="en" >  English </Link> </li>
-      </ul>
+    <div ref={selectRef} className={`z-[10000] cursor-pointer w-[50px] h-[40px] relative ${classname} `} onClick={_=> setShow(!show)} >
+      <div 
+        style={{direction : "ltr"}}
+        onClick={_=> handleLanguageChange(locale == "ar" ? "en" : "ar" ) } 
+        className={`cursor-pointer flex items-center  gap-[2px] h-full h3 font-semibold uppercase ${color} `}  >
+        <Globe className='flex-none' size={20} />
+        {locale}  
+        </div>
     </div>
   )
 }

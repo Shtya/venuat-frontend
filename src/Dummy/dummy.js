@@ -490,17 +490,17 @@ export const SignUpTypeOfClient = [
 
 
 export const PlaceData = [
-	{value:"halls" , name : "hall"} ,
+	{value:"hall" , name : "hall"} ,
 	{value:"hotel" , name : "hotel"} ,
 ]
 export const CountPlaceData = [
 	[
-		{value:"onePlace" , name : "onePlace"} ,
-		{value:"multiPlace" , name : "multiPlace"} ,
+		{value: false  , name : "onePlace"} ,
+		{value: true  , name : "multiPlace"} ,
 	],
 	[
-		{value:"oneHotel" , name : "oneHotel"} ,
-		{value:"multiHotel" , name : "multiHotel"} ,
+		{value: false  , name : "oneHotel"} ,
+		{value: true  , name : "multiHotel"} ,
 	],
 ]
 

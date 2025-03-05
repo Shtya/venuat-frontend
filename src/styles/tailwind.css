@@ -40,7 +40,7 @@
     }
 
     .error {
-        font-size: clamp(8px, 2vw, 10px);
+        font-size: clamp(8px, 2vw, 12px);
         @apply text-red1  top-full mt-[2px] rtl:right-[0px] ltr:left-[0px];
     }
 }
@@ -80,12 +80,20 @@ html {
     background-color: #1e328b9e;
 }
 
-.select ::-webkit-scrollbar {
+.select ::-webkit-scrollbar  {
+    width: 3px !important;
+    height: 3px !important;
+}
+.filter ::-webkit-scrollbar {
     width: 3px !important;
     height: 3px !important;
 }
 .auth ::-webkit-scrollbar {
     width: 3px !important;
+    height: 3px !important;
+}
+.list ::-webkit-scrollbar {
+    width: 5px !important;
     height: 3px !important;
 }
 
@@ -111,6 +119,20 @@ html {
 }
 
 
+.range-slider{
+    background-color: #EAEDFA !important;
+    height: 4px !important;
+}
+.range-slider__range  {
+    background-color: #1e328b !important ;
+    height: 4px !important;
+}
+
+.range-slider__thumb{
+    background-color: #1e328b !important ;
+    width: 16px !important;
+    height: 16px !important;
+}
 
 
 

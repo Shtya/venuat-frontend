@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useRef, useEffect , useState } from "react";
 
 
-const Calendar = ({watch , dataAos , reverse , cnInput , label , cnLabel , trigger , error , setValue ,KEY = "calendar" , classname , place }) => {
+const Calendar = ({watch , dataAos , reverse , cnInput , label , cnLabel , trigger , error , setValue ,KEY, classname , place }) => {
   const t = useTranslations()
   const datePickerRef = useRef(null);
   const [currentDate , setcurrentDate ] = useState()
@@ -19,20 +19,8 @@ const Calendar = ({watch , dataAos , reverse , cnInput , label , cnLabel , trigg
       }
   },[watchKey])
 
-  
-  function formatDate(date) {
-	return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
-}
 
   useEffect(() => {
-	// const today = new Date();
-	// 	let defaultDate = new Date(
-	// 		today.getFullYear(),
-	// 		today.getMonth(),
-	// 		today.getDate() 
-	// 	); 
-
-	// setcurrentDate(formatDate(defaultDate))
 
     const ele = document.getElementById(KEY) 
     flatpickr( ele , {
@@ -52,9 +40,9 @@ const Calendar = ({watch , dataAos , reverse , cnInput , label , cnLabel , trigg
     <label data-aos={dataAos} id={KEY} className={` flex flex-col gap-[5px] relative  w-[180px] rounded-[5px] cursor-pointer ${classname} `}>
       {label && <label htmlFor={KEY} className={`h5 ${cnLabel}`} > {label} </label> }
 
-      <label  htmlFor={KEY} className={` ${cnInput} ${reverse ? "px-[10px]" : "px-[10px]"} border-b-[1px] border-b-[#BCBBBF] h-[50px] flex items-center justify-between gap-[20px] w-full  cursor-pointer`}>
+      <label  htmlFor={KEY} className={` ${cnInput} ${reverse ? "px-[20px]" : "px-[20px]"} border-b-[1px] border-b-[#BCBBBF] h-[50px] flex items-center justify-between gap-[20px] w-full  cursor-pointer`}>
         <input className=" hidden absolute cursor-pointer inset-0 opacity-0  z-[-1] " id={KEY} ref={datePickerRef} type="text" />
-        <Image className={` ${reverse && "order-[10] "}`} src="/assets/calendar.svg" alt="" width={20} height={20} />
+        <Image className={` ltr:mr-[-10px] rtl:ml-[-10px] ${reverse && "order-[10] "}`} src="/assets/calendar.svg" alt="" width={20} height={20} />
         <span className={` flex-1  h5  ml-[-10px] ${currentDate ? "text-secondry2" : "text-secondry3"} `}> { currentDate || place } </span>
       </label>
 

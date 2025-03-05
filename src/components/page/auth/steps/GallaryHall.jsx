@@ -8,54 +8,39 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
-export default function GalleryHall({ KEY ,errors, submit, getValues, register, setValue, watch, trigger, step, setstep }) {
+export default function GalleryHall({previousStep , KEY ,errors, submit, loading,  setValue, watch, trigger  }) {
     const t = useTranslations();
-    const [error , seterror] = useState()
     const [images, setImages] = useState([]);
 
+ 
 
-    const handleGoToNextStep = () => {
-        if(images?.length < 1){
-            seterror("chooseOneImageAtLeast")
-        }
-        else {
-            seterror(null)
-            setstep(step + 1);
-        }
+    onEnter(submit);
+
+    const handleImageChange = e => { 
+        const files = Array.from(e.target.files); 
+    
+        if (files.length === 0) return;
+    
+        const newImages = files.map(file => ({ 
+            file, 
+            url: URL.createObjectURL(file), 
+        })); 
+    
+        setImages(prevImages => { 
+            const updatedImages = [...prevImages, ...newImages]; 
+            setValue(KEY, updatedImages);  
+            trigger(KEY); // Validate field after update
+            return updatedImages;  
+        }); 
     };
 
-    useEffect(()=>{
-        if(images?.length >=1 ){
-            seterror(null)
-        }
-    } ,[images])
-
-    onEnter(handleGoToNextStep);
-
-    const handleReturn = e => {
-        setstep(step - 1);
-    };
-
-
-    const handleImageChange = e => {
-        const files = Array.from(e.target.files);
-        const newImages = files.map(file => ({
-            file,
-            url: URL.createObjectURL(file),
-        }));
-
-        setImages(prevImages => {
-            setValue(KEY , [...prevImages, ...newImages])
-            return [...prevImages, ...newImages]
-        });
-        // setValue(KEY , images )
-    };
-
-    const removeImage = index => {
-        setImages(prevImages => {
-            setValue(KEY , prevImages.filter((_, i) => i !== index))
-            return prevImages.filter((_, i) => i !== index)
-        });
+    const removeImage = index => { 
+        setImages(prevImages => { 
+            const updatedImages = prevImages.filter((_, i) => i !== index);
+            setValue(KEY, updatedImages);
+            trigger(KEY);
+            return updatedImages;
+        }); 
     };
 
     const watchKey = watch?.(KEY)
@@ -66,13 +51,9 @@ export default function GalleryHall({ KEY ,errors, submit, getValues, register, 
     },[])
 
     return (
-        <div className='w-full'>
-            <div data-aos='fade-up' className='h2 text-center mt-[20px]  max-sm:mb-[20px] '>
-                {t('detailsAboutHall')}
-            </div>
-            <div data-aos='fade-up' className='h4 text-secondry2 text-center mb-[40px] max-sm:mb-[20px] '>
-                {t('addImage')}
-            </div>
+        <div className='w-full' data-aos='fade-up'>
+            <div  className='h2 text-center mt-[20px]  max-sm:mb-[20px] '> {t('detailsAboutHall')} </div>
+            <div  className='h4 text-secondry2 text-center mb-[40px] max-sm:mb-[20px] '> {t('addImage')} </div>
 
             <div data-aos="fade-up" className=' grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-[40px] items-center '>
                 {images.map((image, index) => (
@@ -86,14 +67,14 @@ export default function GalleryHall({ KEY ,errors, submit, getValues, register, 
                 <label className=' h-[160px] cursor-pointer hover:opacity-80 duration-200 flex items-center gap-[5px] justify-center relative border-[1px] border-primary1 p-[10px] rounded-[4px]  w-full '>
                     <Image width={20} height={20} src={ImgPlus} alt={`uploaded`} className='' />
                     <span className='h4 text-primary1  ' > {t("addOneImage")} </span>
-					<input type='file' accept='image/*' multiple onChange={handleImageChange} className='hidden' />
+					<input type='file' accept="image/png, image/jpeg, image/jpg, image/svg+xml" multiple onChange={handleImageChange} className='hidden' />
                 </label>
             </div>
 
-            {error && <div className="error mt-[10px] "> {t(error)} </div> }
+            {errors && <div className="error mt-[10px] "> {t(errors?.images?.message)} </div> }
 
-            <Button width=' mx-auto max-w-[400px] w-full' dataAos='fade-up' onClick={handleGoToNextStep} classname='mt-[50px] ' name={t('containue')} />
-            <Button width=' mx-auto max-w-[400px] w-full' dataAos='fade-up' onClick={handleReturn} classname='mt-[10px] ' outline={true} name={t('return')} />
+            <Button isLoading={loading} width=' mx-auto max-w-[400px] w-full' onClick={submit} classname='mt-[50px] ' name={t('containue')} />
+            <Button width=' mx-auto max-w-[400px] w-full' onClick={previousStep} classname='mt-[10px] ' outline={true} name={t('return')} />
         </div>
     );
 }

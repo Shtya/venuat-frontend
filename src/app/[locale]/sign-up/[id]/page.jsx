@@ -2,20 +2,27 @@
 
 import LayoutAuth from '@/components/molecules/layout/LayoutAuth';
 import ChooseType from '@/components/page/auth/steps/ChooseType';
-import CreateAccount from '@/components/page/auth/steps/CreateAccount';
-import StepsProvider from '@/components/page/auth/steps/StepsProvider';
+import AccountClient from '@/components/page/auth/steps/AccountClient';
+import AccountProvider from '@/components/page/auth/steps/AccountProvider';
 import { SignIn } from '@/constants/links';
 import { hookSignUp } from '@/hooks/hookSignUp';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { hookChooseType } from '@/hooks/hookChooseType';
 
-export default function page() {
+export default function page({params: {id}}) {
     const t = useTranslations();
-    const { register, errors, trigger, clearErrors, setError, getValues, setValue, submit, watch, reset } = hookSignUp();
+    const { register , errors,  getValues, setValue, submit} = hookChooseType();
     
-    const [step, setstep] = useState(1);
+    const [step, setstep] = useState(id);
     const [isClient, setisClient] = useState('');
+
+    useEffect(()=> {
+        if(id == "provider") setisClient("provider")
+        else if(id == "client") setisClient("client")
+        else setisClient(null)
+    } ,[id])
 
     return (
         <LayoutAuth>
@@ -33,9 +40,9 @@ export default function page() {
                     </div>
                 )}
 
-                {step == 1 && <ChooseType getValues={getValues} setstep={setstep} setisClient={setisClient} setValue={setValue} />}
-                {step == 2 && isClient == 'client' && <CreateAccount register={register} errors={errors} submit={submit} />}
-                {step == 2 && isClient == 'provider' && <StepsProvider />}
+                {step == "choose-type" && <ChooseType getValues={getValues} setstep={setstep}  setValue={setValue} />}
+                {step == "client"   && <AccountClient />}
+                {step == "provider" && <AccountProvider />}
             </div>
         </LayoutAuth>
     );

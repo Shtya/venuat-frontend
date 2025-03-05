@@ -1,51 +1,63 @@
-import Button from '@/components/atoms/button/Button'
-import { halls } from '@/Dummy/dummy'
-import { useTranslations } from 'next-intl'
-import Image from 'next/image'
-import React from 'react'
+import SAR from '@/components/atoms/SAR';
+import { SkeletonTable } from '@/components/atoms/Skelton/SkeltonTable';
+import { useLocale, useTranslations } from 'next-intl';
+import Image from 'next/image';
+import React from 'react';
 
-export default function HallReservation() {
-  const t = useTranslations()
+export default function HallReservation({ getMe, loading }) {
+  const t = useTranslations();
+  const locale = useLocale();
 
-  const style = {
-    table : " border-[1px] border-[#D5DBF6]  grid grid-cols-[130px,130px,300px,130px,220px,130px] max-md:grid-cols-[80px,100px,150px,90px,190px,130px]  items-center ",
-    head : " !py-[20px] h-full flex items-center flex-col justify-center gap-[10px] border-l-[1px] border-l-[#D5DBF6] text-center h4",
-    body : "h-full flex items-center flex-col justify-center gap-[5px] p-[10px] border-l-[1px] border-l-[#D5DBF6] text-center h4 text-primary1 font-bold ",
+  const statusColors = {
+    PENDING: "#F59E0B", // Yellow for pending
+    CONFIRMED: "#10B981", // Green for confirmed
+    CANCELLED: "#EF4444", // Red for cancelled
+  };
+
+  // Render Skeleton Loading if `loading` is true
+  if (loading) {
+    return <SkeletonTable />;
   }
 
   return (
-    <div className=' w-full  overflow-auto pb-[10px] ' >
-      <div className=' w-fit main-shadow border-[1px] border-[#D5DBF6] rounded-[20px] overflow-hidden ' >
-          <div className={`${style.table} border-t-transparent  `}>
-            <span data-aos="zoom-in" className={style.head} > {t("orderNumber")} </span>
-            <span data-aos="zoom-in" className={style.head} > {t("bookingDate")} </span>
-            <span data-aos="zoom-in" className={style.head} > {t("hallImageAndName")} </span>
-            <span data-aos="zoom-in" className={style.head} > {t("totalPrice")} </span>
-            <span data-aos="zoom-in" className={style.head} > {t("address")} </span>
-            <span data-aos="zoom-in" className={`${style.head} border-l-transparent `} > {t("procedures")} </span>
-          </div>
+    <div className="w-full overflow-auto main-shadow ">
+      <div className="w-full  rounded-[20px] max-h-[80vh] overflow-auto ">
+        {/* Table */}
+        <table className="min-w-[1000px] w-full  ">
+          {/* Table Headers */}
+          <thead>
+            <tr className="border-b-[1px] border-[#D5DBF6]">
+              <th className=" border-l-[1px] ltr:border-l-transparent rtl:border-l-[#D5DBF6] !py-[20px] !px-[10px] text-center h4">{t("orderNumber")}</th>
+              <th className=" border-l-[1px] border-l-[#D5DBF6] !py-[20px] !px-[10px] text-center h4">{t("bookingDateFrom")}</th>
+              <th className=" border-l-[1px] border-l-[#D5DBF6] !py-[20px] !px-[10px] text-center h4">{t("bookingDateTo")}</th>
+              <th className=" border-l-[1px] border-l-[#D5DBF6] !py-[20px] !px-[10px] text-center h4">{t("hallImageAndName")}</th>
+              <th className=" border-l-[1px] border-l-[#D5DBF6] !py-[20px] !px-[10px] text-center h4">{t("totalPrice")}</th>
+              <th className=" border-l-[1px] border-l-[#D5DBF6] !py-[20px] !px-[10px] text-center h4">{t("address")}</th>
+              <th className=" border-l-[1px] rtl:border-l-transparent ltr:border-l-[#D5DBF6] !py-[20px] !px-[10px] text-center h4">{t("procedures")}</th>
+            </tr>
+          </thead>
 
-          <div >
-            {
-              halls.slice(0,4)?.map((e,i)=> 
-                <div key={i} className={`${style.table}  border-t-transparent `}>  
-                  <div data-aos="zoom-in" className={style.body} > {e.id} </div>
-                  <div data-aos="zoom-in" className={style.body} > {e.date} </div>
-                  <div data-aos="zoom-in" className={style.body} > 
-                      <div className=""> {e.name} </div>
-                      <Image className='mx-auto w-[100px] h-[80px] object-cover rounded-[20px] ' src={`/assets/test-img/${e.img}.png`} alt='' width={120} height={120} />
-                  </div>
-                  <div data-aos="zoom-in" className={style.body}> {t("price" , {count : e.price})} </div>
-                  <div data-aos="zoom-in" className={style.body}> {e.address} </div>
-                  <Button 
-                        dataAos="zoom-in"
-                        disabled={e?.action == "canceled" ? false : true}
-                        name={ e?.action == "canceled" ? t("cancelOrder") : t("orderStatus") } 
-                        classname={` mx-[10px] ${e?.action == "canceled" ? "bg-red1 border-red1 hover:bg-red1 hover:bg-opacity-80 " : "bg-green1 border-green1 hover:bg-green1 hover:bg-opacity-80 "} h-[50px] `} /> 
-                </div>)
-            }
-          </div>
+          {/* Table Rows */}
+          <tbody >
+            {getMe?.reservations?.map((e, i) => (
+              <tr key={i} className={` ${getMe?.reservations?.length != i+1 && "border-b-[1px] border-[#D5DBF6]" } `}>
+                <td className="  border-l-[1px] ltr:border-l-transparent rtl:border-l-[#D5DBF6] p-[10px] text-center h4 text-primary1 font-bold">{e?.id}</td>
+                <td className=" border-l-[1px] border-l-[#D5DBF6] p-[10px] text-center h4 text-primary1 font-bold">{e?.check_in}</td>
+                <td className=" border-l-[1px] border-l-[#D5DBF6] p-[10px] text-center h4 text-primary1 font-bold">{e?.check_out}</td>
+                <td className=" border-l-[1px] border-l-[#D5DBF6] p-[10px] text-center h4 text-primary1 font-bold">
+                  <div>{e?.venue?.name?.[locale]}</div>
+                  <Image className="mx-auto w-[100px] h-[80px] object-cover rounded-[20px]" src={e?.venue?.venueGalleries?.[0]?.imgs?.[0]} alt="" width={120} height={120} />
+                </td>
+                <td className="border-l-[1px] border-l-[#D5DBF6] p-[10px] text-center h4 text-primary1 font-bold"> <SAR price={e?.venue?.price} />  </td>
+                <td className="border-l-[1px] border-l-[#D5DBF6] p-[10px] text-center h4 text-primary1 font-bold"> {`${e?.venue?.property?.city?.name}, ${e?.venue?.property?.city?.country?.name}`}  </td>
+                <td className="border-l-[1px] rtl:border-l-transparent ltr:border-l-[#D5DBF6] p-[10px] text-center">
+                  <button disabled={e?.status?.toUpperCase() === "CANCELLED"} style={{   background: statusColors[e?.status.toUpperCase()],   borderColor: statusColors[e?.status.toUpperCase()], }} className={` px-[15px] cursor-default mx-[10px] text-white rounded-full border-[1px] h4 hover:bg-opacity-80 h-[50px]`} > {e?.status?.toUpperCase()} </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
-  )
+  );
 }

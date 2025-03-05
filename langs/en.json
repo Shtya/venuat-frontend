@@ -1,4 +1,134 @@
 {
+    "changePassword": "Change your password",
+    "account_update_confirmation": "Your account information has been successfully updated.",
+    "packagePrice": "Package price",
+    "totalWithVat": "Price with vat",
+    "additionalFeature": "Additional Features",
+
+    "successReservation": "The reservation has been successfully",
+    "checkinDate": "Check-in date is required",
+    "checkoutDate": "Check-out date is required",
+    "checkoutDateAfterCheckin": "Check-out date must be after check-in date",
+    "fromTime": "From time is required",
+    "toTime": "To time is required",
+    "toTimeAfterFromTime": "To time must be after From time",
+    "bookingDateFrom": "Booking date from",
+    "bookingDateTo": "Booking date to",
+    "status": "Status:",
+    "answer": "Answer:",
+    "askedOn": "Asked on:",
+    "CHOOSE_FILE" : "Choose File" ,
+    "chooseService" : "Choose Service" ,
+    "countService" : "Count service" ,
+    "EntercountService" : "Enter count service" ,
+    "addNewEquipment" : "Add new equipment" ,
+
+    "nameEquipment" :  "Name Equipment",
+    "enterNameEquipment" :  "Enter Name Equipment",
+    "countEquipment" :  "Count Equipment",
+    "EntercountEquipment" :  "Enter Count Equipment",
+    "addEquipment" : "Add Equipment",
+    "closeTimeMustAfterOpen" : "Closing time must be after opening time",
+    "descriptionHall" : "Description of the hall" ,
+    "EnterdescriptionHall" : "Enter description of the hall" ,
+
+    "welcomeDrink": "Welcome drink",
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "dinner": "Dinner",
+    "coffee": "Breakfast coffee",
+    "hallPrice": "Hall price",
+    "additionalFees": "Additional fees",
+    "vatValue": "VAT value",
+    "total": "Total",
+    "payNow": "Pay now",
+    "poweredBy": "Powered by",
+    "passWithSocial": "You can log in through",
+    "addNewServices" : "Add new services",
+    "enterNameService": "Enter name service",
+    "nameService": "Name service",
+
+    "addImg" : "Choose icon",
+    "chooseFromHere" : "Choose from here",
+
+    "addService" : "Add service",
+    "YouChooseOne" : "You choose one",
+     "atLeastOne": "At least one image is required",
+     "uploadImgeSuccess" : "Upload images successfully",
+     "searchLocation" : "Search location...",
+     "RemoveService" : "You deleted the service from the venue.",
+     "RemoveEquipment" : "You deleted the equipment from the venue.",
+
+    
+    "nameProperty": "Name property",
+    "namePropertyPlaceholder": "Enter name property ",
+    "descriptionProperty": "Description property",
+    "descriptionPropertyPlaceholder": "Enter description property",
+    "propertyImage": "Property Image",
+    "createPropertyButton": "Create Property",
+    "Created_Successfully" : "Created Successfully",
+    "Successfully_selected" : "Successfully selected",
+    "termsAndConditionSuccess": "You have agreed with the terms and conditions",
+
+
+    "ChooseYourOccasion" : "Choose Your Occasion",
+    "ChooseOccasion" : "Choose Occasion",
+    "ChooseAnOccasion" : "Choose an occasion",
+
+    "validation": {
+    "location": {
+      "required": "Please choose a place on the map"
+    },
+    "occasion": {
+      "required": "Occasion is required"
+    },
+    "city": {
+      "required": "City is required"
+    },
+    "name": {
+      "required": "Name is required",
+      "min": "Name must be at least 3 characters",
+      "max": "Name must be less than 100 characters"
+    },
+    "description": {
+      "required": "Description is required",
+      "min": "Description must be at least 10 characters",
+      "max": "Description must be less than 500 characters"
+    },
+    "file": {
+      "required": "File is required",
+      "fileType": "Only image files are allowed",
+      "fileSize": "File size must be less than 5MB"
+    }
+  },
+
+
+
+
+
+
+
+
+
+
+
+    "notfoundquestion": "No questions are available at the moment.",
+    "notfoundpolicy": "No policies are available at the moment.",
+
+    "addFaq-success": "The question has been sent successfully",
+    "addFaq-error": "An error occurred while sending the question",
+    "missingVenueId-error": "Venue ID is not available",
+    "no_data_available": "No data available",
+    "services_name": "Services",
+    "equipment": "Equipment",
+    "welcome": "Welcome {name}! 🎉",
+    "email_is_missing": "Email is missing, please log in again",
+    "verification_must_be_6_digits": "Verification code must be 6 digits",
+    "loginbtn": "Log in",
+
+    "choose_package": "Choose a package",
+    "your_package": "Your current packages",
+    "additionalEquipment": "Additional equipment",
     "add_your_hall_now": "Add your hall now",
     "login": "Login",
     "en": "En",
@@ -49,7 +179,7 @@
     "faq_payment_methods": "What payment methods are available?",
     "faq_data_security": "Is my personal data secure?",
     "faqstitle": "Frequently asked questions",
-    
+
     "faqs": [
         {
             "question": "What is the Venut platform?",
@@ -203,26 +333,23 @@
             "quantity": "0"
         }
     ],
-    "welcomeDrink": "Welcome drink",
-    "breakfast": "Breakfast",
-    "lunch": "Lunch",
-    "dinner": "Dinner",
-    "coffee": "Breakfast coffee",
-    "hallPrice": "Hall price",
-    "additionalFees": "Additional fees",
-    "vatValue": "VAT value",
-    "total": "Total",
-    "payNow": "Pay now",
-    "poweredBy": "Powered by",
-    "passWithSocial": "You can log in through",
+    
+
+    
 
     "errors": {
+        "description" : "Description is required", 
+        "passwordMinLength": "Password must be at least 8 characters",
+        "confirmPassword": "Confirm Password is required",
+        "passwordMismatch": "Passwords do not match",
+        "currentPassword": "Current Password is required",
         "date": "Date is required.",
         "city": "City is required.",
         "veistor": "Number of visitors is required.",
         "typeEvent": "Event type is required.",
         "chooseTypeClient": "You must specify the user type.",
         "name": "Name is required.",
+        "icon": "Icon is required.",
         "phone": "Phone number is required.",
         "invalidEmail": "Enter a valid email address.",
         "email": "Email is required.",
@@ -231,6 +358,8 @@
 
         "place": "An option must be selected.",
         "countHalls": "An option must be selected.",
+        "type_place" : " Type place is required, Please select an option.",
+        "is_multi_place" : "MultiPlaces is required, Please select an option.",
 
         "freeBreakfast": "Free breakfast availability is required.",
         "parkingSpace": "Parking space availability is required.",

@@ -13,7 +13,6 @@ export default function LayoutAuth({ children }) {
     return (
         <div className=' auth relative overflow-hidden '>
             <div className=' top-[20px] left-[20px] absolute  flex items-center gap-[10px] ' > 
-                <Image alt='' src={"/assets/locale.svg"} width={20} height={20} />
                 <DropLang noDir={"left-0"} color={"text-secondry3 font-[300] "} /> 
             </div>
             

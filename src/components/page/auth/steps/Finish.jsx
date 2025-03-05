@@ -1,49 +1,37 @@
-"use client"
-import Button from '@/components/atoms/button/Button';
-import Radio from '@/components/atoms/radio/Radio';
-import { onEnter } from '@/helper/onEnter';
-import { useTranslations } from 'next-intl';
-import dynamic from 'next/dynamic';
-import Image from 'next/image';
-import React, { useState } from 'react';
-const MAP = dynamic(() => import('@/components/molecules/Map'), { ssr: false });
+"use client";
+import Button from "@/components/atoms/button/Button";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
 
+export default function Finish() {
+    const t = useTranslations();
+    const [isFullScreen, setIsFullScreen] = useState(true);
 
-
-export default function Finish ({getValues , setname , KEY , setstep , data , step , setValue , btnSubmitName , btnReturnName }) {
-	const t = useTranslations()
-
-	const handleSubmit = (e)=>{
-		setValue( KEY , e.value)
-	}
-
-	const handleReturn = (e)=>{
-		setValue( KEY , "")
-		setstep(step - 1)
-	}
-
-
-	const [error , seterror ] = useState()
-
-	const handleGoToNextStep = ()=>{
-		// const getVal = getValues(KEY)
-		// if(!getVal){ seterror(`errors.${KEY}`) }
-		// else{
-		// 	seterror(null)
-		// 	setstep(step + 1)  
-		// 	localStorage.setItem("stepProvider" , step)
-		// }
-	}
-
-	onEnter(handleGoToNextStep)
-
+    useEffect(() => {
+        setTimeout(() => setIsFullScreen(false));
+    }, []);
 
     return (
-        <div  >
-			<div data-aos="zoom-out"  className="h2 mt-[20px] mb-[30px] text-center "> {t("congratulations_message")} </div>
-			<Image data-aos="zoom-out" className=' w-full max-w-[340px] h-[300px] mx-auto object-contain ' alt='' src={"/assets/finish.png"} width={200} height={200} />
-			
-			<Button  href={"/"}  width="max-w-[300px] w-full mx-auto " dataAos='zoom-out' onClick={handleGoToNextStep} classname='mt-[50px] ' name={t("home_page")} />
+        <div className="flex flex-col items-center text-center   ">
+            <div className="h2 mt-5 mb-7">{t("congratulations_message")}</div>
+
+            {/* Animated Image */}
+            <Image
+                className={`transition-all duration-[1000ms] ease-in-out object-contain mx-auto 
+                    ${isFullScreen ? " scale-[100] w-screen h-screen opacity-100" : "scale-1 w-full max-w-[340px] h-[300px]"}`}
+                alt=""
+                src="/assets/finish.png"
+                width={340}
+                height={300}
+            />
+
+            <Button
+                href="/"
+                width="max-w-[300px] w-full mx-auto"
+                classname="mt-12"
+                name={t("home_page")}
+            />
         </div>
     );
 }

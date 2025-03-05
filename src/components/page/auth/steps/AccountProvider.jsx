@@ -1,0 +1,56 @@
+import ProgressSteps from '@/components/atoms/progress/ProgressSteps';
+import RadioLabel from '@/components/atoms/radio/RadioLabel';
+import { CountPlaceData, PlaceData, ServicesData } from '@/Dummy/dummy';
+import { hookProvider } from '@/hooks/hookProvider';
+import React, { useState } from 'react';
+import Answer from './Answer';
+import MapComponent from './Map';
+import Services from './Services';
+import SelectServices from './SelectServices';
+import InformationAboutHall from './InformationAboutHall';
+import DetailsAboutHall from './DetailsAboutHall';
+import GalleryHall from './GallaryHall';
+import SelectEqupment from './AddEqupment';
+import Finish from './Finish';
+import AcceptConditions from './AcceptConditions';
+import CircularProgressBar from '@/components/atoms/progress/CircularProgressBar';
+import StepSignUp from './StepSign-up';
+import CreateProperty from './CreateProperty';
+
+export default function AccountProvider() {
+    const totalSteps = 12
+    const {  loading, step , previousStep , setstep , register, errors, fields, append, remove, trigger, clearErrors, getValues, setValue, submit, watch , equipmentFields, appendEquipment, removeEquipment } = hookProvider();
+    const valPlace = watch('type_place');
+
+    
+    return (
+        <div className=''>
+            <ProgressSteps currentStep={step} setCurrentStep={setstep} totalSteps={totalSteps} />
+
+            {step == 1 && <StepSignUp loading={loading} errors={errors} register={register} submit={submit} /> }
+            {step == 2 && <CreateProperty previousStep={previousStep} title='createPropertyButton' trigger={trigger} submit={submit} register={register} errors={errors} watch={watch}  loading={loading}  setValue={setValue} />}
+
+            {step == 3 && <RadioLabel previousStep={previousStep} loading={loading} submit={submit} title='placeTitle' watch={watch} getValues={getValues} KEY={'type_place'}     data={PlaceData} step={step} setValue={setValue} />}
+            {step == 4 && <RadioLabel previousStep={previousStep} loading={loading} submit={submit} title='hallTitle' watch={watch} getValues={getValues} KEY={'is_multi_place'}  data={valPlace?.value == 'halls' ? CountPlaceData[0] : CountPlaceData[1]} step={step} setValue={setValue} />}
+            
+            
+            {step == 5 && <Answer       previousStep={previousStep} loading={loading} submit={submit}  setValue={setValue} watch={watch} trigger={trigger} errors={errors} register={register} getValues={getValues} />}
+            {step == 6 && <MapComponent previousStep={previousStep} loading={loading} submit={submit}  setValue={setValue} watch={watch} trigger={trigger} errors={errors} register={register} clearErrors={clearErrors}  />}
+            
+            {/* {step == 60 && <Services watch={watch} KEY='SERVICES' clearErrors={clearErrors} errors={errors} trigger={trigger} submit={submit} getValues={getValues} data={ServicesData} setstep={setstep} step={step} setValue={setValue} />} */}
+            
+            {step == 7 && <SelectServices       previousStep={previousStep} loading={loading} clearErrors={clearErrors} watch={watch} fields={fields} append={append} remove={remove} register={register} errors={errors} trigger={trigger} submit={submit} setValue={setValue} />}
+            {step == 8 && <SelectEqupment       previousStep={previousStep} loading={loading} clearErrors={clearErrors} watch={watch} fields={equipmentFields} append={appendEquipment} remove={removeEquipment} register={register} errors={errors} trigger={trigger} submit={submit}  setValue={setValue} />}
+            {step == 9 && <InformationAboutHall previousStep={previousStep} loading={loading} watch={watch}  register={register} errors={errors} trigger={trigger} submit={submit}  setValue={setValue} />}
+
+            
+            {/* {step == 10 && <DetailsAboutHall watch={watch} fields={fields} append={append} remove={remove} register={register} errors={errors} trigger={trigger} submit={submit} getValues={getValues} data={ServicesData} setstep={setstep} step={step} setValue={setValue} />} */}
+            
+            {step == 10 && <GalleryHall      previousStep={previousStep} loading={loading}  KEY='images' watch={watch} errors={errors} trigger={trigger} submit={submit} getValues={getValues} setValue={setValue} />}
+            {step == 11 && <AcceptConditions previousStep={previousStep} loading={loading}  watch={watch}  register={register} submit={submit} setValue={setValue} />}
+            {step == 12 && <Finish  />}
+
+            <CircularProgressBar percent={Math.ceil(((step - 1)  / (totalSteps-1)) * 100)} />
+        </div>
+    );
+}
