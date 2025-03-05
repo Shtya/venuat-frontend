@@ -5,6 +5,20 @@
     "totalWithVat": "Price with vat",
     "additionalFeature": "Additional Features",
 
+    "Question" : "Question",
+    "enterQuestion" : "Enter question",
+    "Answer" : "Answer",
+    "enterAnswer" : "Enter answer",
+    "addfaqs" : "Add FAQs",
+
+    "addPolicies" : "Add Policies",
+    "addPolicy" : "Add Policy",
+    "policy": "Policy",
+    "addPolicyName": "Add policy name",
+    "enterPolicyName": "Enter policy name",
+    "addPolicyDesc": "Add policy description",
+    "enterPolicyDesc": "Enter policy description",
+
     "successReservation": "The reservation has been successfully",
     "checkinDate": "Check-in date is required",
     "checkoutDate": "Check-out date is required",
@@ -338,6 +352,8 @@
     
 
     "errors": {
+        "question" : "Question is required",
+        "answer" : "Answer is required",
         "description" : "Description is required", 
         "passwordMinLength": "Password must be at least 8 characters",
         "confirmPassword": "Confirm Password is required",

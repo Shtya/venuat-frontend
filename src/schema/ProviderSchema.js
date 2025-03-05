@@ -91,6 +91,29 @@ export const providerSchema = step => {
                 ).min(1, 'atLeastOne'),
         };
     }
+    if (step === 11) {
+        schemaFields = {
+            faqs: yup.array().of(
+                yup.object().shape({
+                    question: yup.string().required('errors.question'),
+                    answer: yup.string().required('errors.answer'),
+                }),
+            ),
+        };
+    }
+    if (step === 12) {
+        schemaFields = {
+            policies: yup.array().of(
+                yup.object().shape({
+                    name: yup.string().required('errors.name'),
+                    description: yup.string().required('errors.description'),
+                }),
+            ),
+        };
+    }
+
+    
+
 
     return yup.object(schemaFields);
 };

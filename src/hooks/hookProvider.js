@@ -17,7 +17,12 @@ export const hookProvider = () => {
 
     const { register, trigger, control, handleSubmit, formState: { errors }, clearErrors, setError, getValues, setValue, watch, reset, } = useForm({
         resolver: yupResolver(providerSchema(step)),
-        defaultValues: { services: [{ value: '', price: '' }], equipment: [{ value: '', price: '', count: '' }] },
+        defaultValues: { 
+            services: [{ value: '', price: '' }], 
+            equipment: [{ value: '', price: '', count: '' }] ,
+            faqs: [{ answer: '', question: '' }] ,
+            policies: [{ name: '', description: ''}] ,
+        },
     });
 
     //! update the params
@@ -200,10 +205,7 @@ export const hookProvider = () => {
         .catch(err => {});
         setloading(false);
     };
-            
-
-
-
+    
     
     //! add equipment to the venue
     const addEquipmentToVenue = async (data , step) => {
@@ -237,19 +239,43 @@ export const hookProvider = () => {
     };
 
 
-    //! add polices to the venue 
-    const addPolicesToVenue = async (data , step) => {
-        setloading(true);
-    
+    //! add faqs to the venue 
+    const addFaqsToVenue = async (data , step) => {
+        const DATA = await Promise.all(
+            data.faqs.map(async (e) => ({
+                venue_id: venueId,
+                question: await translated(e.question),
+                answer: await translated(e.answer), // Fixed to use `e.answer`
+            }))
+        );
+        
         try {
-            const res = await AxiosInstance.post(`venues/${venueId}/add-policies` , {policy_ids : data?.accetpCondition} );
-            Notification( t("termsAndConditionSuccess") , "success");
+            const res = await AxiosInstance.post(`/venue-faq` , DATA );
             ChagneStep(step)  
         } 
         catch (err) {} 
         finally { setloading(false)  }
     };
-    
+
+
+    //! add policies to the venue 
+    const addPoliciesToVenue = async (data , step) => {
+        const DATA = await Promise.all(
+            data.policies.map(async (e) => ({
+                venue_id: venueId,
+                name: await translated(e.name),
+                description: await translated(e.description), 
+            }))
+        );
+        
+        try {
+            await AxiosInstance.post(`/venues/multi-policies` , DATA );
+            ChagneStep(step)  
+        } 
+        catch (err) {} 
+        finally { setloading(false)  }
+    };
+
 
     const submit = handleSubmit(async data => {
         setloading(true);
@@ -284,12 +310,16 @@ export const hookProvider = () => {
         step == 9 && (await UpdateVenue( dataInfoHall2 , 10));
 
         step == 10 && (await uploadVenueImages(data?.images, 11));
-        step == 11 && (await addPolicesToVenue(data, 12));
+        step == 11 && (await addFaqsToVenue(data, 12));
+        step == 12 && (await addPoliciesToVenue(data, 13));
+        step == 13 && (await UpdateVenue({acceptTerms : data?.acceptTerms}, 14));
 
     });
 
     const { fields, append, remove } = useFieldArray({ control, name: 'services' });
     const { fields: equipmentFields, append: appendEquipment, remove: removeEquipment } = useFieldArray({ control, name: 'equipment' });
+    const { fields: faqsFields, append: appendfaqs, remove: removefaqs } = useFieldArray({ control, name: 'faqs' });
+    const { fields: policiesFields, append: appendpolicies, remove: removepolicies } = useFieldArray({ control, name: 'policies' });
 
-    return { loading, previousStep , step, setstep, equipmentFields, appendEquipment, removeEquipment, fields, append, remove, register, errors, trigger, clearErrors, setError, getValues, setValue, submit, watch, reset };
+    return {policiesFields ,appendpolicies , removepolicies , faqsFields , appendfaqs , removefaqs , loading, previousStep , step, setstep, equipmentFields, appendEquipment, removeEquipment, fields, append, remove, register, errors, trigger, clearErrors, setError, getValues, setValue, submit, watch, reset };
 };

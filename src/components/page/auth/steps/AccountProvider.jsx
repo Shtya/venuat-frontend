@@ -8,7 +8,7 @@ import MapComponent from './Map';
 import Services from './Services';
 import SelectServices from './SelectServices';
 import InformationAboutHall from './InformationAboutHall';
-import DetailsAboutHall from './DetailsAboutHall';
+import AddFaqs from './AddFaqs';
 import GalleryHall from './GallaryHall';
 import SelectEqupment from './AddEqupment';
 import Finish from './Finish';
@@ -16,10 +16,11 @@ import AcceptConditions from './AcceptConditions';
 import CircularProgressBar from '@/components/atoms/progress/CircularProgressBar';
 import StepSignUp from './StepSign-up';
 import CreateProperty from './CreateProperty';
+import AddPolicies from './AddPolicies';
 
 export default function AccountProvider() {
-    const totalSteps = 12
-    const {  loading, step , previousStep , setstep , register, errors, fields, append, remove, trigger, clearErrors, getValues, setValue, submit, watch , equipmentFields, appendEquipment, removeEquipment } = hookProvider();
+    const totalSteps = 14
+    const {policiesFields , appendpolicies , removepolicies , faqsFields , appendfaqs , removefaqs , loading, step , previousStep , setstep , register, errors, fields, append, remove, trigger, clearErrors, getValues, setValue, submit, watch , equipmentFields, appendEquipment, removeEquipment } = hookProvider();
     const valPlace = watch('type_place');
 
     
@@ -44,11 +45,13 @@ export default function AccountProvider() {
             {step == 9 && <InformationAboutHall previousStep={previousStep} loading={loading} watch={watch}  register={register} errors={errors} trigger={trigger} submit={submit}  setValue={setValue} />}
 
             
-            {/* {step == 10 && <DetailsAboutHall watch={watch} fields={fields} append={append} remove={remove} register={register} errors={errors} trigger={trigger} submit={submit} getValues={getValues} data={ServicesData} setstep={setstep} step={step} setValue={setValue} />} */}
-            
             {step == 10 && <GalleryHall      previousStep={previousStep} loading={loading}  KEY='images' watch={watch} errors={errors} trigger={trigger} submit={submit} getValues={getValues} setValue={setValue} />}
-            {step == 11 && <AcceptConditions previousStep={previousStep} loading={loading}  watch={watch}  register={register} submit={submit} setValue={setValue} />}
-            {step == 12 && <Finish  />}
+            
+            {step == 11 && <AddFaqs      previousStep={previousStep} loading={loading} clearErrors={clearErrors} watch={watch} fields={faqsFields} append={appendfaqs} remove={removefaqs} register={register} errors={errors} trigger={trigger} submit={submit} setValue={setValue} />}
+            {step == 12 && <AddPolicies  previousStep={previousStep} loading={loading} clearErrors={clearErrors} watch={watch} fields={policiesFields} append={appendpolicies} remove={removepolicies} register={register} errors={errors} trigger={trigger} submit={submit} setValue={setValue} />}
+            {step == 13 && <AcceptConditions previousStep={previousStep} loading={loading}  watch={watch}  register={register} submit={submit} setValue={setValue} />}
+            
+            {step == 14 && <Finish  />}
 
             <CircularProgressBar percent={Math.ceil(((step - 1)  / (totalSteps-1)) * 100)} />
         </div>

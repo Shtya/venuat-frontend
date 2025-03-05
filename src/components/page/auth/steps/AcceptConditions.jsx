@@ -19,7 +19,7 @@ export default function AcceptConditions({previousStep , watch , loading : loadi
 	useEffect(()=> {
 			setnext(!watchKey) 
 			if(next){
-				setValue("accetpCondition" , policies?.map((e,i)=> e?.id ) )
+				setValue("acceptTerms" , next )
 			}
 		} ,[watchKey])
 

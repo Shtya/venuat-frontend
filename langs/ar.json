@@ -1,5 +1,108 @@
 {
 
+        "changePassword": "غيّر كلمة المرور",
+        "account_update_confirmation": "تم تحديث معلومات حسابك بنجاح.",
+        "packagePrice": "سعر الباقة",
+        "totalWithVat": "السعر مع الضريبة",
+        "additionalFeature": "ميزات إضافية",
+    
+        "Question": "السؤال",
+        "enterQuestion": "أدخل السؤال",
+        "Answer": "الإجابة",
+        "enterAnswer": "أدخل الإجابة",
+        "addfaqs": "إضافة أسئلة شائعة",
+    
+        "addPolicies": "إضافة السياسات",
+        "addPolicy": "إضافة سياسة",
+        "policy": "السياسة",
+        "addPolicyName": "أضف اسم السياسة",
+        "enterPolicyName": "أدخل اسم السياسة",
+        "addPolicyDesc": "أضف وصف السياسة",
+        "enterPolicyDesc": "أدخل وصف السياسة",
+    
+        "successReservation": "تمت عملية الحجز بنجاح",
+        "checkinDate": "تاريخ تسجيل الدخول مطلوب",
+        "checkoutDate": "تاريخ تسجيل المغادرة مطلوب",
+        "checkoutDateAfterCheckin": "يجب أن يكون تاريخ المغادرة بعد تاريخ تسجيل الدخول",
+        "fromTime": "وقت البدء مطلوب",
+        "toTime": "وقت الانتهاء مطلوب",
+        "toTimeAfterFromTime": "يجب أن يكون وقت الانتهاء بعد وقت البدء",
+        "bookingDateFrom": "تاريخ الحجز من",
+        "bookingDateTo": "تاريخ الحجز إلى",
+        "status": "الحالة:",
+        "answer": "الإجابة:",
+        "askedOn": "تم السؤال في:",
+        "CHOOSE_FILE": "اختر ملفًا",
+        "chooseService": "اختر خدمة",
+        "countService": "عدد الخدمات",
+        "EntercountService": "أدخل عدد الخدمات",
+        "addNewEquipment": "إضافة معدات جديدة",
+    
+        "nameEquipment": "اسم المعدات",
+        "enterNameEquipment": "أدخل اسم المعدات",
+        "countEquipment": "عدد المعدات",
+        "EntercountEquipment": "أدخل عدد المعدات",
+        "addEquipment": "إضافة المعدات",
+        "closeTimeMustAfterOpen": "يجب أن يكون وقت الإغلاق بعد وقت الفتح",
+        "descriptionHall": "وصف القاعة",
+        "EnterdescriptionHall": "أدخل وصف القاعة",
+    
+
+        "addNewServices": "إضافة خدمات جديدة",
+        "enterNameService": "أدخل اسم الخدمة",
+        "nameService": "اسم الخدمة",
+    
+        "addImg": "اختر أيقونة",
+        "chooseFromHere": "اختر من هنا",
+    
+        "addService": "إضافة خدمة",
+        "YouChooseOne": "يجب اختيار واحد",
+        "atLeastOne": "مطلوب صورة واحدة على الأقل",
+        "uploadImgeSuccess": "تم رفع الصور بنجاح",
+        "searchLocation": "ابحث عن الموقع...",
+        "RemoveService": "لقد قمت بحذف الخدمة من المكان.",
+        "RemoveEquipment": "لقد قمت بحذف المعدات من المكان.",
+    
+        "nameProperty": "اسم الخاصية",
+        "namePropertyPlaceholder": "أدخل اسم الخاصية",
+        "descriptionProperty": "وصف الخاصية",
+        "descriptionPropertyPlaceholder": "أدخل وصف الخاصية",
+        "propertyImage": "صورة الخاصية",
+        "createPropertyButton": "إنشاء خاصية",
+        "Created_Successfully": "تم الإنشاء بنجاح",
+        "Successfully_selected": "تم الاختيار بنجاح",
+        "termsAndConditionSuccess": "لقد وافقت على الشروط والأحكام",
+    
+        "ChooseYourOccasion": "اختر مناسبتك",
+        "ChooseOccasion": "اختر المناسبة",
+        "ChooseAnOccasion": "اختر مناسبة",
+    
+        "validation": {
+            "location": {
+                "required": "يرجى اختيار موقع على الخريطة"
+            },
+            "occasion": {
+                "required": "المناسبة مطلوبة"
+            },
+            "city": {
+                "required": "المدينة مطلوبة"
+            },
+            "name": {
+                "required": "الاسم مطلوب",
+                "min": "يجب أن يكون الاسم على الأقل 3 أحرف",
+                "max": "يجب أن يكون الاسم أقل من 100 حرف"
+            },
+            "description": {
+                "required": "الوصف مطلوب",
+                "min": "يجب أن يكون الوصف على الأقل 10 أحرف",
+                "max": "يجب أن يكون الوصف أقل من 500 حرف"
+            },
+            "file": {
+                "required": "الملف مطلوب",
+                "fileType": "يُسمح فقط بملفات الصور",
+                "fileSize": "يجب أن يكون حجم الملف أقل من 5 ميجابايت"
+            }
+        },    
 
 
     "notfoundquestion": " لا توجد أسئلة متاحة في الوقت الحالي.",
@@ -234,50 +337,59 @@
     "poweredBy": "مدعوم بـــ",
     "passWithSocial": "يمكنك الدخول عبر",
 
+
+
+
+
     "errors": {
-        "passwordMinLength": "يجب أن تكون كلمة المرور على الأقل 8 أحرف",
+        "question": "السؤال مطلوب",
+        "answer": "الإجابة مطلوبة",
+        "description": "الوصف مطلوب",
+        "passwordMinLength": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
         "confirmPassword": "تأكيد كلمة المرور مطلوب",
-        "passwordMismatch": "كلمات المرور غير متطابقة",
+        "passwordMismatch": "كلمتا المرور غير متطابقتين",
         "currentPassword": "كلمة المرور الحالية مطلوبة",
         "date": "التاريخ مطلوب.",
         "city": "المدينة مطلوبة.",
         "veistor": "عدد الزوار مطلوب.",
-        "typeEvent": "نوع المناسبة مطلوب.",
-        "chooseTypeClient": "يجب ان تحدد نوع المستخدم",
-        "name": "الاسم مطلوب",
-        "phone": "رقم الهاتف مطلوب",
-        "invalidEmail": "أدخل بريدًا إلكترونيًا صحيحًا",
-        "email": "البريد الإلكتروني مطلوب",
-        "message": "الرساله مطلوبه",
-        "password": "كلمة المرور مطلوبة",
+        "typeEvent": "نوع الحدث مطلوب.",
+        "chooseTypeClient": "يجب تحديد نوع المستخدم.",
+        "name": "الاسم مطلوب.",
+        "icon": "الأيقونة مطلوبة.",
+        "phone": "رقم الهاتف مطلوب.",
+        "invalidEmail": "أدخل بريدًا إلكترونيًا صالحًا.",
+        "email": "البريد الإلكتروني مطلوب.",
+        "message": "الرسالة مطلوبة.",
+        "password": "كلمة المرور مطلوبة.",
 
-        "place": "يجب تحديد خيار",
-        "countHalls": "يجب تحديد خيار",
+        "place": "يجب تحديد خيار.",
+        "countHalls": "يجب تحديد خيار.",
+        "type_place": "نوع المكان مطلوب، يرجى تحديد خيار.",
+        "is_multi_place": "تحديد تعدد الأماكن مطلوب، يرجى تحديد خيار.",
 
-        "freeBreakfast": "توفر الإفطار المجاني مطلوب",
-        "parkingSpace": "توفر مساحة لوقوف السيارات مطلوب",
-        "freeLunch": "توفر الغداء المجاني مطلوب",
-        "kidsArea": "توفر منطقة للأطفال مطلوب",
-        "hallName": "اسم القاعة مطلوب",
-        "eventType": "نوع الحدث مطلوب",
-        "responsiblePersonName": "اسم الشخص المسؤول مطلوب",
-        "nearestMainAddress": "عنوان أقرب شارع رئيسي مطلوب",
-        "phoneNumber": "رقم الهاتف مطلوب",
-        "value": "القيمة مطلوبة",
-        "count": "العدد مطلوب",
-        "mustNumber": "الرقم مطلوب",
-        "mustBePositive": "يجب أن يكون الرقم موجبًا",
-        "meter": "المساحه بالمتر مطلوبة ",
-        "minPeople": "الحد الأدنى من الأشخاص مطلوب",
-        "maxPeople": "الحد الأقصى من الأشخاص مطلوب",
-        "openingTime": "وقت فتح القاعة مطلوب",
-        "closingTime": "وقت غلق القاعة مطلوب",
-        "price": "السعر مطلوب",
+        "freeBreakfast": "يجب تحديد توفر الإفطار المجاني.",
+        "parkingSpace": "يجب تحديد توفر موقف السيارات.",
+        "freeLunch": "يجب تحديد توفر الغداء المجاني.",
+        "kidsArea": "يجب تحديد توفر منطقة الأطفال.",
+        "hallName": "اسم القاعة مطلوب.",
+        "eventType": "نوع الحدث مطلوب.",
+        "responsiblePersonName": "اسم الشخص المسؤول مطلوب.",
+        "nearestMainAddress": "أقرب عنوان رئيسي مطلوب.",
+        "phoneNumber": "رقم الهاتف مطلوب.",
+        "value": "القيمة مطلوبة.",
+        "count": "العدد مطلوب.",
+        "mustNumber": "يجب إدخال رقم.",
+        "mustBePositive": "يجب أن يكون الرقم موجبًا.",
+        "meter": "المساحة بالمتر مطلوبة.",
+        "minPeople": "الحد الأدنى لعدد الأشخاص مطلوب.",
+        "maxPeople": "الحد الأقصى لعدد الأشخاص مطلوب.",
+        "openingTime": "وقت الفتح مطلوب.",
+        "closingTime": "وقت الإغلاق مطلوب.",
+        "price": "السعر مطلوب.",
 
-        "nameequipment": "اسم المعده مطلوب",
-        "countequipment": "العدد مطلوب"
+        "nameequipment": "اسم المعدة مطلوب.",
+        "countequipment": "العدد مطلوب."
     },
-
     "hotel": "فندق",
     "hall": "قاعه",
     "Halls": "القاعات",

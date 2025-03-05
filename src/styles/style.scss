@@ -56,6 +56,6 @@ body {
   border:  1px solid lightgray !important ;
 }
 
-.leaflet-bottom.leaflet-right , .leaflet-control-attribution.leaflet-control {
+.leaflet-bottom.leaflet-right , .leaflet-control-attribution.leaflet-control ,.leaflet-control-zoom.leaflet-bar.leaflet-control {
   display: none !important;
 }

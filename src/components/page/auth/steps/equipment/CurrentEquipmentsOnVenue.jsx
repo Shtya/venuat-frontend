@@ -12,7 +12,7 @@ export default function CurrentEquipmentsOnVenue({isOpenPopup}) {
 
 	//! get Serviecs on this venue 
 	const [currEquipment , setcurrEquipment] = useState(null)
-	const [loading , setloading] = useState(true)
+	const [loading , setloading] = useState(false)
 
 
 	const [venueId, setvenueId] = useState(null);

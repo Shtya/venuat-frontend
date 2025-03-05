@@ -12,7 +12,7 @@ export default function CurrentServicesOnVenue({isOpenPopup}) {
 
 	//! get Serviecs on this venue 
 	const [currServs , setcurrServs] = useState(null)
-	const [loading , setloading] = useState(true)
+	const [loading , setloading] = useState(false)
 
 
 	const [venueId, setvenueId] = useState(null);
