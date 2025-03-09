@@ -36,7 +36,7 @@ const page = () => {
                     <Button dataAos='zoom-out' href={'/available-halls'} name={t('browse_all')} outline={true} classname={'!max-w-[300px]  mx-auto mt-[50px] '} />
 
 
-                    {dataSetting?.bestRatedVenues > 0 && <div className='flex items-center justify-between  mt-[100px] mb-[40px]'>
+                    {dataSetting?.bestRatedVenues?.length > 0 && <div className='flex items-center justify-between  mt-[100px] mb-[40px]'>
                         <div data-aos='zoom-out' className='h1  text-primary1 '> {t('bestRate')}  </div>
                         <Arrow />
                     </div>}
