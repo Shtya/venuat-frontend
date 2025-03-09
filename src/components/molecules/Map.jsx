@@ -44,10 +44,12 @@ const Map = ({ showName=true , center, zoom, click, setValue, data , setlocation
 
 
     const fetchPlaceName = async (lat, lng) => {
+        if (!lat || !lng) {
+            console.log("Invalid coordinates:", lat, lng);
+            return; // Exit function if lat or lng are null or undefined
+        }
         try {
-            const { data } = await axios.get(
-                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
-            );
+            const { data } = await axios.get( `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}` );
             if (data?.display_name) {
                 setPlaceName(data.display_name);
                 setlocationName?.(data?.display_name)
@@ -106,8 +108,13 @@ const Map = ({ showName=true , center, zoom, click, setValue, data , setlocation
 
 
     useEffect(()=> {
-        fetchPlaceName(center?.[0] , center?.[1] )
-    } ,[])
+        if(!center?.[0] ) {
+            console.log("no")
+            fetchPlaceName(21.2854, 39.2376)}
+        else {
+            console.log("yes"  , center )
+            fetchPlaceName(center?.[0] , center?.[1] )}
+    } ,[center])
 
     return (
         <div className='w-full w-max-[500px] z-[0] relative'>

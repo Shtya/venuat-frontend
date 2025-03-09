@@ -36,7 +36,7 @@ export default function Section1({ venue, loading }) {
         <div className='h-fit'>
             {loading ? ( // ✅ Show placeholder while loading
                 <div className='grid grid-cols-[1fr,1fr] max-lg:grid-cols-1 gap-[20px]'>
-                    <div className='bg-gray-300 animate-pulse rounded-[30px] w-full h-[630px] ' />
+                    <div className='bg-gray-300 animate-pulse rounded-[30px] w-full h-[500px] ' />
                     <div className='grid grid-cols-2 max-[400px]:grid-cols-1 gap-[20px]'>
                         {Array(4).fill(0).map((_, i) => (
                                 <div key={i} className='bg-gray-300 animate-pulse rounded-[30px] max-md:h-[200px] h-full w-full' />

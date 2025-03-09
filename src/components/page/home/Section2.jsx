@@ -68,7 +68,9 @@ export default function Section2({ venue, loading }) {
             {/* Map Section */}
             <div data-aos='fade-up'>
                 <div className='h1 font-[700] mb-[20px]'>{t('where_in_jeddah')}</div>
-                {loading ? <div className='h-[365px] w-full bg-gray-300 animate-pulse rounded-lg' /> : venue && <Map showName={false} setlocationName={setlocationName} center={[venue?.lat, venue?.lng]} zoom={100} />}
+                {loading ? 
+                    <div className='h-[365px] w-full bg-gray-300 animate-pulse rounded-lg' /> 
+                    : venue && <Map showName={false} setlocationName={setlocationName} center={[venue?.lat || 21.2854  , venue?.lng || 39.2376]} zoom={100} />}
             </div>
         </div>
     );
