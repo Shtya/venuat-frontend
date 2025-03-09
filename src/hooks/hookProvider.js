@@ -262,18 +262,22 @@ export const hookProvider = () => {
     const addPoliciesToVenue = async (data , step) => {
         const DATA = await Promise.all(
             data.policies.map(async (e) => ({
-                venue_id: venueId,
                 name: await translated(e.name),
                 description: await translated(e.description), 
             }))
         );
         
-        try {
-            await AxiosInstance.post(`/venues/multi-policies` , DATA );
-            ChagneStep(step)  
-        } 
-        catch (err) {} 
-        finally { setloading(false)  }
+        await AxiosInstance.post(`/policies/bulks` , DATA ).then((res) =>{
+            const ids = res?.data?.map(item => item.id);
+            AxiosInstance.post(`/venues/${venueId}/add-policies` , {"policy_ids" : ids} )
+            .then((res) =>{ })
+            .catch((err) =>{})
+            .finally(()=> {
+                ChagneStep(step)  
+                setloading(false)
+            })
+
+        }).catch(err => {})
     };
 
 

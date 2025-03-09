@@ -1,43 +1,32 @@
 import AxiosInstance from '@/config/Axios';
-import { useRouter } from '@/navigation';
+import { usePathname, useRouter } from '@/navigation';
 import { searchSchema } from '@/schema/SearchSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 export const hookSearch = () => {
-    const {
-        register,
-        trigger,
-        handleSubmit,
-        formState: { errors },
-        clearErrors,
-        setError,
-        getValues,
-        setValue,
-        watch,
-        reset,
-    } = useForm({ resolver: yupResolver(searchSchema) });
+    const { register, trigger, handleSubmit, formState: { errors }, clearErrors, setError, getValues, setValue, watch, reset, } = useForm({ resolver: yupResolver(searchSchema) });
     const router = useRouter()
+    const pathname = usePathname()
     
-    const [venues, setVenues] = useState([]);
-    const [cities, setCities] = useState([]);
+    // const [venues, setVenues] = useState([]);
     const [filteredVenues, setFilteredVenues] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setErrorState] = useState(null);
-    const [occasionNames, setOccasionNames] = useState([]); // تخزين المناسبات الفريدة
 
     
-    const fetchAllVenues = async () => {
-        try {
-            const response = await AxiosInstance.get(`/venues/find-all?limit=100`);
-            setVenues(response.data);
-        } catch (error) {
-            setErrorState(error.message || 'Failed to load venues');
-        } finally {
-            setLoading(false);
-        }
-    };
+    // const fetchAllVenues = async () => {
+    //     try {
+    //         const response = await AxiosInstance.get(`/venues/find-all?limit=300`);
+    //         setVenues(response.data);
+    //     } catch (error) {
+    //         setErrorState(error.message || 'Failed to load venues');
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
 
     const fetchVenues = async ({ page, query }) => {
@@ -47,31 +36,16 @@ export const hookSearch = () => {
             const venuesData = response.data;
             setFilteredVenues(venuesData);
 
-            const occasions = venuesData.data.map(venue => venue.occasion).filter(Boolean);
-            const uniqueOccasions = Array.from(new Map(occasions.map(occasion => [occasion.id, occasion])).values());
-            setOccasionNames(uniqueOccasions);
         } catch (error) {
             setErrorState(error.message || 'Failed to load venues');
         } finally {
             setLoading(false);
         }
     };
-    const fetchCities = async () => {
-        try {
-            const response = await AxiosInstance.get('/cities?limit=10000');
-            const venuesData = response.data.data;
-
-            setCities(venuesData);
-        } catch (error) {
-            setErrorState(error.message || 'Failed to load venues');
-        } finally {
-        }
-    };
 
     useEffect(() => {
-        fetchAllVenues()
+        // fetchAllVenues()
         fetchVenues({ page: 1, query: '' });
-        fetchCities();
     }, []);
 
     const handlePagination = async page => {
@@ -80,36 +54,58 @@ export const hookSearch = () => {
 
     const params = new URLSearchParams();
     const [loadingSubmit, setLoadingSubmit] = useState(false);
+
+
     const submit = handleSubmit(async data => {
-        sessionStorage.setItem('formData', JSON.stringify(data));
-        router.push("/available-halls")
-
         setLoadingSubmit(true);
-        const { visitor, city, cityGET, typeEvent, typeEventGET, date } = data;
+        const { visitor, city , typeEvent , date } = data;
 
+        if(pathname == "/") {
+            const queryString = new URLSearchParams(
+                Object.fromEntries(
+                  Object.entries({
+                    visitor: visitor,
+                    city: city,
+                    date: date,
+                    occasion: typeEvent
+                  }).filter(([_, value]) => value) // Remove undefined values
+                )
+              ).toString(); 
+              
+              router.push(`/available-halls${queryString && `?${queryString}`}`);
+        }
 
         if (visitor) params.append('visitor', visitor);
-        if (cityGET?.id) params.append('city', cityGET.id);
-        if (typeEventGET?.id) params.append('occasion', typeEventGET.id);
+        if (city) params.append('city', city);
+        if (typeEvent) params.append('occasion', typeEvent);
         if (date) params.append('startOccasion', date);
 
         await fetchVenues({ page: 1, query: params.toString() });
         setLoadingSubmit(false);
     });
 
+    const clearData = async() => {
+        setValue("city" , null)
+        setValue("visitor" , null)
+        setValue("typeEvent" , null)
+        setValue("date" , null)
+        setLoadingSubmit(true)
+        await fetchVenues({ page: 1, query: "" });
+        setLoadingSubmit(false);
+    }
 
-    //! put the data from the session storage is exist 
+
+    //! put the data from the params for the search 
+    const searchParams = useSearchParams();
     useEffect(() => {
-        const savedFormData = sessionStorage.getItem('formData');
-        if (savedFormData) {
-          const formData = JSON.parse(savedFormData);
-    
-          setValue('visitor', formData.visitor);
-          setValue('city', formData.city);
-          setValue('typeEvent', formData.typeEvent);
-          setValue('date', formData.date);
-        }
-      }, [setValue]);
+      if (searchParams) {
+          setValue("visitor", searchParams.get("visitor") || "");
+          setValue("city", searchParams.get("city") || "");
+          setValue("typeEvent", searchParams.get("occasion") || ""); // "occasion" maps to typeEvent
+          setValue("date", searchParams.get("date") || "");
+        if(searchParams.size)  submit()
+      }
+    }, [searchParams, setValue]);
 
 
 
@@ -153,5 +149,5 @@ export const hookSearch = () => {
         return () => clearTimeout(handler);
     }, [JSON.stringify(watchprice)]);
 
-    return { venue: filteredVenues, loadingSubmit, loading, handlePagination, cities, occasionNames, register, errors, trigger, clearErrors, setError, getValues, setValue, submit, watch, reset };
+    return { venue: filteredVenues, clearData , loadingSubmit, loading, handlePagination, register, errors, trigger, clearErrors, setError, getValues, setValue, submit, watch, reset };
 };

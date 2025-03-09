@@ -10,8 +10,8 @@ export const hookOccasion = () => {
   const fetchOccasion = async () => {
     setLoading(true)
     try {
-          const response = await AxiosInstance.get(`/occasion-type`);
-          setOccasion(response.data.data);
+          const response = await AxiosInstance.get(`/occasion-type/on-venues`);
+          setOccasion(response.data);
 
       } catch (error) {
           setErrorState(error.message || 'Failed to load venues');

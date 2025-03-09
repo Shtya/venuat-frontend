@@ -9,7 +9,7 @@ import Rate_price from '@/components/atoms/card/Rate_price';
 import CardPlaceholder from '../placeholder/CardPlaceholder';
 import NotFound from '@/components/atoms/NotFound';
 
-export default function Card({ slice = 3, animation = true, data, isLoading, sckelton = 3, indextab, id }) {
+export default function Card({ slice = 3 , showNoResultData , animation = true, data, isLoading, sckelton = 3, indextab, id }) {
     const t = useTranslations();
     const locale = useLocale();
 
@@ -22,17 +22,19 @@ export default function Card({ slice = 3, animation = true, data, isLoading, sck
                         .map((_, i) => <CardPlaceholder index={i} key={i} />)
                 ) : data?.length > 0 ? (
                     data.slice(0, slice).map((e, i) => (
-                        <div key={e.id} data-aos={animation && 'zoom-in'} data-aos-delay={`${i}00`} className='h-full pb-[80px] max-sm:pb-[50px] relative rounded-[30px] overflow-hidden w-full shadow-custom border-gray1 border-[1px]'>
-                            <img className='w-full bg-primary1 min-h-[250px] max-sm:min-h-[220px] max-sm:max-h-[220px] max-h-[250px] object-cover' src={e?.venueGalleries?.[0]?.imgs[0] || '/assets/test-img/notfound.png'} alt='' />
+                        <div key={e.id} data-aos={animation && 'zoom-in'} data-aos-delay={`${i}00`} className='h-full pb-[50px] max-sm:pb-[50px] relative rounded-[30px] overflow-hidden w-full shadow-custom border-gray1 border-[1px]'>
+                            <img className='w-full bg-primary1 min-h-[200px] max-sm:max-h-[220px] max-h-[250px] object-cover' src={e?.venueGalleries?.[0]?.imgs[0] || '/assets/test-img/notfound.png'} alt='' />
                             <div className='p-[20px]'>
                                 <Address_vesitor titleAddress={e?.name?.[locale]} location={`${e.property?.city.name} , ${e.property?.city?.country.name}`} titleVistor={t('visitors_count')} countOfVistor={t('visitor_number', { count: e?.visitCount || 0 })} />
                                 <Rate_price empty={3} fill={2} rateTitle={t('rating')} ratings={e?.ratings} priceTitle={t('price2')} priceValue={e?.price} />
-                                <Button outline={true} href={`/details-halls/${e.id}`} classname={'absolute bottom-[15px] left-[50%] translate-x-[-50%] w-[95%]'} name={t('book_now')} />
+                                <Button outline={true} href={`/details-halls/${e.id}`} classname={'absolute bottom-[5px] left-[50%] translate-x-[-50%] w-[calc(100%-10px)]'} name={t('book_now')} />
                             </div>
                         </div>
                     ))
                 ) : (
-                    <NotFound  />
+                    showNoResultData 
+                    ? <Image className=' col-span-4 '  src={"/assets/not-result.gif"} alt='' width={900} height={600} />
+                    :<NotFound  />
                 )}
             </div>
 

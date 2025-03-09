@@ -6,6 +6,7 @@ import { LocateIcon, LocateOffIcon, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import CountainerStarts from '@/components/atoms/start/CountainerStarts';
 import NotFound from '@/components/atoms/NotFound';
+import SAR from '@/components/atoms/SAR';
 
 export default function CardGrid2_1({ isLoading, data }) {
     const t = useTranslations();
@@ -36,8 +37,9 @@ export default function CardGrid2_1({ isLoading, data }) {
                               <div className='flex flex-col max-sm:items-center justify-end items-end sm:h-full'>
                                   <CountainerStarts ratings={e.ratings} />
 
-                                  <div className='flex items-center gap-[10px] mt-[10px]'>
+                                  <div className='flex items-center gap-[10px] mt-[5px]'>
                                       <div className='h2'>{t('price2')}</div>
+                                      {/* <SAR price={e.price} /> */}
                                       <div className='h2 mt-[5px] text-white'>{t('price', { count: e.price })}</div>
                                   </div>
                               </div>

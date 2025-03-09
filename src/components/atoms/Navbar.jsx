@@ -5,9 +5,8 @@ import { Link, usePathname } from '../../navigation.js';
 import Image from 'next/image';
 import Button from './button/Button.jsx';
 import DropdownLang from './DropdownLang.jsx';
-import { AlignJustify, Menu } from 'lucide-react';
 import { MyAccount, SignIn } from '@/constants/links.js';
-import { ImgUser, ImgUserPrimary } from '@/constants/imgs.js';
+import { ImgUserPrimary } from '@/constants/imgs.js';
 import { hookUser } from '@/hooks/hookUser.js';
 
 export default function Navbar() {
@@ -17,7 +16,7 @@ export default function Navbar() {
     const links = [
         { name: t('home'), value: '/' },
         { name: t('available_halls'), value: '/available-halls' },
-        { name: t('exhibitions_and_events'), value: '/exhibitions-and-events' },
+        { name: t('contact_us'), value: '/contact-us' },
     ];
 
     const style = {
@@ -72,12 +71,10 @@ export default function Navbar() {
         };
     }, []);
 
-    //! is auth
-    const [isAuth, setisAuth] = useState(true);
     const {user} = hookUser()
 
     return (
-        <nav className={`z-[1000] sticky top-0 ${place ? (isScrolled ? 'bg-black ' : 'h-0') : 'bg-white'}  `}>
+        <nav className={` navbar z-[1000] sticky top-0 ${place ? (isScrolled ? 'bg-black ' : 'h-0') : 'bg-white'}  `}>
             <div className={`lg:hidden fixed z-[1000] w-full top-0 flex items-center justify-between px-[20px]  ${place ? (isScrolled ? 'bg-[#000]' : 'h-[80px') : 'bg-white '} `}>
                 <div className='flex items-center gap-[10px] '>
                     <Image onClick={handleToggle} className=' cursor-pointer hover:text-primary1' src={`/assets/${show == 'fixed' ? 'close' : `${place ? 'menu-white' : 'menu'}`}.svg`} alt='' width={25} height={25} />
@@ -91,7 +88,7 @@ export default function Navbar() {
             <div className={` max-lg:${show}  duratino-300  ${place ? 'max-lg:bg-secondry1' : 'max-lg:bg-primary3'}  max-lg:z-[100] max-lg:inset-0 max-lg:h-[100vh] max-lg:top-0 max-lg:flex-col max-lg:justify-center max-lg:items-start max-lg:gap-[20px] border-b-[1px]   border-b-primary3 container ${isScrolled ? 'min-h-[80px]' : 'min-h-[130px]'} duration-300 w-full flex items-center justify-between`}>
                 <div className={style.item + 'max-lg:mt-[-180px]'}>
                     <Link className='max-lg:hidden' href='/'>
-                        <Image src={`/assets/${place ? 'logo-white' : 'logo'}.svg`} alt='' width={130} height={60} />
+                        <Image src={`/assets/${place ? 'logo-white' : 'logo'}.svg`} alt='' width={100} height={40} />
                     </Link>
                     <ul className={style.item}>
                         {links?.map((e, i) => (

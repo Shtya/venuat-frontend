@@ -10,7 +10,8 @@ const PriceRangeSlider = ({setValue , min, max, loading }) => {
   const t = useTranslations();
   useEffect(()=> {
     setValues([min,max])
-  } , [loading])
+    console.log(min , max)
+  } , [loading , min , max])
   
     return (
         <div className='w-full flex flex-col items-center p-4 bg-white rounded-lg shadow-md'>

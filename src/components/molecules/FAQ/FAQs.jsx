@@ -48,7 +48,7 @@ export default function FAQs({ unite, title, data, loading, cnTitle, cn }) {
                     ) : data?.length > 0 ? (
 
                         data.map((faq, index) => (
-                            <div key={faq.id} className={`rounded-[30px] max-sm:rounded-[10px] max-sm:px-[10px] px-[30px] shadow-blur border duration-300 ${selected === index ? 'border-gray-300' : 'border-transparent'}`}>
+                            <div key={index} className={`rounded-[30px] max-sm:rounded-[10px] max-sm:px-[10px] px-[30px] shadow-blur border duration-300 ${selected === index ? 'border-gray-300' : 'border-transparent'}`}>
                                 <button onClick={() => toggleSection(index)} className='w-full py-4 flex justify-between gap-[5px] items-center'>
                                     <div className='h3 rtl:text-right ltr:text-left font-semibold flex items-center gap-[15px]'>{faq.question?.[locale]}</div>
                                     <Image className={`${selected === index ? 'rotate-[90deg]' : 'rotate-[-90deg]'} max-sm:w-[20px] max-sm:h-[20px] duration-300`} src='/assets/prev.svg' alt='' width={30} height={30} />

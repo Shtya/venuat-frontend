@@ -6,7 +6,7 @@ import { hookSearch } from '@/hooks/hookSearch';
 
 export default function Hero() {
     const t = useTranslations();
-    const { venue, cities, loading, loadingSubmit, handlePagination, occasionNames, register, errors, trigger, clearErrors, setError, getValues, setValue, submit, watch, reset } = hookSearch();
+    const {  loadingSubmit,  register, errors, trigger, setValue, submit, watch  ,clearData } = hookSearch();
 
     const [hasMounted, setHasMounted] = useState(false);
 
@@ -26,7 +26,7 @@ export default function Hero() {
                 <div data-aos='fade-up' className='h2 text-center text-white'>
                     {t('unforgettable_wedding_experience')}
                 </div>
-                <Search loading={loadingSubmit} register={register} cities={cities} errors={errors} trigger={trigger} setValue={setValue} submit={submit} watch={watch} dataAos='fade-up' />
+                <Search clearData={clearData} loading={loadingSubmit} register={register} errors={errors} trigger={trigger} setValue={setValue} submit={submit} watch={watch} dataAos='fade-up' />
             </div>
         </section>
     );

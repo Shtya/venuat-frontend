@@ -14,7 +14,7 @@ export default function Footer() {
 const pages = [
 	{name : "home" , value : "/"},
 	{name : "available_halls" , value : "/available-halls"},
-	{name : "exhibitions_and_events" , value : "/exhibitions-and-events"},
+	// {name : "exhibitions_and_events" , value : "/exhibitions-and-events"},
 	{name : "customer_reviews" , value : "/customer-reviews"},
 	{name : "login" , value : "/sign-in"},
 	{name : "contact_us" , value : "/contact-us"},
@@ -28,7 +28,7 @@ const files = [
 
 
   return (
-	<div className='mt-[50px] py-[40px]  bg-[#fbfbff] border-t-gray1 border-t-[1px]  ' >
+	<div className=' footer mt-[50px] py-[40px]  bg-[#fbfbff] border-t-gray1 border-t-[1px]  ' >
 		<div className="container grid grid-cols-[500px,auto,auto] max-lg:grid-cols-[350px,1fr,1fr] max-md:grid-cols-2 max-sm:grid-cols-1 gap-[40px] ">
 
 			<div className="form  max-md:col-span-2 max-sm:col-span-1  w-fulls bg-white p-[20px] relative shadow-blur rounded-[20px] overflow-hidden ">

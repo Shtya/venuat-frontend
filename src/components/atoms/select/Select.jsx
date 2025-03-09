@@ -32,13 +32,17 @@ const Select = ({ cnSelect, showIcons, loading, label, cnLabel, sendId, dataAos,
 
     const watchKey = watch?.(KEY);
     useEffect(() => {
-        if (watchKey) trigger?.(KEY);
-    }, [watchKey]);
+        if (watchKey) {
+            trigger?.(KEY);
+            const getOneData = data?.find(e => e.id == watchKey )
+            if(getOneData) handleValue(getOneData)
+        }
+        else {
+            setval({name : place })
+        }
+        
+    }, [watchKey , data]);
 
-    const watchKeyGET = watch?.(KEY + 'GET');
-    useEffect(() => {
-        if (watchKeyGET) handleValue(watchKeyGET);
-    }, []);
 
     const selectRef = useRef(null);
     useEffect(() => {
@@ -77,7 +81,7 @@ const Select = ({ cnSelect, showIcons, loading, label, cnLabel, sendId, dataAos,
                             ? Array(14)
                                   .fill(0)
                                   .map((_, i) => <div key={i} className='bg-gray-300 animate-pulse w-full h-[40px] rounded-[6px]'></div>)
-                            : data?.map((e, i) => <img key={e.id || i} src={e?.url} alt={e.id} onClick={() => handleValueIcon(e)} className={` ${Icon?.id == e.id && ' !bg-primary1 !bg-opacity-35 '} bg-[#f9fbfc] rounded-[6px] w-full p-[10px] shadow-[4px_4px_10px_rgba(0,0,0,0.1),_-4px_-4px_10px_rgba(255,255,255,0.8)] cursor-pointer hover:shadow-lg hover:scale-[.92] duration-300 max-w-[40px] h-[40px] object-contain`} />)}
+                            : data?.map((e, i) => <img key={i} src={e?.url} alt={e.id} onClick={() => handleValueIcon(e)} className={` ${Icon?.id == e.id && ' !bg-primary1 !bg-opacity-35 '} bg-[#f9fbfc] rounded-[6px] w-full p-[10px] shadow-[4px_4px_10px_rgba(0,0,0,0.1),_-4px_-4px_10px_rgba(255,255,255,0.8)] cursor-pointer hover:shadow-lg hover:scale-[.92] duration-300 max-w-[40px] h-[40px] object-contain`} />)}
                     </div>
                 </div>
             ) : (
