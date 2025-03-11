@@ -42,7 +42,7 @@ const Page = ({params}) => {
       <Button href={"/available-halls"} dataAos="fade-up" name={t('browse_all')} outline={true} classname={'!max-w-[300px]  mx-auto mt-[50px] '} />
       {policy?.length > 0 && <TextArea policy={policy} loading={loadingPolicy} />}
 
-      <div className=' max-xl:max-w-[800px] max-xl:mx-auto grid grid-cols-[1fr,450px] max-xl:grid-cols-1 gap-[30px] ' >
+      <div className=' !mt-[50px] max-xl:max-w-[800px] max-xl:mx-auto grid grid-cols-[1fr,450px] max-xl:grid-cols-1 gap-[30px] ' >
         <FAQs cn={"!py-0"} title={"faqstitle"} data={faqs} loading={loadingfaqs} />
         <AskSomeThing id={params.id} />
       </div>

@@ -14,7 +14,7 @@ const PriceRangeSlider = ({setValue , min, max, loading }) => {
   } , [loading , min , max])
   
     return (
-        <div className='w-full flex flex-col items-center p-4 bg-white rounded-lg shadow-md'>
+        <div className='w-full flex flex-col items-center  bg-white rounded-lg '>
             <div className='h2 w-full mb-[20px] font-[700] mt-[30px] '> {t('price2')} </div>
             {loading ? (
                 <div className='w-full h-[10px] bg-gray-300 animate-pulse rounded-[4px]'></div>

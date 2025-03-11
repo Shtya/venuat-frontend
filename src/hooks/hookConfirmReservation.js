@@ -1,7 +1,9 @@
+"use client"
+
 import AxiosInstance from '@/config/Axios';
 import { ContactUsSchema } from '@/schema/ContactUsSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'next/navigation';
 import { ReservationSchema } from '@/schema/ReservationSchema';
@@ -9,96 +11,100 @@ import { hookUser } from './hookUser';
 import { Notification } from '@/config/Notification';
 import { useTranslations } from 'next-intl';
 
-export const hookConfirmReservation = ({id}) => {
-  const t = useTranslations()
-  const { register , trigger , handleSubmit,formState: { errors }, clearErrors, setError, getValues, setValue , watch, reset } = useForm({ resolver: yupResolver(ReservationSchema) });
-  const {user}  = hookUser()
+export const hookConfirmReservation = ({ id }) => {
+    const t = useTranslations();
+    const [ startDate , setstartDate] = useState()
+    const [ endDate , setendDate] = useState()
+
+    console.log(startDate , endDate)
+    const schema = useMemo(() => ReservationSchema({ startDate, endDate }), [startDate, endDate]);
+
+    const {  register,  trigger,  handleSubmit,  formState: { errors },  clearErrors,  setError,  getValues,  setValue,  watch,  reset, } = 
+        useForm({ resolver: yupResolver(schema) });
+
+    const { user } = hookUser();
+
+    const [venue, setVenue] = useState();
+    const [loading, setLoading] = useState(true);
+    const [loadingPricing, setloadingPricing] = useState(true);
+    const [error, setErrorState] = useState(null);
+
+    const fetchVenues = async ({ query }) => {
+        setloadingPricing(true);
+        try {
+            const response = await AxiosInstance.get(`/venues/${id}/reservation-venue${query}`);
+            setVenue(response.data);
+
+            setstartDate(response?.data?.package?.start_date)
+            setendDate(response?.data?.package?.end_date)
 
 
-  const [venue, setVenue] = useState();
-  const [loading, setLoading] = useState(true);
-  const [loadingPricing , setloadingPricing ] = useState(true)
-  const [error, setErrorState] = useState(null);
+        } catch (error) {
+            setErrorState(error.message || 'Failed to load venues');
+        } finally {
+            setLoading(false);
+            setloadingPricing(false);
+        }
+    };
 
+    const searchParams = useSearchParams();
+    const [PackageId , setPackageId] = useState()
 
-  const fetchVenues = async ({query}) => {
-    setloadingPricing(true)
-      try {
-          const response = await AxiosInstance.get(`/venues/${id}${query}`);
-          setVenue(response.data);
+    useEffect(() => {
+        const PackageId = searchParams.get('package');
+        setPackageId(PackageId)
+        if (PackageId) {
+            fetchVenues({ query: `?packageId=${PackageId}` });
+        } else {
+            fetchVenues({ query: '' });
+        }
 
-      } catch (error) {
-          setErrorState(error.message || 'Failed to load venues');
-      } finally {
-          setLoading(false);
-          setloadingPricing(false)
-      }
-  };
-
-    
-  const [Package, setPackage] = useState();
-  const [loadingPackage, setLoadingPackage] = useState(true);
-
-  const fetchPackage = async () => {
-      try {
-          const response = await AxiosInstance.get(`venue-packages/${id}/venue`);
-          setPackage(response.data);
-
-      } catch (error) {
-          setErrorState(error.message || 'Failed to load Packages');
-      } finally {
-          setLoadingPackage(false);
-      }
-  };
-
-
-  useEffect(() => {
-      if(id){
-          fetchVenues({query : ""});
-          fetchPackage()
-      }
-  }, [id]);
-
-
-  //! get query  package id
-  const searchParams = useSearchParams();
-  const [packageId, setPackageId] = useState(searchParams.get('package')); // Initial value
-  useEffect(() => {
-      setPackageId(searchParams.get('package')); 
-    }, [searchParams]);
-    
-
-  //! get current package
-  useEffect(()=>  {
-    if(packageId ){
-      fetchVenues({query : `?packageId=${packageId}`})
-    }
-  },[packageId , loading ])
+        
+    }, [id, searchParams.get('package')]);
 
 
 
-  const [loadingReservation, setLoadingReservation] = useState(false);
-  const submit = handleSubmit(async data => {
-    const handleData = {
-      user : user?.id,
-      venue : +id ,
-      package : packageId,
-      status : "pending",
-      "check_in":  data?.check_in,
-      "check_out":  data?.check_out,
-      "from_time":  data?.from_time,
-      "to_time":  data?.to_time,
-      total_price : Number(venue?.venue?.totalPriceWithVAT) ,
-    }
+    //! whene change the count of quentity 
+    const countChange = watch('quantity');
+    useEffect(() => {
+        if (countChange) {
+          fetchVenues({ query: `?packageId=${PackageId}` });
+        }
+    }, [countChange]);
 
-    setLoadingReservation(true);
-    await AxiosInstance.post(`/reservations`, handleData)
-        .then(res => {
-            Notification( t("successReservation") , 'success');
-        })
-        .catch(err => console.log(err));
-    setLoadingReservation(false);
-  });
 
-  return { loadingReservation , loadingPricing , packageId, setPackageId , Package , loadingPackage ,venue : venue?.venue , loading , register, errors , trigger , setValue, submit , watch };
+    const [loadingReservation, setLoadingReservation] = useState(false);
+    const [isSubmit , setIsSubmit] = useState(false);
+    useEffect(()=> {
+        const firstErrorElement = document.querySelectorAll('.error')[0];
+        if (firstErrorElement) {
+            firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    } ,[isSubmit , errors])
+
+
+    const submit = handleSubmit(async data => {
+        setIsSubmit(true)
+        const handleData = {
+            user: user?.id,
+            venue: +id,
+            package: +PackageId,
+            status: 'pending',
+            check_in: data?.check_in,
+            check_out: data?.check_out,
+            from_time: data?.from_time,
+            to_time: data?.to_time,
+            total_price: Number(venue?.venue?.totalPriceWithVAT),
+        };
+
+        setLoadingReservation(true);
+        await AxiosInstance.post(`/reservations`, handleData)
+            .then(res => {
+                Notification(t('successReservation'), 'success');
+            })
+            .catch(err => console.log(err));
+        setLoadingReservation(false);
+    });
+
+    return { loadingReservation, loadingPricing, venue: venue?.venue, Package: venue?.package, loading, errors, trigger, setValue, submit, watch };
 };

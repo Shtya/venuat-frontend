@@ -17,13 +17,13 @@ export default function Rate_price({ rateTitle, ratings , priceTitle, priceValue
 
     return (
         <div  className={` ${ rateTitle ? "max-sm:grid-cols-1 grid-cols-[1fr,100px] " : " grid-cols-1 " } ${cn} grid items-start gap-[10px] max-sm:mt-[10px] mt-[20px]`}>
-            {rateTitle && <div className=' flex-col flex gap-[5px] max-sm:flex-row '>
+            {/* {rateTitle && <div className=' flex-col flex gap-[5px] max-sm:flex-row '>
                 <div className='text-[17px] max-md:text-[15px]  font-[600] '> {rateTitle} </div>
                 <div className='flex flex-wrap items-center gap-[5px] leading-[25px]  '>
                     <Starts countFill={Math.floor(avarageRate)} countEmpty={5 - Math.floor(avarageRate)} />
                     <span className='text-[12px] '> {`${avarageRate}/5`} </span>
                 </div>
-            </div>}
+            </div>} */}
 
             <div className={` ${rateTitle ? "flex-col" : " gap-[10px] "}  flex gap-[5px] max-sm:flex-row  `}>
                 <div className='text-[17px] max-md:text-[15px]  font-[600]'> {priceTitle} </div>

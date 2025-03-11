@@ -10,7 +10,7 @@ export const useDetailsHalls = ({id}) => {
 
     const fetchVenues = async () => {
         try {
-            const response = await AxiosInstance.get(`/venues/${id}`);
+            const response = await AxiosInstance.get(`/venues/${id}/detials-venue`);
             setVenue(response.data);
 
         } catch (error) {

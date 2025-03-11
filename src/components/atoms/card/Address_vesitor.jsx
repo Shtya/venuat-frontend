@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import React from 'react';
 
-export default function Address_vesitor({titleAddress , location , titleVistor , countOfVistor , cn }) {
+export default function Address_vesitor({titleAddress , location , titleVistor , e , cn }) {
     const t = useTranslations()
     
 	return (
@@ -20,7 +20,7 @@ export default function Address_vesitor({titleAddress , location , titleVistor ,
                 <div className='text-[17px] max-md:text-[15px]  font-[600] text-primary1 '> {t('visitors_title')} </div>
                 <div className=' flex items-center gap-[5px] '>
                     <Image className='max-sm:hidden w-[18px] ' src={'/assets/users.svg'} alt='' width={25} height={25} />
-                	<div className='text-[12px] leading-[22px] '> {countOfVistor} </div>
+                	<div className='text-[12px] leading-[22px] '> {t('visitor_number', { count: e?.max_capacity || 0 })} </div>
                 </div>
             </div>}
         </div>

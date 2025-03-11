@@ -13,8 +13,8 @@ export default function CountainerStarts({ratings}) {
     },[ratings ])
     return (
         <div className='flex items-center gap-[15px]  '>
-            <Starts countFill={Math.floor(avarageRate)} countEmpty={5 - Math.floor(avarageRate)} color='white' />
-            <span className='h4  '> {`${avarageRate}/5`} </span>
+            {/* <Starts countFill={Math.floor(avarageRate)} countEmpty={5 - Math.floor(avarageRate)} color='white' />
+            <span className='h4  '> {`${avarageRate}/5`} </span> */}
         </div>
     );
 }

@@ -15,7 +15,7 @@ export default function Filter({venue , loading , setValue , watch}) {
   return (
     <div className=' border-[1px] border-[#1E328B80] shadow-blur p-[20px] mt-[20px] rounded-[20px] ' >
       <div className="h2 font-[700]"> {t("filter")} </div>
-      <Checkbox loading={loadingOccasion} setValue={setValue} watch={watch}  KEY="category.highestRated" label={t("highest_rated_places")}  />
+      {/* <Checkbox loading={loadingOccasion} setValue={setValue} watch={watch}  KEY="category.highestRated" label={t("highest_rated_places")}  /> */}
       <Checkbox loading={loadingOccasion} setValue={setValue} watch={watch}  KEY="category.mostVisited" label={t("most_visited_places")}  />
       <Checkbox loading={loadingOccasion} setValue={setValue} watch={watch}  KEY="category.newest" label={t("new_places")}  />
 

@@ -7,7 +7,8 @@ import axios from 'axios';
 import Button from '../atoms/button/Button';
 import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/navigation';
-import { ArrowBigLeft, ArrowBigRight, ArrowRight } from 'lucide-react';
+import {  ArrowRight } from 'lucide-react';
+import Pin from '../atoms/Pin';
 
 const Map = ({ showName=true , center, zoom, click, setValue, data , setlocationName }) => {
     const t = useTranslations();
@@ -21,7 +22,22 @@ const Map = ({ showName=true , center, zoom, click, setValue, data , setlocation
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        // Icon for the main location (Blue)
+        
+        const PinHTML = `
+            <div class="relative w-10 h-10 flex items-center justify-center">
+                <div class="absolute w-20 h-20 bg-blue-500 opacity-20 rounded-full animate-ping"></div>
+                <div class="w-[10px] h-[10px] bg-blue-700 rounded-full"></div>
+            </div>
+            `;
+
+            const customIcon = L.divIcon({
+            className: "custom-pin", // اسم فئة يمكن تخصيصها في CSS
+            html: PinHTML, // إدراج الـ HTML المخصص
+            iconSize: [40, 40], // حجم الأيقونة
+            iconAnchor: [20, 20], // نقطة التثبيت
+            popupAnchor: [0, -20], // موضع البوب أب
+            });
+
         const mainLocationIcon = new L.Icon({
             iconUrl: '/assets/location-primary.svg',
             iconSize: [60, 60],
@@ -38,7 +54,7 @@ const Map = ({ showName=true , center, zoom, click, setValue, data , setlocation
         });
 
         setMainIcon(mainLocationIcon);
-        setPinIcon(redPinIcon);
+        setPinIcon(customIcon);
     }, []);
 
 
@@ -119,7 +135,6 @@ const Map = ({ showName=true , center, zoom, click, setValue, data , setlocation
     return (
         <div className='w-full w-max-[500px] z-[0] relative'>
             {showName && placeName && <div className='h4 text-center mb-[20px]'>{placeName}</div>}
-
             <div className='relative'>
                 <div className="absolute top-[10px] left-[50%] translate-x-[-50%] z-[1000] w-[calc(100%-20px)] ">
                     <div className='relative w-full p-2 border rounded-[20px] outline-none bg-white'>

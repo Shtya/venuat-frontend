@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import CountainerStarts from '@/components/atoms/start/CountainerStarts';
+import SAR from '@/components/atoms/SAR';
 
 const Map = dynamic(() => import('@/components/molecules/Map'), { ssr: false });
 
@@ -28,16 +29,16 @@ export default function Section2({ venue, loading }) {
                     <div className='box'>
                         {loading ? <div className='h-10 w-48 bg-gray-300 animate-pulse rounded-lg' /> : <div className='h1 font-[700]'>{venue?.name?.[locale]}</div>}
 
-                        <div className='flex items-center gap-[15px] mt-[10px]'>
+                        {/* <div className='flex items-center gap-[15px] mt-[10px]'>
                             <span className='h2 font-[500]'>{t('reviews_count')}</span>
                             {loading ? <div className='h-6 w-24 bg-gray-300 animate-pulse rounded-lg' /> : <CountainerStarts ratings={venue?.ratings} />}
-                        </div>
+                        </div> */}
                     </div>
 
                     {/* Right Side - Pricing */}
                     <div className='box max-xl:mt-[10px]'>
                         <div className='h1'>{t('hall_price')}</div>
-                        <div className='flex items-center gap-[5px] xl:mt-[10px]'>{loading ? <div className='h-6 w-20 bg-gray-300 animate-pulse rounded-lg' /> : <span className='h2 text-primary1 font-[700]'>{t('price', { count: venue?.price })}</span>}</div>
+                        <div className='flex items-center gap-[5px] xl:mt-[10px]'>{loading ? <div className='h-6 w-20 bg-gray-300 animate-pulse rounded-lg' /> : <SAR cn={"text-[20px]"} price={venue?.price} /> }</div>
                     </div>
                 </div>
 
@@ -68,9 +69,7 @@ export default function Section2({ venue, loading }) {
             {/* Map Section */}
             <div data-aos='fade-up'>
                 <div className='h1 font-[700] mb-[20px]'>{t('where_in_jeddah')}</div>
-                {loading ? 
-                    <div className='h-[365px] w-full bg-gray-300 animate-pulse rounded-lg' /> 
-                    : venue && <Map showName={false} setlocationName={setlocationName} center={[venue?.lat || 21.2854  , venue?.lng || 39.2376]} zoom={100} />}
+                {loading ?  <div className='h-[365px] w-full bg-gray-300 animate-pulse rounded-lg' />  : venue && <Map showName={false} setlocationName={setlocationName} center={[venue?.lat || 21.2854  , venue?.lng || 39.2376]} zoom={100} />}
             </div>
         </div>
     );

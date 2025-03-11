@@ -2,6 +2,22 @@
     "clear" : "Clear" ,
     "showMore" : "Show More" ,
     "visitors_title" : "Visitors" ,
+    "quantity_exceeded": "Quantity exceeded the allowed limit",
+	"Save_changes" : "Save Changes",
+    "updated_Successfully" : "Updated Successfully",
+    "auth1" : "Restricted Access" ,
+    "auth2" : "Please log in to continue. Access to this page is limited to authenticated users only." ,
+    "auth3" : "Go to Login" ,
+    "title_timer" : "Time Remaining for Venue Package",
+    "timer_expired" : "This Package is No Longer Available",
+
+        "invalidDateRange": "Selected date range is not within the allowed time period.",      
+            "checkinDateBeforeStart": "Check-in date must be on or after the start date.",
+            "checkoutDateAfterCheckin": "Check-out date must be on or before the end date.",
+            "fromTimeBeforeStart": "Start time must be within the allowed time range.",
+            "toTimeAfterEnd": "End time must be within the allowed time range.",          
+            "checkoutDateAfterEnd": "End Reservation date must be on or before the period of offer.",
+
 
 
 
@@ -42,7 +58,6 @@
     "successReservation": "The reservation has been successfully",
     "checkinDate": "Check-in date is required",
     "checkoutDate": "Check-out date is required",
-    "checkoutDateAfterCheckin": "Check-out date must be after check-in date",
     "fromTime": "From time is required",
     "toTime": "To time is required",
     "toTimeAfterFromTime": "To time must be after From time",

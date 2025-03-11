@@ -39,8 +39,8 @@ export default function CardGrid2_1({ isLoading, data }) {
 
                                   <div className='flex items-center gap-[10px] mt-[5px]'>
                                       <div className='h2'>{t('price2')}</div>
-                                      {/* <SAR price={e.price} /> */}
-                                      <div className='h2 mt-[5px] text-white'>{t('price', { count: e.price })}</div>
+                                      <SAR price={e.price} cn={"text-[18px] !text-white !fill-white "} />
+
                                   </div>
                               </div>
                           </div>

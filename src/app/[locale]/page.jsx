@@ -17,9 +17,10 @@ const page = () => {
     const { loading: loadingSetting, data: dataSetting } = hookSetting();
     const {occasion , loadingOccasion } = hookOccasion()
 
+
     return (
-        <main className='home'>
-            <Hero />
+        <main className='home overflow-hidden'>
+            <Hero loading={loadingSetting} data={dataSetting?.settings} />
 
             <div className='my-[100px] '>
                 <div className='container'>

@@ -4,12 +4,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-// import 'swiper/css/pagination';
+
 import Image from 'next/image';
 import Button from '../../atoms/button/Button';
-import Starts from '../../atoms/start/Starts';
 import { useLocale, useTranslations } from 'next-intl';
-import { ChevronLeftCircle } from 'lucide-react';
 import Address_vesitor from '@/components/atoms/card/Address_vesitor';
 import Rate_price from '@/components/atoms/card/Rate_price';
 import CardPlaceholder from '../placeholder/CardPlaceholder';
@@ -44,7 +42,7 @@ export default function CardSlider({ isLoading , data }) {
                     <div data-aos='zoom-in' data-aos-delay={`${i}00`} className='h-full pb-[80px] max-sm:pb-[50px] relative rounded-[30px] overflow-hidden w-full shadow-custom border-gray1 border-[1px]'>
                         <img className='w-full bg-primary1 max-sm:max-h-[220px] max-h-[250px] object-cover ' src={e?.venueGalleries?.[0]?.imgs[0] || '/assets/test-img/notfound.png'} alt='' />
                         <div className='p-[20px]'>
-                            <Address_vesitor titleAddress={e?.name?.[locale]} location={`${e.property?.city.name} , ${e.property?.city?.country.name}`} titleVistor={t('visitors_count')} countOfVistor={t('visitor_number', { count: e?.visitCount || 0 })} />
+                            <Address_vesitor titleAddress={e?.name?.[locale]} location={`${e.property?.city.name} , ${e.property?.city?.country.name}`} titleVistor={t('visitors_count')} e={e} />
                             <Rate_price empty={3} fill={2} rateTitle={t('rating')} ratings={e?.ratings} priceTitle={t('price2')} priceValue={e?.price} />
 
                             {e?.list && (

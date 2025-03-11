@@ -55,7 +55,7 @@ const page = () => {
                 </div>
 
                 <div>
-                    <Card showNoResultData={true} isLoading={loading} slice={1000} animation={false} sckelton={9} data={venue?.data} />
+                    <Card grid="max-[1300px]:grid-cols-2" showNoResultData={true} isLoading={loading} slice={1000} animation={false} sckelton={9} data={venue?.data} />
                     <Pagination limit={venue.limit} countRecored={venue.countRecored} page={venue.page} onPageChange={handlePagination} />
                 </div>
             </div>

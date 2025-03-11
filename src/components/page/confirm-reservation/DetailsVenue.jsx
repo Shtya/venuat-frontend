@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Amount from './Amount';
 import { useLocale, useTranslations } from 'next-intl';
 import Checkbox from '@/components/atoms/checkbox/Checkbox';
@@ -6,10 +6,31 @@ import Divider from '@/components/atoms/Divider';
 import { ensureYourHalls, services } from '@/Dummy/dummy';
 import AmountSkeleton from '@/components/atoms/Skelton/AmountSkeleton';
 import SAR from '@/components/atoms/SAR';
+import AmountServices from './AmountServices';
+import AmountEquipments from './AmountEquipments';
 
-export default function DetailsVenue({ cn, venue, loading }) {
+export default function DetailsVenue({setValue , cn, venue , Package , loading }) {
     const t = useTranslations();
     const locale = useLocale();
+    const [Services , setServices] = useState(null)
+    const [Equipments , setEquipments] = useState(null)
+    const [disabled , setdisabled] = useState(false)
+
+    useEffect(()=> {
+        if(venue){
+            if(Package){
+                setServices(Package?.services?.filter(ele => ele?.price > 0))
+                setEquipments(Package?.equipments?.filter(ele => ele?.price > 0))
+                setdisabled(true)
+            }
+            else{
+                setServices(venue?.venueServices)
+                setEquipments(venue?.venueEquipments)
+                setdisabled(false)
+            }
+        }
+    } ,[loading])
+
 
     const style = {
         head: 'grid grid-cols-3  gap-[10px] my-[20px]',
@@ -42,7 +63,7 @@ export default function DetailsVenue({ cn, venue, loading }) {
                 <Divider />
     
                 {/* Skeleton for Additional Features */}
-                <div className="mt-[40px] mb-[20px]">
+                {/* <div className="mt-[40px] mb-[20px]">
                     <div className="h-4 w-[200px] bg-gray-300 rounded animate-pulse"></div>
                 </div>
                 <div className="grid max-sm:grid-cols-1 grid-cols-2 gap-x-[100px] gap-y-[20px] mb-[40px] ">
@@ -52,7 +73,7 @@ export default function DetailsVenue({ cn, venue, loading }) {
                             <div className="h-4 w-full bg-gray-300 rounded animate-pulse"></div>
                         </div>
                     ))}
-                </div>
+                </div> */}
             </div>
         );
     }
@@ -60,7 +81,7 @@ export default function DetailsVenue({ cn, venue, loading }) {
 
     return (
         <div className={`${cn}`}>
-            {venue?.venueServices?.length > 0 && (
+            {Services?.length > 0 && (
                 <div className={style.head}>
                     <span className=' font-medium text-secondry3 '> {t('additionalServices')} </span>
                     <span  className='text-center font-medium text-secondry3 '> {t('quantity')} </span>
@@ -68,14 +89,12 @@ export default function DetailsVenue({ cn, venue, loading }) {
                 </div>
             )}
 
-            {venue?.venueServices?.map((e, i) => (
-                <Amount style={style.body} key={i} name={e?.service?.name?.[locale]} price={e.price} quantity={e.count} />
-            ))}
-			{venue?.venueServices?.length > 0 && <Divider />}
+            
+            <AmountServices setValue={setValue} venue={venue} data={Services} disabled={disabled}  style={style.body} />
+			{Services?.length > 0 && <Divider classname={"mt-[50px]"} />}
 
 
-
-            {venue?.venueEquipments.length > 0 && (
+            {Equipments?.length > 0 && (
                 <div className={style.head+ " mt-[60px] "}>
                     <span  className=' font-medium text-secondry3 '> {t('additionalEquipment')} </span>
                     <span  className='text-center font-medium text-secondry3 '> {t('quantity')} </span>
@@ -83,14 +102,11 @@ export default function DetailsVenue({ cn, venue, loading }) {
                 </div>
             )}
 
-            {venue?.venueEquipments.map((e, i) => (
-                <Amount style={style.body} key={i} name={e?.equipment?.name?.[locale]} price={e.price} quantity={e.count} />
-            ))}
-
-            {venue?.venueEquipments.length > 0 && <Divider />}
+            <AmountEquipments setValue={setValue} venue={venue} data={Equipments} disabled={disabled}  style={style.body} />
+            {Equipments?.length > 0 && <Divider classname={"my-[50px]"} />}
 
 
-            <div  className=' mt-[40px] mb-[20px] font-medium text-secondry3 '> {t('additionalFeature')}  </div>
+            {/* <div  className=' mt-[40px] mb-[20px] font-medium text-secondry3 '> {t('additionalFeature')}  </div>
             <div className='grid max-sm:grid-cols-1 grid-cols-2  gap-x-[100px] gap-y-[20px]  '>
                 {venue?.venueFeatures?.map((e, i) => (
                     <div  key={i} className='  flex items-center justify-between gap-[10px]'>
@@ -100,7 +116,7 @@ export default function DetailsVenue({ cn, venue, loading }) {
                 ))}
             </div>
 
-            <Divider classname='my-[30px]' />
+            <Divider classname='my-[30px]' /> */}
         </div>
     );
 }

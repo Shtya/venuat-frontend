@@ -38,7 +38,7 @@ const page = () => {
 
     return (
         <main className='min-h-[100vh] container max-lg:pt-[70px] '>
-            <div className='lg:sticky top-[100px] z-[1000] '>
+            <div className='  lg:sticky top-[100px] z-[1000] '>
                 <Search dataAos="fade-up" />
             </div>
 

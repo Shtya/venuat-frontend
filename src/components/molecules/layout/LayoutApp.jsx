@@ -8,6 +8,7 @@ import 'aos/dist/aos.css';
 import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast'
 import { GlobalProvider } from '@/context/GlobalContext'
+import CanNotAccess from '@/components/atoms/CanNotAccess'
 
 
 export default function Layout({children , params }) {
@@ -36,6 +37,7 @@ export default function Layout({children , params }) {
 		<div  > {children} </div>
 		{show && <Footer />}
 		<Toaster position="top-center" reverseOrder={false} />
+		<CanNotAccess />
 	</div>
 	</GlobalProvider>
   )

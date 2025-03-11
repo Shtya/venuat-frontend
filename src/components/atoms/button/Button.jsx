@@ -3,7 +3,7 @@ import { useRouter } from '@/navigation';
 import Image from 'next/image';
 import React from 'react';
 
-export default function Button({style , isLoading, width, name, dataAos, rotate = true, disabled, onClick, icon, outline, showIcon, classname, href }) {
+export default function Button({style , cnName , isLoading , typeIcon , width, name, dataAos, rotate = true, disabled, onClick, icon, outline, showIcon , classname, href }) {
     const router = useRouter();
 
     const handleClciks = () => {
@@ -17,8 +17,8 @@ export default function Button({style , isLoading, width, name, dataAos, rotate 
                     <div className={` w-5 h-5 border-2 ${!outline ? "border-white" : "border-primary1 "}  border-t-transparent rounded-full animate-spin`}></div>
                 ) : (
                     <>
-                        <span>{name}</span>
-                        {showIcon && <Image className={`${rotate ? 'ltr:rotate-[180deg]' : ''}`} src={icon || '/assets/arrow-right.svg'} alt='' width={20} height={20} />}
+                        <span className={`${cnName}`} >{name}</span>
+                        {showIcon ? typeIcon == "svg" ? icon : <Image className={`${rotate ? 'ltr:rotate-[180deg]' : ''}`} src={icon || '/assets/arrow-right.svg'} alt='' width={20} height={20} /> : null}
                     </>
                 )}
             </div>
