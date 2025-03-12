@@ -10,7 +10,7 @@ import { Link } from '@/navigation';
 import {  ArrowRight } from 'lucide-react';
 import Pin from '../atoms/Pin';
 
-const Map = ({ showName=true , center, zoom, click, setValue, data , setlocationName }) => {
+const Map = ({ showName=true , center, zoom , Fetch , click, setValue, data , setlocationName }) => {
     const t = useTranslations();
     const locale = useLocale()
     const [position, setPosition] = useState(center || [21.2854, 39.2376]); // Default to Jeddah
@@ -124,12 +124,12 @@ const Map = ({ showName=true , center, zoom, click, setValue, data , setlocation
 
 
     useEffect(()=> {
-        if(!center?.[0] ) {
-            console.log("no")
-            fetchPlaceName(21.2854, 39.2376)}
-        else {
-            console.log("yes"  , center )
-            fetchPlaceName(center?.[0] , center?.[1] )}
+        if(!Fetch){
+            if(!center?.[0] ) {
+                fetchPlaceName(21.2854, 39.2376)}
+            else {
+                fetchPlaceName(center?.[0] , center?.[1] )}
+        }
     } ,[center])
 
     return (

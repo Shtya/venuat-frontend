@@ -1,39 +1,27 @@
 {
-    "clear" : "Clear" ,
-    "showMore" : "Show More" ,
-    "visitors_title" : "Visitors" ,
+    "phoen1" :"Phone number must start with 05",
+    "phoen2" :"Phone number must be 10 digits long",
+    "phoen3" :"Phone number is required",
+
+
+    "clear": "Clear",
+    "showMore": "Show More",
+    "visitors_title": "Visitors",
     "quantity_exceeded": "Quantity exceeded the allowed limit",
-	"Save_changes" : "Save Changes",
-    "updated_Successfully" : "Updated Successfully",
-    "auth1" : "Restricted Access" ,
-    "auth2" : "Please log in to continue. Access to this page is limited to authenticated users only." ,
-    "auth3" : "Go to Login" ,
-    "title_timer" : "Time Remaining for Venue Package",
-    "timer_expired" : "This Package is No Longer Available",
+    "Save_changes": "Save Changes",
+    "updated_Successfully": "Updated Successfully",
+    "auth1": "Restricted Access",
+    "auth2": "Please log in to continue. Access to this page is limited to authenticated users only.",
+    "auth3": "Go to Login",
+    "title_timer": "Time Remaining for Venue Package",
+    "timer_expired": "This Package is No Longer Available",
 
-        "invalidDateRange": "Selected date range is not within the allowed time period.",      
-            "checkinDateBeforeStart": "Check-in date must be on or after the start date.",
-            "checkoutDateAfterCheckin": "Check-out date must be on or before the end date.",
-            "fromTimeBeforeStart": "Start time must be within the allowed time range.",
-            "toTimeAfterEnd": "End time must be within the allowed time range.",          
-            "checkoutDateAfterEnd": "End Reservation date must be on or before the period of offer.",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    "invalidDateRange": "Selected date range is not within the allowed time period.",
+    "checkinDateBeforeStart": "Check-in date must be on or after the start date.",
+    "checkoutDateAfterCheckin": "Check-out date must be on or before the end date.",
+    "fromTimeBeforeStart": "Start time must be within the allowed time range.",
+    "toTimeAfterEnd": "End time must be within the allowed time range.",
+    "checkoutDateAfterEnd": "End Reservation date must be on or before the period of offer.",
 
     "changePassword": "Change your password",
     "account_update_confirmation": "Your account information has been successfully updated.",
@@ -41,14 +29,14 @@
     "totalWithVat": "Price with vat",
     "additionalFeature": "Additional Features",
 
-    "Question" : "Question",
-    "enterQuestion" : "Enter question",
-    "Answer" : "Answer",
-    "enterAnswer" : "Enter answer",
-    "addfaqs" : "Add FAQs",
+    "Question": "Question",
+    "enterQuestion": "Enter question",
+    "Answer": "Answer",
+    "enterAnswer": "Enter answer",
+    "addfaqs": "Add FAQs",
 
-    "addPolicies" : "Add Policies",
-    "addPolicy" : "Add Policy",
+    "addPolicies": "Add Policies",
+    "addPolicy": "Add Policy",
     "policy": "Policy",
     "addPolicyName": "Add policy name",
     "enterPolicyName": "Enter policy name",
@@ -66,20 +54,20 @@
     "status": "Status:",
     "answer": "Answer:",
     "askedOn": "Asked on:",
-    "CHOOSE_FILE" : "Choose File" ,
-    "chooseService" : "Choose Service" ,
-    "countService" : "Count service" ,
-    "EntercountService" : "Enter count service" ,
-    "addNewEquipment" : "Add new equipment" ,
+    "CHOOSE_FILE": "Choose File",
+    "chooseService": "Choose Service",
+    "countService": "Count service",
+    "EntercountService": "Enter count service",
+    "addNewEquipment": "Add new equipment",
 
-    "nameEquipment" :  "Name Equipment",
-    "enterNameEquipment" :  "Enter Name Equipment",
-    "countEquipment" :  "Count Equipment",
-    "EntercountEquipment" :  "Enter Count Equipment",
-    "addEquipment" : "Add Equipment",
-    "closeTimeMustAfterOpen" : "Closing time must be after opening time",
-    "descriptionHall" : "Description of the Venue" ,
-    "EnterdescriptionHall" : "Enter description of the Venue" ,
+    "nameEquipment": "Name Equipment",
+    "enterNameEquipment": "Enter Name Equipment",
+    "countEquipment": "Count Equipment",
+    "EntercountEquipment": "Enter Count Equipment",
+    "addEquipment": "Add Equipment",
+    "closeTimeMustAfterOpen": "Closing time must be after opening time",
+    "descriptionHall": "Description of the Venue",
+    "EnterdescriptionHall": "Enter description of the Venue",
 
     "welcomeDrink": "Welcome drink",
     "breakfast": "Breakfast",
@@ -93,73 +81,61 @@
     "payNow": "Pay now",
     "poweredBy": "Powered by",
     "passWithSocial": "You can log in through",
-    "addNewServices" : "Add new services",
+    "addNewServices": "Add new services",
     "enterNameService": "Enter name service",
     "nameService": "Name service",
 
-    "addImg" : "Choose icon",
-    "chooseFromHere" : "Choose from here",
+    "addImg": "Choose icon",
+    "chooseFromHere": "Choose from here",
 
-    "addService" : "Add service",
-    "YouChooseOne" : "You choose one",
-     "atLeastOne": "At least one image is required",
-     "uploadImgeSuccess" : "Upload images successfully",
-     "searchLocation" : "Search location...",
-     "RemoveService" : "You deleted the service from the venue.",
-     "RemoveEquipment" : "You deleted the equipment from the venue.",
+    "addService": "Add service",
+    "YouChooseOne": "You choose one",
+    "atLeastOne": "At least one image is required",
+    "uploadImgeSuccess": "Upload images successfully",
+    "searchLocation": "Search location...",
+    "RemoveService": "You deleted the service from the venue.",
+    "RemoveEquipment": "You deleted the equipment from the venue.",
 
-    
     "nameProperty": "Name property",
     "namePropertyPlaceholder": "Enter name property ",
     "descriptionProperty": "Description property",
     "descriptionPropertyPlaceholder": "Enter description property",
     "propertyImage": "Property Image",
     "createPropertyButton": "Create Property",
-    "Created_Successfully" : "Created Successfully",
-    "Successfully_selected" : "Successfully selected",
+    "Created_Successfully": "Created Successfully",
+    "Successfully_selected": "Successfully selected",
     "termsAndConditionSuccess": "You have agreed with the terms and conditions",
 
-
-    "ChooseYourOccasion" : "Choose Your Occasion",
-    "ChooseOccasion" : "Choose Occasion",
-    "ChooseAnOccasion" : "Choose an occasion",
+    "ChooseYourOccasion": "Choose Your Occasion",
+    "ChooseOccasion": "Choose Occasion",
+    "ChooseAnOccasion": "Choose an occasion",
 
     "validation": {
-    "location": {
-      "required": "Please choose a place on the map"
+        "location": {
+            "required": "Please choose a place on the map"
+        },
+        "occasion": {
+            "required": "Occasion is required"
+        },
+        "city": {
+            "required": "City is required"
+        },
+        "name": {
+            "required": "Name is required",
+            "min": "Name must be at least 3 characters",
+            "max": "Name must be less than 100 characters"
+        },
+        "description": {
+            "required": "Description is required",
+            "min": "Description must be at least 10 characters",
+            "max": "Description must be less than 500 characters"
+        },
+        "file": {
+            "required": "File is required",
+            "fileType": "Only image files are allowed",
+            "fileSize": "File size must be less than 5MB"
+        }
     },
-    "occasion": {
-      "required": "Occasion is required"
-    },
-    "city": {
-      "required": "City is required"
-    },
-    "name": {
-      "required": "Name is required",
-      "min": "Name must be at least 3 characters",
-      "max": "Name must be less than 100 characters"
-    },
-    "description": {
-      "required": "Description is required",
-      "min": "Description must be at least 10 characters",
-      "max": "Description must be less than 500 characters"
-    },
-    "file": {
-      "required": "File is required",
-      "fileType": "Only image files are allowed",
-      "fileSize": "File size must be less than 5MB"
-    }
-  },
-
-
-
-
-
-
-
-
-
-
 
     "notfoundquestion": "No questions are available at the moment.",
     "notfoundpolicy": "No policies are available at the moment.",
@@ -305,7 +281,7 @@
     "createAccount": "Create account",
     "alreadyHaveAccount": "Already have an account?",
     "fullNamePlaceholder": "Enter your full name",
-    "phoneNumberPlaceholder": "+966| Enter your phone number",
+    "phoneNumberPlaceholder": "Enter your phone number",
     "emailPlaceholder": "Please enter your email",
     "password": "Password",
     "passwordPlaceholder": "Please enter your password",
@@ -382,14 +358,11 @@
             "quantity": "0"
         }
     ],
-    
-
-    
 
     "errors": {
-        "question" : "Question is required",
-        "answer" : "Answer is required",
-        "description" : "Description is required", 
+        "question": "Question is required",
+        "answer": "Answer is required",
+        "description": "Description is required",
         "passwordMinLength": "Password must be at least 8 characters",
         "confirmPassword": "Confirm Password is required",
         "passwordMismatch": "Passwords do not match",
@@ -409,8 +382,8 @@
 
         "place": "An option must be selected.",
         "countHalls": "An option must be selected.",
-        "type_place" : " Type place is required, Please select an option.",
-        "is_multi_place" : "MultiPlaces is required, Please select an option.",
+        "type_place": " Type place is required, Please select an option.",
+        "is_multi_place": "MultiPlaces is required, Please select an option.",
 
         "freeBreakfast": "Free breakfast availability is required.",
         "parkingSpace": "Parking space availability is required.",

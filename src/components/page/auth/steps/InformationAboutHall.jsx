@@ -52,10 +52,10 @@ export default function InformationAboutHall({ previousStep , loading, errors, s
                 <Input register={register('maxPeople')} error={errors?.maxPeople} label={t('maxPeople')} KEY={'maxPeople'} type={'number'} place={t('enterPeopleCount')} cnInput='!border-[#DEE2E6] !border-[1px] ' />
                 <TimePicker cnInput=' !w-full !text-[13px] placeholder:!text-[#646369] rounded-[8px] !h-[45px] !border-[#DEE2E6] !border-[1px] ' KEY={'openingTime'} error={errors?.openingTime} watch={watch} trigger={trigger} setValue={setValue} label={t('openingTime')} place={t('startsFrom')} />
                 <TimePicker cnInput=' !w-full !text-[13px] placeholder:!text-[#646369] rounded-[8px] !h-[45px] !border-[#DEE2E6] !border-[1px] ' KEY={'closingTime'} error={errors?.closingTime} watch={watch} trigger={trigger} setValue={setValue} label={t('closingTime')} place={t('closesFrom')} />
-                <Input unite={t('currency')} register={register('price')} error={errors?.price} label={t('price2')} KEY={'price'} type={'number'} place={t('enterPrice')} cnInput='!border-[#DEE2E6] !border-[1px] ' />
+                <Input unite={t('currency')} IconUnit={true}  register={register('price')} error={errors?.price} label={t('price2')} KEY={'price'} type={'number'} place={t('enterPrice')} cnInput='!border-[#DEE2E6] !border-[1px] ' />
             </div>
 
-			<div className='max-w-[67%] max-md:max-w-full w-full mt-[20px] ' >
+			<div className='max-w-[67%] mx-auto max-md:max-w-full w-full mt-[20px] ' >
 				<TextArea register={register('description')} error={errors?.description} cnLabel={' !h5 mt-[20px]  '} cnInput={'!border-[#E1E6EF] !border-[1px] '} KEY='description.ar' label={t('descriptionHall')} place={t('EnterdescriptionHall')} />
 
 			</div>

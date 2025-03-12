@@ -10,7 +10,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-export const hookCreateEquipment = (onClose) => {
+export const hookCreateEquipment = (onClose , setnewAdded) => {
   const t = useTranslations()
   const { register , trigger , handleSubmit,formState: { errors }, clearErrors, setError, getValues, setValue , watch, reset } = useForm({ resolver: yupResolver(addEquipmentSchema) });
   const {checkEndpoint} = useGlobalContext()
@@ -68,6 +68,7 @@ export const hookCreateEquipment = (onClose) => {
         .catch(err => {})
         .finally(() => {
           setLoadingService(false)  
+          setnewAdded(dataAddServiceToVenue)
       })
     })
 

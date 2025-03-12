@@ -6,9 +6,9 @@ import Select from '../atoms/select/Select'
 import { useTranslations } from 'next-intl'
 import { hookCreateService } from '@/hooks/hookCreateService'
 
-export default function AddNewServicePopup({onClose}) {
+export default function AddNewServicePopup({onClose ,setnewAdded}) {
   const t = useTranslations()
-  const { register, icons ,errors , trigger , loading , loadingService , clearErrors, setError, getValues, setValue, submit , watch, reset } = hookCreateService(onClose)
+  const { register, icons ,errors , trigger , loading , loadingService , clearErrors, setError, getValues, setValue, submit , watch, reset } = hookCreateService(onClose , setnewAdded)
 
 
   return (

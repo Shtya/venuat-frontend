@@ -7,9 +7,9 @@ import { useTranslations } from 'next-intl'
 import { hookCreateService } from '@/hooks/hookCreateService'
 import { hookCreateEquipment } from '@/hooks/equipment/hookCreateEquipment'
 
-export default function AddNewEquipmentPopup({onClose}) {
+export default function AddNewEquipmentPopup({onClose , setnewAdded}) {
   const t = useTranslations()
-  const { register, icons ,errors , trigger , loading , loadingService , clearErrors, setError, getValues, setValue, submit , watch, reset } = hookCreateEquipment(onClose)
+  const { register, icons ,errors , trigger , loading , loadingService , clearErrors, setError, getValues, setValue, submit , watch, reset } = hookCreateEquipment(onClose , setnewAdded)
 
 
   return (

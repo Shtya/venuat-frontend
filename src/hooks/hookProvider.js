@@ -143,6 +143,7 @@ export const hookProvider = () => {
             Notification(err.response?.data?.message || 'An error occurred', 'error');
         } finally {
             setloading(false);
+            setValue("name" , null )
         }
     };
 
@@ -190,8 +191,11 @@ export const hookProvider = () => {
         .then(res => { 
             ChagneStep(step)  
         })
-        .catch(err => {});
-        setloading(false);
+        .catch(err => {})
+        .finally(()=> {
+            setloading(false);
+            setValue("name" , null)
+        })
     };
 
     //! add service to the venue 

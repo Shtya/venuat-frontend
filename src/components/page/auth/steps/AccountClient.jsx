@@ -8,9 +8,10 @@ import Image from 'next/image';
 import VerifyIdentity from './VerifyIdentity';
 import SuccessVerifyIdentity from './SuccessVerifyIdentity';
 import { hookSignUp } from '@/hooks/hookSignUp';
+import InputPhone from '@/components/atoms/input/InputPhone';
 
 export default function AccountClient() {
-    const { step, register, loading, errors, submit, handleStepChange , loadingCheckOTP , CheckCodeOTP, resendGmailMsg } = hookSignUp();
+    const { step, register, loading, setValue , errors, submit, handleStepChange , loadingCheckOTP , CheckCodeOTP, resendGmailMsg } = hookSignUp();
     const t = useTranslations();
 
     return (
@@ -19,8 +20,8 @@ export default function AccountClient() {
                 <>
                     <div>
                         <Input dataAos='fade-up' error={errors?.name} register={register('name')} KEY={'name'} cnInput='!border-[#E1E6EF] !border-[1px] ' classname='mt-[20px] ' icon={ImgUser} type={'text'} label={t('fullName')} place={t('fullNamePlaceholder')} />
-                        <Input dataAos='fade-up' error={errors?.phone} register={register('phone')} KEY={'phone'} cnInput='!border-[#E1E6EF] !border-[1px] ' classname='mt-[20px] ' icon={ImgPhone} type={'text'} label={t('phoneNumber')} place={t('phoneNumberPlaceholder')} />
-                        <Input dataAos='fade-up' error={errors?.email} register={register('email')} KEY={'email'} cnInput='!border-[#E1E6EF] !border-[1px] ' classname='mt-[20px] ' icon={ImgEmail} type={'email'} label={t('email')} place={t('emailPlaceholder')} />
+                        <InputPhone dataAos='fade-up' icon={ImgPhone} error={errors?.phone} register={register('phone')} KEY={'phone'} cnInput='!border-[#E1E6EF] !border-[1px] ' classname='mt-[20px] ' setValue={setValue} type={'text'} label={t('phoneNumber')} place={t('phoneNumberPlaceholder')} />
+                        <Input dataAos='fade-up'  error={errors?.email} register={register('email')} KEY={'email'} cnInput='!border-[#E1E6EF] !border-[1px] ' classname='mt-[20px] ' icon={ImgEmail} type={'email'} label={t('email')} place={t('emailPlaceholder')} />
                         <Input dataAos='fade-up' error={errors?.password} register={register('password')} KEY={'password'} cnInput='!border-[#E1E6EF] !border-[1px] ' classname='mt-[20px] ' icon={ImgPassword} type={'password'} label={t('password')} place={t('passwordPlaceholder')} />
                         <Button isLoading={loading} dataAos='fade-up' onClick={submit} name={t('createAccountButton')} classname='mt-[40px]' />
                     </div>

@@ -52,6 +52,16 @@ export default function Sidebar({getMe , loading , currentComponent ,handleCurre
         }
     };
 
+
+    const handleLogout = () => {
+        // Remove any stored authentication tokens or user data
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("user"); 
+        router.push("/sign-in");
+    };
+    
+
   return (
 	<div data-aos="fade-up" className='main-shadow h-fit pt-[20px] pb-[10px]  rounded-[20px] ' >
 		<div className='mx-auto bg-primary3 hover:bg-opacity-50  duration-200 cursor-pointer rounded-[50%] flex items-center justify-center relative w-[80px] h-[80px] ' >
@@ -78,7 +88,7 @@ export default function Sidebar({getMe , loading , currentComponent ,handleCurre
 		<div onClick={()=> handleCurrentPage(3)} className={`h4 hover:bg-gray1 mt-[2px] p-[10px] cursor-pointer duration-200 ${currentComponent == 3 && "text-primary1  !bg-primary3 border-r-[4px] border-primary1 "} `} > {t("sent_questions")} </div>
 
 		<hr className=' my-[10px] border-t-[1px] border-primary3 ' />
-		<div className={`h4 p-[10px] text-red-600 hover:bg-red-200 cursor-pointer hover:bg-opacity-60 duration-200  `} > {t("logout")} </div>
+		<div onClick={handleLogout} className={`h4 p-[10px] text-red-600 hover:bg-red-200 cursor-pointer hover:bg-opacity-60 duration-200  `} > {t("logout")} </div>
 
 	</div>
   )

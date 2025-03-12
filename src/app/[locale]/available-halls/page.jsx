@@ -50,7 +50,7 @@ const page = () => {
                         </div>
                     </div>
 
-                    <Map data={venue?.data} zoom={5} />
+                    <Map data={venue?.data} zoom={5} Fetch={true}  />
                     <Filter loading={loading} venue={venue} trigger={trigger } setValue={setValue} watch={watch} />
                 </div>
 

@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-export const hookCreateService = (onClose) => {
+export const hookCreateService = (onClose , setnewAdded) => {
   const t = useTranslations()
   const { register , trigger , handleSubmit,formState: { errors }, clearErrors, setError, getValues, setValue , watch, reset } = useForm({ resolver: yupResolver(addServiceSchema) });
   const {checkEndpoint} = useGlobalContext()
@@ -45,6 +45,7 @@ export const hookCreateService = (onClose) => {
   const [loadingService , setLoadingService] = useState(false)
 
   const submit = handleSubmit(async data => {
+
     setLoadingService(true)
     const DATA = {
       name : await translated(data?.name) ,
@@ -55,7 +56,7 @@ export const hookCreateService = (onClose) => {
       const dataAddServiceToVenue = {
         service : res?.data?.id ,
         count : +data?.count ,
-        price : +data?.price 
+        price : +data?.price ,
       }
       AxiosInstance.post(`venues/${venueId}/add-service` , dataAddServiceToVenue ).then((res )=> {
         Notification( t("Created_Successfully") , "success" )
@@ -65,6 +66,8 @@ export const hookCreateService = (onClose) => {
       .finally(()=>{
         checkEndpoint()
         setLoadingService(false)
+        setnewAdded(dataAddServiceToVenue)
+        
       })
     })
 

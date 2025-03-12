@@ -19,7 +19,7 @@ export default function Hero({ loading, data }) {
     console.log(data)
 
     return (
-        <section className='relative min-h-screen flex items-center flex-col justify-center'>
+        <section className='relative h-full min-h-[900px]  flex items-center flex-col justify-center'>
 
              {/* ✅ Placeholder أثناء تحميل الفيديو */}
              {loading && (

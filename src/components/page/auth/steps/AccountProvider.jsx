@@ -28,7 +28,7 @@ export default function AccountProvider() {
         <div className=''>
             <ProgressSteps currentStep={step} setCurrentStep={setstep} totalSteps={totalSteps} />
 
-            {step == 1 && <StepSignUp loading={loading} errors={errors} register={register} submit={submit} /> }
+            {step == 1 && <StepSignUp setValue={setValue} loading={loading} errors={errors} register={register} submit={submit} /> }
             {step == 2 && <CreateProperty previousStep={previousStep} title='createPropertyButton' trigger={trigger} submit={submit} register={register} errors={errors} watch={watch}  loading={loading}  setValue={setValue} />}
 
             {step == 3 && <RadioLabel previousStep={previousStep} loading={loading} submit={submit} title='placeTitle' watch={watch} getValues={getValues} KEY={'type_place'}     data={PlaceData} step={step} setValue={setValue} />}

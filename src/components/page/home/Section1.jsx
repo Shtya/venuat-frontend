@@ -45,10 +45,10 @@ export default function Section1({ venue, loading }) {
                 </div>
             ) : (
                 <div className='grid grid-cols-2 max-md:grid-cols-1 gap-[20px]'>
-                    <img data-aos='zoom-in'  className='rounded-[30px] overflow-hidden bg-[#eee] border-[1px] border-[#eee] ' src={imgs?.[0]} alt='' width={750} height={650} />
+                    <img data-aos='zoom-in'  className='rounded-[30px] h-[600px] overflow-hidden bg-[#eee] border-[1px] border-[#eee] ' src={imgs?.[0]} alt='' width={750} height={650} />
                     <div className='grid grid-cols-2 max-[400px]:grid-cols-1 gap-[20px]'>
                         {Array(4).fill(0).map((e, i) => (
-                            <img data-aos='zoom-out' data-aos-delay={`${i}00`} className=' bg-[#eee] border-[1px] border-[#eee]  rounded-[30px] max-md:h-[200px] h-full w-full object-cover' key={i} src={imgs?.[i+2]} alt='' width={350} height={280} />
+                            <img data-aos='zoom-out' data-aos-delay={`${i}00`} className=' bg-[#eee] border-[1px] border-[#eee]  rounded-[30px] max-md:h-[200px] h-[287px] w-full object-cover' key={i} src={imgs?.[i+2]} alt='' width={350} height={280} />
                         ))}
                     </div>
                 </div>

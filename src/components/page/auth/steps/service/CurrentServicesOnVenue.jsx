@@ -1,3 +1,4 @@
+import SAR from '@/components/atoms/SAR'
 import AxiosInstance from '@/config/Axios'
 import { Notification } from '@/config/Notification'
 import { GlobalProvider, useGlobalContext } from '@/context/GlobalContext'
@@ -5,7 +6,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
-export default function CurrentServicesOnVenue({isOpenPopup}) {
+export default function CurrentServicesOnVenue({ append , setValue , fields }) {
 	const locale = useLocale()
 	const t  = useTranslations()
 	const { changeListen , checkEndpoint } = useGlobalContext()
@@ -60,13 +61,13 @@ export default function CurrentServicesOnVenue({isOpenPopup}) {
 	<div>
 		
 
-		<div className='flex flex-col gap-[10px] ' >
+		<div className='flex flex-col gap-x-[30px] gap-y-[15px] mb-[30px] ' >
 				{
 				loading
                     ? Array.from({ length: 1 }).map((_, i) => <SkeletonRow key={i} />) // Show skeleton when loading
                     : currServs?.map((e,i)=> 
-					<div key={i} className={` relative grid max-sm:grid-cols-1 grid-cols-[60px,1fr,1fr,1fr]  items-center gap-x-[10px] gap-y-[20px]`} > 
-						<div onClick={()=> remove(e.VenueServiceID)} className={` ${i == 0 && "mt-[20px]"} ${loadingRemove && currID === e?.VenueServiceID  ? "pointer-events-none" : ""} cursor-pointer hover:bg-opacity-40 duration-200 w-[40px] h-[40px] rounded-[50%] bg-red1 bg-opacity-20 flex items-center justify-center `} > 
+					<div key={i} className={` relative grid max-sm:grid-cols-1 grid-cols-[60px,1fr,1fr,1fr]  items-center gap-x-[20px] gap-y-[20px]`} > 
+						<div onClick={()=> remove(e.VenueServiceID)} className={` ${i == 0 && "mt-[10px]"} ${loadingRemove && currID === e?.VenueServiceID  ? "pointer-events-none" : ""} cursor-pointer hover:bg-opacity-40 duration-200 w-[40px] h-[40px] rounded-[50%] bg-red1 bg-opacity-20 flex items-center justify-center `} > 
 							{
 								loadingRemove && currID === e?.VenueServiceID 
 								? <div className={` w-5 h-5 border-2 border-white  border-t-transparent rounded-full animate-spin`}></div>
@@ -76,7 +77,7 @@ export default function CurrentServicesOnVenue({isOpenPopup}) {
 						</div>
 						<Field index={i} label={t("nameServices")} name={e?.name?.[locale]}  />
 						<Field index={i} label={t("countService")} name={e?.count}  />
-						<Field index={i} label={t("price2")}       name={e?.price}  />
+						<Field index={i} label={t("price2")}  unit="SAR"      name={e?.price}  />
                     </div>)
 				}
 			</div>
@@ -89,11 +90,14 @@ export default function CurrentServicesOnVenue({isOpenPopup}) {
 
 
 
-function Field({ name , label , index }) {
+function Field({ name , label , index , unit }) {
   return (
 	<div className={` pointer-events-none duration-500 relative select flex  flex-col gap-[5px]  w-full `}>
             {index == 0 && <label className={`h5`}> {label} </label>}
-			<div className=' bg-neutral-200 h5  text-secondry2 h-[40px] flex items-center px-[10px] rounded-[8px] w-full border border-neutral-200 ' > {name} </div>
+			<div className=' flex items-center justify-between bg-neutral-200 h5  text-secondry2 h-[40px]  px-[10px] rounded-[8px] w-full border border-neutral-200 ' > 
+				{name} 
+				{unit &&<SAR />}
+			</div>
 	</div>
   )
 }

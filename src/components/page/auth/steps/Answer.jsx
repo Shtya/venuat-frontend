@@ -1,5 +1,6 @@
 import Button from '@/components/atoms/button/Button'
 import Input from '@/components/atoms/input/Input'
+import InputPhone from '@/components/atoms/input/InputPhone'
 import Select from '@/components/atoms/select/Select'
 import { Cities, eventTypes } from '@/Dummy/dummy'
 import { onEnter } from '@/helper/onEnter'
@@ -50,7 +51,7 @@ export default function Answer({previousStep ,errors , loading ,  submit  , regi
 			<Input register={register("responsiblePersonName")} error={errors?.responsiblePersonName} label={t("responsiblePersonName")}  KEY={"responsiblePersonName"}    type={"text"}   place={t("enterName")}  cnInput="!border-secondry3 !border-[1px] " />
 			<Input register={register("nearestMainAddress")} error={errors?.nearestMainAddress} label={t("nearestMainAddress")}     KEY={"nearestMainAddress"}       type={"text"}   place={t("enterAddress")}  cnInput="!border-secondry3 !border-[1px] " />
 			<Input register={register("email")} error={errors?.email} label={t("email")}                  KEY={"email"}                    type={"email"}  place={t("enterEmail")}  cnInput="!border-secondry3 !border-[1px] " />
-			<Input register={register("phone")} error={errors?.phone} label={t("phoneNumber")}            KEY={"phoneNumber"}              type={"text"}   place={t("enterNumber")}  cnInput="!border-secondry3 !border-[1px] " />
+			<InputPhone register={register}  error={errors?.phone}  label={t("phoneNumber")}            KEY={"phone"}      setValue={setValue}        type={"text"}   place={t("enterNumber")}  cnInput="!border-secondry3 !border-[1px] " />
 		</div>
 
 			<Button width=" !z-[2] max-w-[300px] w-full mx-auto " dataAos='fade-up' isLoading={loading} onClick={submit} classname='mt-[50px] ' name={t("containue")} />
