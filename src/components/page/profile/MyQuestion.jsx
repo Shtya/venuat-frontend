@@ -18,7 +18,7 @@ export default function MyQuestion({ faqs, loadingfaqs }) {
                 {t('Halls')}
             </div>
 
-            <VenueQuestions data={[]} loading={loadingfaqs} />
+            <VenueQuestions data={faqs} loading={loadingfaqs} />
         </div>
     );
 }
