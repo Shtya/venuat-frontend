@@ -6,6 +6,9 @@ import { useRouter } from '@/navigation'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'use-intl'
+import Popup from '../molecules/Popup'
+import AddNewEquipmentPopup from '../popupComponent/AddNewEquipmentPopup'
+import LogoutPopup from '../popupComponent/LogouPopup'
 
 export default function Sidebar({getMe , loading , currentComponent ,handleCurrentPage}) {
 	const t = useTranslations()
@@ -52,6 +55,7 @@ export default function Sidebar({getMe , loading , currentComponent ,handleCurre
         }
     };
 
+    const [isOpenPopup , setisOpenPopup] = useState(false)
 
     const handleLogout = () => {
         // Remove any stored authentication tokens or user data
@@ -88,7 +92,10 @@ export default function Sidebar({getMe , loading , currentComponent ,handleCurre
 		<div onClick={()=> handleCurrentPage(3)} className={`h4 hover:bg-gray1 mt-[2px] p-[10px] cursor-pointer duration-200 ${currentComponent == 3 && "text-primary1  !bg-primary3 border-r-[4px] border-primary1 "} `} > {t("sent_questions")} </div>
 
 		<hr className=' my-[10px] border-t-[1px] border-primary3 ' />
-		<div onClick={handleLogout} className={`h4 p-[10px] text-red-600 hover:bg-red-200 cursor-pointer hover:bg-opacity-60 duration-200  `} > {t("logout")} </div>
+		<div onClick={()=> setisOpenPopup(true) } className={`h4 p-[10px] text-red-600 hover:bg-red-200 cursor-pointer hover:bg-opacity-60 duration-200  `} > {t("logout")} </div>
+
+
+        <Popup title={t('logoutTitle')} isOpen={isOpenPopup} onClose={() => setisOpenPopup(false)} content={ <LogoutPopup onClick={handleLogout}  onClose={() => setisOpenPopup(false)} /> } />
 
 	</div>
   )

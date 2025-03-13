@@ -10,7 +10,7 @@ export default function CanNotAccess({ children }) {
     const [isAuthenticated, setIsAuthenticated] = useState(true);
 
     useEffect(() => {
-		if(pathname?.startsWith("/reservation") || pathname.startsWith("/1212f") ){
+		if(pathname?.startsWith("/reservation") || pathname.startsWith("/my-account") ){
 			console.log(pathname)
 			const user = localStorage.getItem('user');
 			setIsAuthenticated(!!user);

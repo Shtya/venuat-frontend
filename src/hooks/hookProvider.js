@@ -167,7 +167,7 @@ export const hookProvider = () => {
 
 
 
-        await AxiosInstance.patch(`/users/${vendorId}`, {role : "vendor"} )
+        await AxiosInstance.patch(`/users/${vendorId}`, {role : "vendor"} ).then(res => {}).catch(err => console.log(err))
         await AxiosInstance.post(`/properties`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
             .then( async res => {
                 await AxiosInstance.post(`/venues`, {property : +res?.data?.id })

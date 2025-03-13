@@ -15,7 +15,7 @@ const pages = [
 	{name : "home" , value : "/"},
 	{name : "available_halls" , value : "/available-halls"},
 	// {name : "exhibitions_and_events" , value : "/exhibitions-and-events"},
-	{name : "customer_reviews" , value : "/customer-reviews"},
+	// {name : "customer_reviews" , value : "/customer-reviews"},
 	{name : "login" , value : "/sign-in"},
 	{name : "contact_us" , value : "/contact-us"},
   ]

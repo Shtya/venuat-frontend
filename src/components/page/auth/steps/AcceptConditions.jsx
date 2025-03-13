@@ -6,12 +6,15 @@ import Button from '@/components/atoms/button/Button'
 import { onEnter } from '@/helper/onEnter'
 import React, { useEffect, useState } from 'react'
 import { hookPolicies } from '@/hooks/hookPolicies'
+import { hookSetting } from '@/hooks/hookSettings'
 
 
 
 export default function AcceptConditions({previousStep , watch , loading : loadingPolicesSend ,  submit , KEY="accetpCondition"  , setValue }) {
 	const t = useTranslations()
-	const { policies , loading } = hookPolicies()
+	// const { policies , loading } = hookPolicies()
+
+	const { data , loading } = hookSetting()
 	onEnter(submit)
 
 	const watchKey = watch?.(KEY)
@@ -34,7 +37,7 @@ export default function AcceptConditions({previousStep , watch , loading : loadi
 
   return (
 	<div data-aos="fade-up" >
-		<TextArea policy={policies} loading={loading}  classname={"mt-0 !mb-[50px]  "}  title={t("titleCondition")} desc={t("descCondition")}  />
+		<TextArea policy={data?.settings?.policies} loading={loading}  classname={"mt-0 !mb-[50px]  "}  title={t("titleCondition")} desc={t("descCondition")}  />
 		<Checkbox  watch={watch} cn='!mt-0' cnLabel={"text-secondry1 !font-[600] !h3  "}  setValue={setValue}  KEY={KEY} label={t("acceptCondition")} />
 	
 

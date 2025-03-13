@@ -28,7 +28,7 @@ const CountdownTimer = ({ Package }) => {
                         to={endTime}
                         labelStyle={{ color: '#1e328b', fontSize: '14px', fontWeight: '700' }}
                         labels={['Hours', 'Minutes', 'Seconds']}
-                        className='tick flex justify-center text-[28px]'
+                        className=' rtl:flex-row-reverse tick flex justify-center text-[28px]'
                         onComplete={() => alert(t('timer_expired'))} // You can customize this action
                     />
                 ) : (

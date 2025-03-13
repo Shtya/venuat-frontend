@@ -275,7 +275,7 @@ export const FilterPageData = [
 
 
 export const FAQsData = {
-	title: "faqstitle",
+	title: "",
 	faqs: [
 	  {
 		question: "faqs[0]",

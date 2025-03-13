@@ -45,10 +45,10 @@ AxiosInstance.interceptors.response.use(
                 localStorage.setItem('accessToken', newAccessToken);
 
                 originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-                toast.success('تم تحديث الجلسة بنجاح! 🔄');
+                // toast.success('تم تحديث الجلسة بنجاح! 🔄');
                 return AxiosInstance(originalRequest);
             } catch (err) {
-                toast.error('انتهت الجلسة، يُرجى تسجيل الدخول مجددًا!');
+                // toast.error('انتهت الجلسة، يُرجى تسجيل الدخول مجددًا!');
                 // Optionally, you can redirect to the login page here
                 // window.location.href = '/login';
             }
@@ -59,6 +59,7 @@ AxiosInstance.interceptors.response.use(
                 : error.response.data.message || 'حدث خطأ غير متوقع!'; 
             Notification(errorMessage, "error");
         } else {
+            if(["/users/me"].includes(error?.config?.url)) return
             Notification(error.response?.data?.message || 'حدث خطأ غير متوقع!', "error");
         }
         

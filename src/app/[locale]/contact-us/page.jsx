@@ -11,13 +11,8 @@ import React from 'react'
 
 export default function page() {
 	const t = useTranslations()
-	const { register, errors , trigger , clearErrors, setError, getValues, setValue, submit , watch, reset } = hookContactUs()
+	const { register, errors , setValue, submit , loading } = hookContactUs()
 
-
-    // "country_code": "+966",
-    // "": "اكتب رسالتك",
-    // "": "اكتب رسالتك هنا",
-    // "send": "إرسال"
 
   return (
 	<div className='container py-[50px] ' >
@@ -31,7 +26,7 @@ export default function page() {
 				<Input dataAos="fade-up" KEY={"email"}    register={register("email")}    error={errors?.email}             cnInput="!border-[#E1E6EF] !border-[1px] "   icon={ImgEmail}    type={"email"}       label={t("email")}       place={t("emailPlaceholder")} />
 				<InputPhone setValue={setValue} dataAos="fade-up" KEY={"phone"} register={register("phone")} error={errors?.phone} cnInput="!border-[#E1E6EF] !border-[1px] "   icon={ImgPhone}    type={"text"}    label={t("phoneNumber")}    place={t("enterNumber")} />
 				<TextArea dataAos="fade-up" KEY={"message"} register={register("message")} error={errors?.message} cnInput="!border-[#E1E6EF] !border-[1px] "  type={"message"}    label={t("write_message")}    place={t("message_placeholder")} />
-				<Button classname={"mt-[40px]"} name={t("send")} onClick={submit} dataAos={"fade-up"}  />
+				<Button isLoading={loading} classname={"mt-[40px]"} name={t("send")} onClick={submit} dataAos={"fade-up"}  />
 			</div>
 
 			<Image  data-aos="fade-up" className=' max-md:order-[-1] max-md:h-fit w-full h-[400px] object-contain mx-auto '  src={"/assets/imgs/contact-us.png"} width={400} height={300} />

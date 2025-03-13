@@ -30,7 +30,7 @@ const Page = ({params}) => {
       <Section1 venue={venue?.venue} loading={loading} />
       <Section2 venue={venue?.venue} loading={loading} /> 
 
-        <div  className={` ${Package?.length > 0 && "!flex"} hidden items-center justify-between  mt-[100px] mb-[40px]`}>
+        <div  className={` arrow-package ${Package?.length > 0 ? "flex" : "hidden" } items-center justify-between  mt-[100px] mb-[10px]`}>
             <div data-aos="fade-up" className='h1 font-[700] my-[30px] '> {t('choose_location_package')} </div>
             <Arrow />
         </div>

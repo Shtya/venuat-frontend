@@ -82,13 +82,14 @@ export const hookConfirmReservation = ({ id }) => {
         }
     } ,[isSubmit , errors])
 
+    const [isOpenPopup , setisOpenPopup] = useState(false)
 
     const submit = handleSubmit(async data => {
         setIsSubmit(true)
+
         const handleData = {
             user: user?.id,
             venue: +id,
-            package: +PackageId,
             status: 'pending',
             check_in: data?.check_in,
             check_out: data?.check_out,
@@ -97,14 +98,18 @@ export const hookConfirmReservation = ({ id }) => {
             total_price: Number(venue?.venue?.totalPriceWithVAT),
         };
 
+        if(PackageId) handleData.package = +PackageId
+    
+
         setLoadingReservation(true);
         await AxiosInstance.post(`/reservations`, handleData)
             .then(res => {
                 Notification(t('successReservation'), 'success');
+                setisOpenPopup(true)
             })
             .catch(err => console.log(err));
         setLoadingReservation(false);
     });
 
-    return { loadingReservation, loadingPricing, venue: venue?.venue, Package: venue?.package, loading, errors, trigger, setValue, submit, watch };
+    return { isOpenPopup , setisOpenPopup , loadingReservation, loadingPricing, venue: venue?.venue, Package: venue?.package, loading, errors, trigger, setValue, submit, watch };
 };

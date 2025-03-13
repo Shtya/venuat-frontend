@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { useGlobalContext } from '@/context/GlobalContext';
 
 export default function InputPhone({ unite, place, dataAos, rounded = true, error, cnInput, classname, label, type, icon, KEY, setValue, cnLabel }) {
     const t = useTranslations();
+    const {changeListen} = useGlobalContext()
     const [phoneNumber, setPhoneNumber] = useState('');
     const [phoneError, setPhoneError] = useState('');
 
@@ -40,6 +42,11 @@ export default function InputPhone({ unite, place, dataAos, rounded = true, erro
         }
     };
 
+    useEffect(()=> {
+        setPhoneNumber("") 
+    } ,[changeListen])
+
+    
     return (
         <div data-aos={dataAos} className={`${classname} flex flex-col gap-[5px] relative`}>
             {label && (
@@ -54,8 +61,8 @@ export default function InputPhone({ unite, place, dataAos, rounded = true, erro
                             +966
                         </span>
                     )}
-                    <input
-                        className={`${icon && 'rtl:mr-[-40px] ltr:ml-[-40px]'} focus:border-primary1 ${rounded ? '!focus:border-[1px]' : '!focus:border-b-[1px]'} placeholder:text-secondry3 h5 w-full ${icon ? 'rtl:pr-[40px] ltr:pl-[40px]' : 'px-[10px]'} h-full outline-none text-secondry2`}
+                    <input 
+                        className={` ${icon && 'rtl:mr-[-40px] ltr:ml-[-40px]'} focus:border-primary1 ${rounded ? '!focus:border-[1px]' : '!focus:border-b-[1px]'} placeholder:text-secondry3 h5 w-full ${icon ? 'rtl:pr-[40px] ltr:pl-[40px]' : 'px-[10px]'} h-full outline-none text-secondry2`}
                         id={KEY}
                         placeholder={icon ? "050 000 0000" : place}
                         type={type}
@@ -77,9 +84,10 @@ export default function InputPhone({ unite, place, dataAos, rounded = true, erro
             </div>
             {(phoneError || (phoneNumber === '' && error)) && (
                 <div className='error absolute'>
-                    {phoneError ? t(phoneError) : t("phoen3")}
+                    {phoneError ? phoneError : t("phoen3")}
                 </div>
             )}
         </div>
     );
 }
+

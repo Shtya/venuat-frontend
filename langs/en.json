@@ -1,9 +1,39 @@
 {
+
+    "reservationSuccess1" :"Reservation Successful!",
+    "reservationSuccess2" :"Your reservation has been successfully completed. We look forward to seeing you soon!",
+    "reservationSuccess3" :"Show Your Reservation",
+    "noReservation" : "No reservations at this time.",
+    "noQuestionYet" : "No questions available",
+    
+    
+    
+    
+    
+    
+    
+    
+    "logoutCancel" : "Cancel" ,
+    "Q" : "Q",
+    "logoutConfirm" : "Log Out" ,
+    "logoutTitle" : "Are you sure you want to log out?" ,
+    "logoutMessage" : "You will be logged out from your account." ,
+    "CheckInDate" : "Check In Date" ,
+    "CheckOutDate" : "Check Out Date" ,
+    "CheckInTime" : "Check In Time" ,
+    "CheckOutTime" : "Check Out Time" , 
+    "reservation-error1" : "The check in date is required." ,
+    "reservation-error2" : "The check-out date is required." ,
+    "reservation-error3" : "The check out date must be after the check in date." ,
+    "reservation-error4" : "The check out date must be before the period of the offer date." ,
+    "reservation-error5" : "The from time is required." ,
+    "reservation-error6" : "The to time is required." ,
+    "reservation-error7" : "The to time must be after the from time." ,
     "phoen1" :"Phone number must start with 05",
     "phoen2" :"Phone number must be 10 digits long",
     "phoen3" :"Phone number is required",
-
-
+    
+    "contact_us_success" : "Your message has been sent! We will get in touch with you shortly.",
     "clear": "Clear",
     "showMore": "Show More",
     "visitors_title": "Visitors",
@@ -378,7 +408,9 @@
         "invalidEmail": "Enter a valid email address.",
         "email": "Email is required.",
         "message": "Message is required.",
+
         "password": "Password is required.",
+        "newPassword": "New password is required.",
 
         "place": "An option must be selected.",
         "countHalls": "An option must be selected.",

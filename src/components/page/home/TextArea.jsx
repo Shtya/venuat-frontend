@@ -6,14 +6,14 @@ export default function TextArea({ classname, policy, loading, title, desc }) {
   const locale = useLocale();
 
   return (
-    <div data-aos="fade-up" className={`my-[100px] max-w-[900px] ${classname} `}>
+    <div data-aos="fade-up" className={`my-[100px] max-w-[900px] ${classname} `} id='accessibility' >
       {title && <div  className="text-center text-secondry1s font-[700] mb-[10px] h1">{title}</div>}
       {desc && <div  className="text-center mb-[40px] h4 text-secondry3">{desc}</div>}
 
-      <div id="accessibility"  className="h2 font-[700] mb-[10px]">{t("accessibility")}</div>
+      <div   className="h2 font-[700] mb-[10px]">{t("accessibility")}</div>
       <div  className="h3 text-secondry3">{t("accessibility_description")}</div>
 
-      <div id="policies"  className="h2 font-[700] mt-[40px] mb-[10px]">{t("policies")}</div>
+      <div  className="h2 font-[700] mt-[40px] mb-[10px]">{t("policies")}</div>
 
       <div className="flex flex-col gap-[20px]">
         {loading

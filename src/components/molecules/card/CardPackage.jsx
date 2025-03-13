@@ -5,6 +5,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import CardPlaceholder from '../placeholder/CardPlaceholder';
 import InnerCard from './atoms/InnerCard';
+import { useEffect } from 'react';
 
 export default function CardPackage({ loading , data , Package , btnName }) {
 
@@ -25,13 +26,22 @@ export default function CardPackage({ loading , data , Package , btnName }) {
         }
     };
 
+    // Filter out expired packages
+    const validPackages = Package?.filter(e => !e?.end_date || new Date(e.end_date) > new Date());
+
+    // Hide arrows if no valid packages are present
+    useEffect(() => {
+        const arrow = document.querySelector('.arrow-package');
+        arrow.style.display = validPackages?.length === 0 ? 'none' : 'flex';
+        
+    }, [validPackages , loading]);
 
     return (
-        <Swiper  {...config} className='mySwiper w-full !bg-white '>
+        <Swiper  {...config} className='mySwiper w-full !bg-white mb-[80px] '>
             {
             loading
               ? Array(3).fill(0).map((_, i) => <SwiperSlide key={i} > <CardPlaceholder index={i}  key={i} /> </SwiperSlide> )
-              : Package?.map((e, i) => ( 
+              : validPackages?.map((e, i) => ( 
                 <SwiperSlide className='!bg-white shadow-none' key={e.id}  >
                 <InnerCard btnName={btnName} e={e} i={i} data={data} /> 
                 </SwiperSlide>

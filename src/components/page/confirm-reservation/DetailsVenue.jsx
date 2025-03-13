@@ -32,6 +32,15 @@ export default function DetailsVenue({setValue , cn, venue , Package , loading }
     } ,[loading])
 
 
+    useEffect(()=> {
+        console.log(Services , Equipments)
+        if(Services?.length == 0 && Equipments?.length == 0) {
+            const arrowShowDetails = document.querySelector(".arrow-show-details")
+            if (arrowShowDetails) arrowShowDetails.style.display = 'none';
+        }
+    } ,[Services , Equipments , loading])
+
+
     const style = {
         head: 'grid grid-cols-3  gap-[10px] my-[20px]',
         body: 'grid grid-cols-3 justify-center gap-[10px] my-[20px]',

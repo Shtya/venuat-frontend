@@ -7,14 +7,8 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 
-export default function Step1({resendGmailMsg ,loading }) {
+export default function Step1({ submit ,loading , errors , register }) {
     const t = useTranslations();
-    const { register , trigger , control , handleSubmit,formState: { errors }, clearErrors, setError, getValues, setValue , watch, reset } = useForm({  resolver: yupResolver(forgetSchema) });
-
-
-  const submit = handleSubmit(async data => {
-    resendGmailMsg({emailValue : data?.email})
-  }); 
 
     return (
         <div>

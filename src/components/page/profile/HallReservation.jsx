@@ -19,6 +19,8 @@ export default function HallReservation({ getMe, loading }) {
     return <SkeletonTable />;
   }
 
+  console.log(getMe)
+
   return (
     <div className="w-full overflow-auto main-shadow ">
       <div className="w-full  rounded-[20px] max-h-[80vh] overflow-auto ">
@@ -38,7 +40,74 @@ export default function HallReservation({ getMe, loading }) {
           </thead>
 
           {/* Table Rows */}
-          <tbody >
+
+          <tbody>
+              {getMe?.reservations?.length > 0 ? (
+                getMe?.reservations?.map((e, i) => {
+
+                  const checkOutDate = new Date(e?.check_out);
+                  const isConfirmed = !isNaN(checkOutDate) && checkOutDate < new Date();
+
+                  const reservationStatus = isConfirmed ? "CONFIRMED" : e?.status?.toUpperCase();
+
+                  return (
+                    <tr
+                      key={i}
+                      className={`${
+                        getMe?.reservations?.length !== i + 1 &&
+                        "border-b-[1px] border-[#D5DBF6]"
+                      }`}
+                    >
+                      <td className="border-l-[1px] ltr:border-l-transparent rtl:border-l-[#D5DBF6] p-[10px] text-center h4 text-primary1 font-bold">
+                        {e?.id}
+                      </td>
+                      <td className="border-l-[1px] border-l-[#D5DBF6] p-[10px] text-center h4 text-primary1 font-bold">
+                        {e?.check_in}
+                      </td>
+                      <td className="border-l-[1px] border-l-[#D5DBF6] p-[10px] text-center h4 text-primary1 font-bold">
+                        {e?.check_out}
+                      </td>
+                      <td className="border-l-[1px] border-l-[#D5DBF6] p-[10px] text-center h4 text-primary1 font-bold">
+                        <div className=' text-[14px] mb-[3px] ' >{e?.venue?.name?.[locale]}</div>
+                        <Image
+                          className="mx-auto w-[100px] h-[80px] object-cover rounded-[20px]"
+                          src={e?.venue?.venueGalleries?.[0]?.imgs?.[0]}
+                          alt=""
+                          width={120}
+                          height={120}
+                        />
+                      </td>
+                      <td className="border-l-[1px] border-l-[#D5DBF6] p-[10px] text-center h4 text-primary1 font-bold">
+                        <SAR price={e?.venue?.price} />
+                      </td>
+                      <td className="border-l-[1px] border-l-[#D5DBF6] p-[10px] text-center h4 text-primary1 font-bold">
+                        {`${e?.venue?.property?.city?.name}, ${e?.venue?.property?.city?.country?.name}`}
+                      </td>
+                      <td className="border-l-[1px] rtl:border-l-transparent ltr:border-l-[#D5DBF6] p-[10px] text-center">
+                        <button
+                          disabled={reservationStatus === "CANCELLED"}
+                          style={{
+                            background: statusColors[reservationStatus],
+                            borderColor: statusColors[reservationStatus],
+                          }}
+                          className={`px-[15px] cursor-default mx-[10px] text-white rounded-full border-[1px] h4 hover:bg-opacity-80 h-[50px]`}
+                        >
+                          {reservationStatus}
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan={7} className="text-center text-[25px] h-[200px] text-gray-500 p-4">
+                    {t("noReservation")}
+                  </td>
+                </tr>
+              )}
+            </tbody>
+
+          {/* <tbody >
             {getMe?.reservations?.map((e, i) => (
               <tr key={i} className={` ${getMe?.reservations?.length != i+1 && "border-b-[1px] border-[#D5DBF6]" } `}>
                 <td className="  border-l-[1px] ltr:border-l-transparent rtl:border-l-[#D5DBF6] p-[10px] text-center h4 text-primary1 font-bold">{e?.id}</td>
@@ -55,7 +124,7 @@ export default function HallReservation({ getMe, loading }) {
                 </td>
               </tr>
             ))}
-          </tbody>
+          </tbody> */}
         </table>
       </div>
     </div>

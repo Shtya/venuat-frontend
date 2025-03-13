@@ -10,8 +10,8 @@ export default function Section1({ venue, loading }) {
     const bar = [
         { name: 'summary', value: 'summary' },
         { name: 'similar_halls', value: 'similar_halls' },
-        { name: 'accessibility', value: 'accessibility' },
-        { name: 'policies', value: 'policies' },
+        { name: 'policies', value: 'accessibility' },
+        { name: 'FAQs', value: 'policies' },
     ];
 
     const [value, setvalue] = useState({ index: 0, value: '' });
@@ -58,7 +58,7 @@ export default function Section1({ venue, loading }) {
                 <ul data-aos='fade-up' className='flex flex-wrap items-center gap-[20px] max-md:gap-x-[10px] max-md:gap-y-[0px] h-full '>
                     {bar.map((e, i) => (
                         <li onClick={ele => handleTabs(e, i, e.value)} className={` ${value.index == i ? 'text-primary1 font-[700] border-b-primary1 ' : 'border-b-transparent'} border-b-[2px]   hover:text-primary1 duration-100 min-h-[80px] max-sm:min-h-[50px] max-sm:leading-[50px] leading-[80px] text-secondry1 cursor-pointer  `} key={i}>
-                            {t(e.name)}{' '}
+                            { e.name == "FAQs" ? "FAQs" : t(e.name)} 
                         </li>
                     ))}
                 </ul>
