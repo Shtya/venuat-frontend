@@ -6,6 +6,7 @@ import LayoutAuth from '@/components/molecules/layout/LayoutAuth'
 import { login } from '@/config/Axios'
 import { ImgEmail,ImgPassword } from '@/constants/imgs'
 import { ForgetPassword, SignUp } from '@/constants/links'
+import { onEnter } from '@/helper/onEnter'
 import { hookSignIn } from '@/hooks/hookSignIn'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
@@ -16,6 +17,7 @@ export default function page() {
 	const t = useTranslations()
 	const { register, errors , loading , trigger , clearErrors, setError, getValues, setValue, submit , watch, reset } = hookSignIn()
 
+	onEnter(submit)
 
   return ( <LayoutAuth >
 				<div className='max-w-[400px] w-full mx-auto max-md:mt-[0] ' >

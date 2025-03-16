@@ -35,15 +35,15 @@ const Page = ({params}) => {
             <Arrow />
         </div>
       
-      <CardPackage data={venue?.venue} Package={Package} loading={loading} />
+      <CardPackage checkAuth={true} data={venue?.venue} Package={Package} loading={loading} />
 
       <div data-aos="fade-up" className='h1 font-[700] my-[30px] '> {t('halls_you_may_like')} </div>
       <Card  id={"similar_halls"} data={venue?.similarVenues} isLoading={loading} />
       <Button href={"/available-halls"} dataAos="fade-up" name={t('browse_all')} outline={true} classname={'!max-w-[300px]  mx-auto mt-[50px] '} />
       {policy?.length > 0 && <TextArea policy={policy} loading={loadingPolicy} />}
 
-      <div className=' !mt-[50px] max-xl:max-w-[800px] max-xl:mx-auto grid grid-cols-[1fr,450px] max-xl:grid-cols-1 gap-[30px] ' >
-        <FAQs cn={"!py-0"} title={"faqstitle"} data={faqs} loading={loadingfaqs} />
+      <div className={`!mt-[50px] max-xl:max-w-[800px] max-xl:mx-auto grid ${faqs?.length > 0 ?"grid-cols-[1fr,450px]" : "grid-cols-1" } max-xl:grid-cols-1 gap-[30px]`} >
+        {faqs?.length > 0 && <FAQs cn={"!py-0"} title={"faqstitle"} data={faqs} loading={loadingfaqs} />}
         <AskSomeThing id={params.id} />
       </div>
     </main>

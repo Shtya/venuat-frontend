@@ -63,7 +63,7 @@ export default function Section1({ venue, loading }) {
                     ))}
                 </ul>
 
-                <Button dataAos={'fade-up'} href={`/reservation/${venue?.id}`} classname='min-w-[200px] mb-[10px] ' name={t('book_the_hall')} />
+                <Button  dataAos={'fade-up'} href={`/reservation/${venue?.id}`} classname='min-w-[200px] mb-[10px] ' name={t('book_the_hall')} />
             </div>
         </div>
     );

@@ -12,7 +12,6 @@ export default function page() {
 	// const { step, register, loading, errors, submit, handleStepChange , loadingCheckOTP , CheckCodeOTP , loadingMsgGmail , resendGmailMsg } = hookForgetPassword();
 	const {  register, step , loading, errors, setstep, CheckCodeOTP ,resendGmailMsg, getValues, setValue, submit, watch, reset,  } = hookForgetPassword()
 
-	console.log(step)
   return ( <LayoutAuth >
 				<div className='max-w-[400px] mx-auto  w-full ' >
 					{step == 1 && <Step1 submit={submit} loading={loading}  register={register} errors={errors} />}

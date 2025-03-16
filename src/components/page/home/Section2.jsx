@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
-import CountainerStarts from '@/components/atoms/start/CountainerStarts';
 import SAR from '@/components/atoms/SAR';
 
 const Map = dynamic(() => import('@/components/molecules/Map'), { ssr: false });

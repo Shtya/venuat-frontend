@@ -21,7 +21,7 @@ const Popup = ({ content, isOpen, onClose, title, cn }) => {
             <div onClick={onClose} className={`${!isOpen && 'bottom-[-100vh] opacity-0'} transition-all duration-500 w-full h-full absolute left-0 bottom-0 opacity-70`} style={{ background: 'rgba(0, 0, 0, 0.78)' }}></div>
 
             {/* Popup Content */}
-            <div className={`${!isOpen ? 'max-h-0 opacity-0 ' : ' opacity-100 max-h-[1000px] p-[30px]'} overflow-auto duration-500 transition-all bg-white dark:bg-bg1 rounded-[6px] shadow-lg mx-auto max-w-[600px] w-full relative ${cn}`}>
+            <div className={`${!isOpen ? 'max-h-0 opacity-0 ' : ' opacity-100 max-h-[700px] max-md:max-h-[500px] p-[30px]'} overflow-auto duration-500 transition-all bg-white dark:bg-bg1 rounded-[6px] shadow-lg mx-auto max-w-[600px] w-full relative ${cn}`}>
                 {/* Close Button */}
                 <div className='flex items-center justify-between mb-[30px]'>
                     <h3 className=' capitalize flex-1 text-center #0D0C0D text-[24px] font-[700] '>{title}</h3>

@@ -10,7 +10,6 @@ const PriceRangeSlider = ({setValue , min, max, loading }) => {
   const t = useTranslations();
   useEffect(()=> {
     setValues([min,max])
-    console.log(min , max)
   } , [loading , min , max])
   
     return (

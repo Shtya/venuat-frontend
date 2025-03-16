@@ -17,11 +17,10 @@ export default function Navbar() {
         { name: t('home'), value: '/' },
         { name: t('available_halls'), value: '/available-halls' },
         { name: t('contact_us'), value: '/contact-us' },
+        { cn: 'hidden dashboard-btn !text-white rounded-full px-[20px] py-[5px] font-[600] bg-primary1  ', name: t('dashboard'), value: 'https://venuat-dashboard.vercel.app/en' },
     ];
 
-    const style = {
-        item: 'flex items-center gap-[20px] max-lg:flex-col max-lg:items-start  ',
-    };
+    const style = { item: 'flex items-center gap-[20px] max-lg:flex-col max-lg:items-start  ' };
     const [show, setshow] = useState('hidden');
 
     const handleToggle = () => {
@@ -53,7 +52,6 @@ export default function Navbar() {
 
     // Scroll event handling
     const [isScrolled, setIsScrolled] = useState(false);
-
     const handleScroll = () => {
         if (window.scrollY > 0) {
             // You can adjust the scroll threshold as needed
@@ -62,7 +60,6 @@ export default function Navbar() {
             setIsScrolled(false);
         }
     };
-
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
 
@@ -71,7 +68,15 @@ export default function Navbar() {
         };
     }, []);
 
-    const {user} = hookUser()
+    const { user } = hookUser();
+
+    useEffect(() => {
+        if (user) {
+            const ele = document.querySelector('.dashboard-btn');
+            if (user?.role?.name == 'vendor') ele.classList.add('!flex');
+            else ele.classList.remove('!flex');
+        }
+    }, [user, path]);
 
     return (
         <nav className={` navbar z-[1000] sticky top-0 ${place ? (isScrolled ? 'bg-black ' : 'h-0') : 'bg-white'}  `}>
@@ -92,7 +97,7 @@ export default function Navbar() {
                     </Link>
                     <ul className={style.item}>
                         {links?.map((e, i) => (
-                            <Link className={`${place ? 'hover:text-primary3 text-white ' : 'hover:text-primary1 text-secondry1 '}  ${path == e.value ? `font-semibold after:w-[60%] ${place ? 'text-primary3' : 'text-primary1'} ` : ' after:w-0 '} after:duration-300  relative after:absolute after:left-[50%] after:translate-x-[-50%]  after:rounded-[10px] after:h-[3px]  ${place ? 'after:bg-primary3' : 'after:bg-primary1'} after:bottom-[-8px] `} href={e.value} key={i}>
+                            <Link className={` ${e?.cn} ${place ? 'hover:text-primary3 text-white ' : 'hover:text-primary1 text-secondry1 '}  ${path == e.value ? `font-semibold after:w-[60%] ${place ? 'text-primary3' : 'text-primary1'} ` : ' after:w-0 '} after:duration-300  relative after:absolute after:left-[50%] after:translate-x-[-50%]  after:rounded-[10px] after:h-[3px]  ${place ? 'after:bg-primary3' : 'after:bg-primary1'} after:bottom-[-8px] `} href={e.value} key={i}>
                                 {e.name}
                             </Link>
                         ))}
@@ -104,11 +109,11 @@ export default function Navbar() {
                     {user ? (
                         <Link href={MyAccount} className=' items-center cursor-pointer grid grid-cols-[35px,1fr] gap-[5px] '>
                             <div className='w-[35px] h-[35px] flex items-center justify-center rounded-[50%] bg-primary3 border-[1px] border-gray-200 '>
-                                <Image className='w-full h-full p-[2px] ' src={user?.avatar || ImgUserPrimary } alt='' width={20} height={20} />
+                                <Image className='rounded-full overflow-hidden  w-full h-full p-[2px] ' src={user?.avatar || ImgUserPrimary} alt='' width={20} height={20} />
                             </div>
                             <div className=' max-lg:flex gap-[5px] '>
                                 <div className={`h4 max-lg:h3 lg:text-[12px] ${place ? 'text-white' : 'text-secondry1'} font-[500]`}> {t('hello')} </div>
-                                <div className={`h4 max-lg:h3 ${place ? 'text-white' : 'text-secondry1'} capitalize `}> {user?.full_name?.split(" ")[0]} </div>
+                                <div className={`h4 max-lg:h3 ${place ? 'text-white' : 'text-secondry1'} capitalize `}> {user?.full_name?.split(' ')[0]} </div>
                             </div>
                         </Link>
                     ) : (

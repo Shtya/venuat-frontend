@@ -16,7 +16,6 @@ export default function Hero({ loading, data }) {
         setHasMounted(true);
     }, []);
 
-    console.log(data)
 
     return (
         <section className='relative h-full min-h-[900px]  flex items-center flex-col justify-center'>

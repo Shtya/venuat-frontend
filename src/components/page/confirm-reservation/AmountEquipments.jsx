@@ -1,54 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import Amount from './Amount';
 import { useLocale, useTranslations } from 'next-intl';
-import Button from '@/components/atoms/button/Button';
-import { RefreshCcwIcon, Save } from 'lucide-react';
 import AxiosInstance from '@/config/Axios';
 import { Notification } from '@/config/Notification';
 
+export default function AmountEquipments({ setValue, venue, data, style, disabled }) {
+    const t = useTranslations();
+    const locale = useLocale();
+    const [loading, setLoading] = useState(false);
 
-export default function AmountEquipments({ setValue , venue , data, style, disabled }) {
+    const handleUpdate = async (id, count) => {
+        setLoading(true);
 
-	const t = useTranslations()
-	const locale = useLocale()
-	const [editedData, setEditedData] = useState([])
-  
-	const handleUpdate = (id, count, price) => {
-		const updated = editedData.filter(item => item.id !== id);
-	
-		// إذا كانت القيمة الجديدة تساوي العدد الأصلي، فلا نضيفها إلى المصفوفة
-		const original = data.find(item => item.id === id);
-		if (original && original.count !== count) {
-			updated.push({ equipmentId:id, count });
-		}
-	
-		setEditedData(updated);
-	};
-	
-  
-	const [loading, setloading] = useState(false)
-	const handleSave = () => {
-		
-		setloading(true);
-        AxiosInstance.put(`/venue-equipment/${venue?.id}/equipments`, {equipments : editedData} )
-            .then(res => {
-                Notification(t("updated_Successfully"), 'success');
-            })
-            .catch(err => console.log(err))
-			.finally(()=>{
-				setloading(false);
-				setEditedData([])
-				setValue('quantity' , editedData)
-			})
-	}
+        try {
+            const updatedData = { equipments: [{ equipmentId: id, count }] };
+            await AxiosInstance.put(`/venue-equipment/${venue?.id}/equipments`, updatedData);
 
-	return (
-	  <div>
-		{data?.map((e, i) => (
-		  <Amount key={i} style={style} disabled={disabled} name={e?.equipment?.name?.[locale]} price={e.price} quantity={e.count} id={e.id} onUpdate={handleUpdate} />
-		))}
+            // Notification(t("updated_Successfully"), 'success');
+            setValue('quantity', count); // Update the form value if needed
+        } catch (err) {
+            console.error(err);
+            Notification(t("update_failed"), 'error');
+        } finally {
+            setLoading(false);
+        }
+    };
 
-		<Button isLoading={loading} cnName={"order-[4] "} onClick={handleSave} name={t("Save_changes")}  classname={`!max-w-[170px] w-full text-[15px]`}  width={`${editedData?.length > 0 ? "max-h-[300px] mt-[20px] " : " max-h-0 " } mx-auto overflow-auto ease-in-out translation-all duration-500  `} icon={<Save size={16} /> } typeIcon={"svg"} showIcon={true} />
-	  </div>
-	)
-  }
+    return (
+        <div>
+            {data?.map((e, i) => (
+                <Amount
+                    key={i}
+                    style={style}
+                    disabled={disabled || loading} // Disable buttons while loading
+                    name={e?.equipment?.name?.[locale]}
+                    price={e.price}
+                    quantity={e.count}
+                    id={e.id}
+                    onUpdate={handleUpdate}
+                />
+            ))}
+        </div>
+    );
+}

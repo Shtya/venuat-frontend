@@ -33,7 +33,6 @@ const page = () => {
 
 
     const handlePageChange = (page) => {
-      console.log("Current Page:", page);
     };
 
     return (

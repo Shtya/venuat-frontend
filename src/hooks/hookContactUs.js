@@ -14,7 +14,6 @@ export const hookContactUs = () => {
   const {checkEndpoint} = useGlobalContext()
 
   const [loading , setLoading] = useState(false)
-  console.log(errors)
   const submit = handleSubmit(async data => {
     const handleData = {
       email : data?.email ,

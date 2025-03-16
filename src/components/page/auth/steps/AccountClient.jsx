@@ -9,6 +9,7 @@ import VerifyIdentity from './VerifyIdentity';
 import SuccessVerifyIdentity from './SuccessVerifyIdentity';
 import { hookSignUp } from '@/hooks/hookSignUp';
 import InputPhone from '@/components/atoms/input/InputPhone';
+import SocialAuth from '../SocialAuth/SocialAuth';
 
 export default function AccountClient() {
     const { step, register, loading, setValue , errors, submit, handleStepChange , loadingCheckOTP , CheckCodeOTP, resendGmailMsg } = hookSignUp();
@@ -26,20 +27,7 @@ export default function AccountClient() {
                         <Button isLoading={loading} dataAos='fade-up' onClick={submit} name={t('createAccountButton')} classname='mt-[40px]' />
                     </div>
 
-                    <div data-aos='fade-up' className=' h3 text-center my-[20px] '>
-                        {t('passWithSocial')}
-                    </div>
-                    <div className='flex items-center gap-[10px] justify-center '>
-                        <div data-aos='fade-up' className='w-[40px] h-[40px] bg-gray-50 flex items-center justify-center shadow-md rounded-[50%] cursor-pointer '>
-                            <Image src={ImgApple} alt='' width={25} height={25} />
-                        </div>
-                        <div data-aos='fade-up' data-aos-delay={80} className='w-[40px] h-[40px] bg-gray-50 flex items-center justify-center shadow-md rounded-[50%] cursor-pointer '>
-                            <Image src={ImgFacebook} alt='' width={25} height={25} />
-                        </div>
-                        <div data-aos='fade-up' data-aos-delay={160} className='w-[40px] h-[40px] bg-gray-50 flex items-center justify-center shadow-md rounded-[50%] cursor-pointer '>
-                            <Image src={ImgGoogle} alt='' width={25} height={25} />
-                        </div>
-                    </div>
+                    <SocialAuth />
                 </>
             )}
 

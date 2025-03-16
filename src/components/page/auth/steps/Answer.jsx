@@ -21,7 +21,6 @@ export default function Answer({previousStep ,errors , loading ,  submit  , regi
 
         fields.forEach((field) => {
             const value = getValues(field, ""); 
-			console.log(value)
             if (!value) {
                 setValue(field, user?.[field] || ""); 
                 const input = document.querySelector(`[name="${field}"]`);

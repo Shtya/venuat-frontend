@@ -34,7 +34,7 @@ export default function Search({dataAos , clearData , loading  , register, error
 
 		<div className='rtl:mr-auto rtl:ml-[30px] ltr:ml-auto ltr:mr-[30px] max-xl:!mx-auto max-xl:w-full flex flex-wrap items-center max-xl:justify-center gap-[10px]  ' > 
 			<Button isLoading={loading} onClick={submit} name={t("search")} classname={"  md:max-w-fit max-md:!max-w-[150px] !px-[40px] "} /> 
-			{ showClear &&  <Button  onClick={clearData} outline={true} name={t("clear")} classname={"md:max-w-fit !px-[30px] max-md:!w-[150px] hover:!bg-[#c63434] !border-[#c63434] !text-[#c63434] "} /> }
+			{ showClear &&  <Button  onClick={clearData} outline={true} name={t("clear")} classname={"md:max-w-fit !px-[30px] max-md:!w-[150px] hover:!bg-[#c63434] !border-[#c63434] group  "} cnName={"!text-[#c63434] group-hover:!text-white "}  /> }
 
 		</div>
 	</div>

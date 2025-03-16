@@ -16,7 +16,6 @@ export const hookConfirmReservation = ({ id }) => {
     const [ startDate , setstartDate] = useState()
     const [ endDate , setendDate] = useState()
 
-    console.log(startDate , endDate)
     const schema = useMemo(() => ReservationSchema({ startDate, endDate }), [startDate, endDate]);
 
     const {  register,  trigger,  handleSubmit,  formState: { errors },  clearErrors,  setError,  getValues,  setValue,  watch,  reset, } = 

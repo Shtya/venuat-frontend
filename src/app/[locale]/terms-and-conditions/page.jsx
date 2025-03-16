@@ -11,9 +11,6 @@ export default function page() {
 
 	const {data , loading} = hookSetting()
 
-	console.log(data)
-
-
   return (
 	<div className='container' >
 		<div data-aos="fade-up" className="h0 mt-[100px] text-center mb-[-20px]  "> {t("importantTermsAndConditions")} </div>

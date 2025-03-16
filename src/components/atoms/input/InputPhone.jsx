@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useGlobalContext } from '@/context/GlobalContext';
 
 export default function InputPhone({ unite, place, dataAos, rounded = true, error, cnInput, classname, label, type, icon, KEY, setValue, cnLabel }) {
     const t = useTranslations();
+    const locale = useLocale()
+
     const {changeListen} = useGlobalContext()
     const [phoneNumber, setPhoneNumber] = useState('');
     const [phoneError, setPhoneError] = useState('');
@@ -13,14 +15,14 @@ export default function InputPhone({ unite, place, dataAos, rounded = true, erro
         const value = e.target.value;
 
         // Validation: Check if the phone number starts with '05' and is 10 digits long
-        if (value && (!value.startsWith('05'))) {
+        if (value && (!value.startsWith('5'))) {
             setPhoneError(t("phoen1"));
             setPhoneNumber(value);
             setValue(KEY, null);
             return;
         }
 		
-        if (value.length !== 10 ) {
+        if (value.length !== 9 ) {
             setPhoneError(t("phoen2"));
             setPhoneNumber(value);
             setValue(KEY, null);
@@ -64,7 +66,7 @@ export default function InputPhone({ unite, place, dataAos, rounded = true, erro
                     <input 
                         className={` ${icon && 'rtl:mr-[-40px] ltr:ml-[-40px]'} focus:border-primary1 ${rounded ? '!focus:border-[1px]' : '!focus:border-b-[1px]'} placeholder:text-secondry3 h5 w-full ${icon ? 'rtl:pr-[40px] ltr:pl-[40px]' : 'px-[10px]'} h-full outline-none text-secondry2`}
                         id={KEY}
-                        placeholder={icon ? "050 000 0000" : place}
+                        placeholder={icon ? locale == "ar" ? "05 000 0000" : "50 000 0000" : place}
                         type={type}
                         pattern='^[0-9]*$'
                         inputMode='numeric'

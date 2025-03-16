@@ -93,12 +93,12 @@ const Page = ({ params }) => {
                 <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'> <span>{t('hallPrice')}</span> {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse  '></div> : <SAR cn={'font-[700] text-[18px]  text-primary1'} price={venue?.price.toFixed(2)} />} </div>
                 <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'> <span>{t('additionalServices')}</span> {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <SAR cn={'font-[700] text-[18px]  text-primary1'} price={venue?.additionalServicesPrice} />} </div>
                 <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'> <span>{t('additionalEquipment')}</span> {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <SAR cn={'font-[700] text-[18px]  text-primary1'} price={venue?.additionalEquipmentsPrice} />} </div>
-                <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'> <span> {t('vatValue')} </span> {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <span className='font-[700] text-[18px]  text-primary1 flex items-center gap-[5px] ' >15 <Percent size={20} /> </span> } </div>
+                <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'> <span> {t('vatValue')} </span> {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <SAR cn={'font-[700] text-[18px]  text-primary1'} price={ venue?.totalPriceWithVAT  - venue?.totalPrice } />} </div>
 
                 <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'> <span>{t('totalPrice')}</span> {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <SAR cn={'font-[700] text-[18px]  text-primary1'} price={venue?.totalPrice} />} </div>
                 <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'> <span>{t('totalWithVat')}</span> {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <SAR cn={'font-[700] text-[18px]  text-primary1'} price={venue?.totalPriceWithVAT} />} </div>
 
-                <Button isLoading={loadingReservation} onClick={submit} name={t('payNow')} classname='max-w-[400px] w-full mx-auto mt-[60px] ' />
+                <Button checkAuth={true} isLoading={loadingReservation} onClick={submit} name={t('payNow')} classname='max-w-[400px] w-full mx-auto mt-[60px] ' />
                 
                 <div className='h3 text-center mt-[50px] mb-[10px] '> {t('poweredBy')} </div>
                 <div className='flex gap-[20px] justify-center items-center '>

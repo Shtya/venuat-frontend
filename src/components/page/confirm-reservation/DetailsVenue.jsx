@@ -33,7 +33,6 @@ export default function DetailsVenue({setValue , cn, venue , Package , loading }
 
 
     useEffect(()=> {
-        console.log(Services , Equipments)
         if(Services?.length == 0 && Equipments?.length == 0) {
             const arrowShowDetails = document.querySelector(".arrow-show-details")
             if (arrowShowDetails) arrowShowDetails.style.display = 'none';
@@ -70,19 +69,6 @@ export default function DetailsVenue({setValue , cn, venue , Package , loading }
                     <AmountSkeleton key={i} style={style.body} />
                 ))}
                 <Divider />
-    
-                {/* Skeleton for Additional Features */}
-                {/* <div className="mt-[40px] mb-[20px]">
-                    <div className="h-4 w-[200px] bg-gray-300 rounded animate-pulse"></div>
-                </div>
-                <div className="grid max-sm:grid-cols-1 grid-cols-2 gap-x-[100px] gap-y-[20px] mb-[40px] ">
-                    {[...Array(4)].map((_, i) => (
-                        <div key={i} className="flex items-center  gap-[10px]">
-                            <div className="h-[25px] w-[25px] bg-gray-300 rounded animate-pulse"></div>
-                            <div className="h-4 w-full bg-gray-300 rounded animate-pulse"></div>
-                        </div>
-                    ))}
-                </div> */}
             </div>
         );
     }

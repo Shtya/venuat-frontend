@@ -173,7 +173,6 @@ export const hookProvider = () => {
                 await AxiosInstance.post(`/venues`, {property : +res?.data?.id })
                 .then(res => { 
                     localStorage.setItem('venueId', res?.data?.id);
-                    console.log("here" , step )
                     Notification( t("Created_Successfully") , "success" );
                     ChagneStep(step);
                 })

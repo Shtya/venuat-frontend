@@ -5,6 +5,23 @@ import { NextIntlClientProvider, useMessages } from 'next-intl';
 import Layout from '@/components/molecules/layout/LayoutApp';
 import Head from 'next/head';
 
+import { Alexandria , Open_Sans } from 'next/font/google';
+
+// Load Alexandria font
+const alexandria = Alexandria({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-alexandria',
+});
+
+// Load Open Sans font
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  style: ['italic', 'normal'],
+  variable: '--font-open-sans',
+});
+
 export const metadata = {
     title: 'Luxury Wedding Hall and Event Venue Booking Across Saudi Arabia',
     description: 'Make your wedding unforgettable with a wide selection of stunning designs and spacious venues tailored for unique events.',
@@ -35,7 +52,7 @@ export default function RootLayout({ children, params: { locale } }) {
     const messages = useMessages();
 
     return (
-        <html lang={locale} dir={locale == 'en' ? 'ltr' : 'rtl'}>
+        <html lang={locale} dir={locale == 'en' ? 'ltr' : 'rtl'} className={`${alexandria.variable} ${openSans.variable}`} >
             <Head>
                 <meta name='description' content='Make your wedding unforgettable with a wide selection of stunning designs and spacious venues tailored for unique events.' />
                 <meta name='keywords' content='wedding halls, luxury venues, event booking, Saudi Arabia weddings, unique event spaces' />
@@ -52,7 +69,7 @@ export default function RootLayout({ children, params: { locale } }) {
                 <meta name='twitter:title' content='Luxury Wedding Hall and Event Venue Booking Across Saudi Arabia' />
                 <meta name='twitter:description' content='Make your wedding unforgettable with a wide selection of stunning designs and spacious venues tailored for unique events.' />
                 <meta name='twitter:image' content='https://example.com/twitter-image-wedding.jpg' />
-            </Head>
+             </Head>
 
             <body className=' '>
                 <NextIntlClientProvider locale={locale} messages={messages}>
