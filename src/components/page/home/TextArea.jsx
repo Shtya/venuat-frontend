@@ -10,11 +10,10 @@ export default function TextArea({ classname, policy, loading, title, desc }) {
       {title && <div  className="text-center text-secondry1s font-[700] mb-[10px] h1">{title}</div>}
       {desc && <div  className="text-center mb-[40px] h4 text-secondry3">{desc}</div>}
 
-      <div   className="h2 font-[700] mb-[10px]">{t("accessibility")}</div>
+      <div  className="h2 font-[700] mb-[10px]">{t("accessibility")}</div>
       <div  className="h3 text-secondry3">{t("accessibility_description")}</div>
 
       <div  className="h2 font-[700] mt-[40px] mb-[10px]">{t("policies")}</div>
-
       <div className="flex flex-col gap-[20px]">
         {loading
           ? Array.from({ length: 3 }).map((_, i) => (

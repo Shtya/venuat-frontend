@@ -6,7 +6,8 @@ import Checkbox from "@/components/atoms/checkbox/Checkbox"
 import PriceRangeSlider from '@/components/atoms/timeSlider/TimeSlider';
 import { hookOccasion } from '@/hooks/hookOccasion';
 
-export default function Filter({venue , loading , setValue , watch}) {
+
+export default function Filter({venue , setValue , watch}) {
   const t = useTranslations()
   const locale = useLocale()
   const { occasion , loadingOccasion} = hookOccasion()

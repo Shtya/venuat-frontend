@@ -2,6 +2,7 @@ import AxiosInstance from '@/config/Axios';
 import { usePathname, useRouter } from '@/navigation';
 import { searchSchema } from '@/schema/SearchSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useLocale } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -15,18 +16,6 @@ export const hookSearch = () => {
     const [filteredVenues, setFilteredVenues] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setErrorState] = useState(null);
-
-    
-    // const fetchAllVenues = async () => {
-    //     try {
-    //         const response = await AxiosInstance.get(`/venues/find-all?limit=300`);
-    //         setVenues(response.data);
-    //     } catch (error) {
-    //         setErrorState(error.message || 'Failed to load venues');
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
 
 
     const fetchVenues = async ({ page, query }) => {
@@ -79,10 +68,12 @@ export const hookSearch = () => {
         if (city) params.append('city', city);
         if (typeEvent) params.append('occasion', typeEvent);
         if (date) params.append('startOccasion', date);
-
         await fetchVenues({ page: 1, query: params.toString() });
         setLoadingSubmit(false);
     });
+
+
+    
 
     const clearData = async() => {
         setValue("city" , null)
@@ -110,8 +101,11 @@ export const hookSearch = () => {
 
 
     const watchCategory = watch('category');
+    const locale = useLocale()
     useEffect(() => {
         if (!watchCategory) return;
+
+
         Object.entries(watchCategory).forEach(([key, value]) => {
             if (value) {
                 if (!isNaN(key)) {
@@ -121,6 +115,10 @@ export const hookSearch = () => {
                 }
             }
         });
+        
+
+        // const newUrl = `/${locale}${window.location.pathname}?${params.toString()}` ;
+        // router.replace(newUrl, undefined, { shallow: true });
 
         if (params) {
             fetchVenues({ query: params.toString() });
