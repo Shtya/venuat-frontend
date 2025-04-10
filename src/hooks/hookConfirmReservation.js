@@ -16,7 +16,7 @@ export const hookConfirmReservation = ({ id }) => {
     const [ startDate , setstartDate] = useState()
     const [ endDate , setendDate] = useState()
 
-    const schema = useMemo(() => ReservationSchema({ startDate, endDate }), [startDate, endDate]);
+    const schema = useMemo(() => ReservationSchema({ endDate }), [ endDate]);
 
     const {  register,  trigger,  handleSubmit,  formState: { errors },  clearErrors,  setError,  getValues,  setValue,  watch,  reset, } = 
         useForm({ resolver: yupResolver(schema) });
@@ -86,16 +86,33 @@ export const hookConfirmReservation = ({ id }) => {
     const submit = handleSubmit(async data => {
         setIsSubmit(true)
 
+       
+        const filteredPeriods = Object.fromEntries(
+            Object.entries(data?.periods || {}).filter(([dateStr]) => {
+                const [day, month, year] = dateStr.split('/');
+                const parsedDate = new Date(`${year}-${month}-${day}`);
+                parsedDate.setHours(0, 0, 0, 0); // تصفير الوقت
+
+                const checkInDate = new Date(data?.check_in);
+                const checkOutDate = new Date(data?.check_out);
+                checkInDate.setHours(0, 0, 0, 0);
+                checkOutDate.setHours(0, 0, 0, 0);  
+                return parsedDate >= checkInDate && parsedDate <= checkOutDate;
+            })
+        );
+
         const handleData = {
             user: user?.id,
             venue: +id,
             status: 'pending',
             check_in: data?.check_in,
             check_out: data?.check_out,
-            from_time: data?.from_time,
-            to_time: data?.to_time,
-            total_price: Number(venue?.venue?.totalPriceWithVAT),
+            periods: filteredPeriods,
+            total_price: (data?.totalPriceAll * .15) + data?.totalPriceAll 
         };
+
+
+
 
         if(PackageId) handleData.package = +PackageId
     
@@ -105,6 +122,7 @@ export const hookConfirmReservation = ({ id }) => {
             .then(res => {
                 Notification(t('successReservation'), 'success');
                 setisOpenPopup(true)
+                setValue("periods" , {})
             })
             .catch(err => console.log(err));
         setLoadingReservation(false);

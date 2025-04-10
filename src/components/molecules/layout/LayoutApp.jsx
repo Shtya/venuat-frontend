@@ -25,7 +25,7 @@ export default function Layout({children , params }) {
 
 	useEffect(() => {
 		AOS.init({
-		  duration: 500, 
+		  duration: 350, 
 		  easing: 'ease-in-out', 
 		  once: true, 
 		});

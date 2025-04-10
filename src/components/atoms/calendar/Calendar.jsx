@@ -4,6 +4,7 @@ import "flatpickr/dist/flatpickr.min.css";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRef, useEffect , useState } from "react";
+import { format } from "date-fns";
 
 
 const Calendar = ({watch , dataAos , reverse , cnInput , label , cnLabel , trigger , error , setValue ,KEY, classname , place }) => {
@@ -12,32 +13,36 @@ const Calendar = ({watch , dataAos , reverse , cnInput , label , cnLabel , trigg
   const [currentDate , setcurrentDate ] = useState()
 
   const watchKey = watch?.(KEY)
-  useEffect(()=>{
-    if(watchKey) {
-       trigger?.(KEY)
-        setcurrentDate(watchKey)
-      }
-      else{
-        setcurrentDate(place)
-
-      }
-  },[watchKey])
+  useEffect(() => {
+    const today = format(new Date(Date.now() + 86400000), "yyyy-MM-dd");
+  
+    if (watchKey) {
+      trigger?.(KEY);
+      setcurrentDate(watchKey);
+    } else {
+      setcurrentDate(today);
+      setValue && setValue(KEY, today); 
+    }
+  }, [watchKey]);
+  
 
 
   useEffect(() => {
 
     const ele = document.getElementById(KEY) 
-    flatpickr( ele , {
+    flatpickr(ele, {
       dateFormat: "Y-m-d",
+      defaultDate: watchKey || new Date(Date.now() + 86400000),
       onChange: (selectedDates) => {
         const date = selectedDates[0];
         if (date) {
-          const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
-          setcurrentDate(formattedDate?.split("T")[0]);
-          setValue && setValue( KEY , formattedDate?.split("T")[0]);
+          const formattedDate = format(date, "yyyy-MM-dd");
+          setcurrentDate(formattedDate);
+          setValue && setValue(KEY, formattedDate);
         }
       }
     });
+    
   }, []);
 
   return (

@@ -91,7 +91,7 @@
     "changePassword": "Change your password",
     "account_update_confirmation": "Your account information has been successfully updated.",
     "packagePrice": "Package price",
-    "totalWithVat": "Price with vat",
+    "totalWithVat": "Total price with vat",
     "additionalFeature": "Additional Features",
 
     "Question": "Question",
@@ -140,6 +140,7 @@
     "dinner": "Dinner",
     "coffee": "Breakfast coffee",
     "hallPrice": "Venue price",
+    "hallPricePerDays": "Venue price for {days} {days, plural, one {day} other {days}}",
     "additionalFees": "Additional fees",
     "vatValue": "VAT value",
     "total": "Total",

@@ -7,7 +7,7 @@ const nextConfig = {
 	// reactStrictMode: true,
 	// output: 'export',
 	images: {
-		domains: ['localhost' , 'api.venuat.com' , 'picsum.photos'],
+		domains: ['localhost' , 'api.venuat.com' , "lh3.googleusercontent.com" , 'picsum.photos'],
 	  },
 };
 

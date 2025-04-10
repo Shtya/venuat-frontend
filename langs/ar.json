@@ -8,6 +8,7 @@
     "userAlreadyIsSubscribed" : "هذا البريد الإلكتروني مشترك بالفعل",
     "dashboard": "لوحة التحكم",
     "explore": "استكشف",
+    "hallPricePerDays": "سعر القاعة لمدة {days} {days, plural, one {يوم} two {يومين} few {أيام} many {يومًا} other {يوم}}",
     "moreInfo": "مزيد من المعلومات",
     "reservationDetails": "تفاصيل الحجز",
     "details-reservation1": "تفاصيل الحجز",
@@ -73,7 +74,7 @@
     "changePassword": "غيّر كلمة المرور",
     "account_update_confirmation": "تم تحديث معلومات حسابك بنجاح.",
     "packagePrice": "سعر الباقة",
-    "totalWithVat": "السعر مع الضريبة",
+    "totalWithVat": "إجمالي السعر مع الضريبة",
     "additionalFeature": "ميزات إضافية",
 
     "Question": "السؤال",

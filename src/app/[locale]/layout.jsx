@@ -54,6 +54,7 @@ export default function RootLayout({ children, params: { locale } }) {
     return (
         <html lang={locale} dir={locale == 'en' ? 'ltr' : 'rtl'} className={`${alexandria.variable} ${openSans.variable}`} >
             <Head>
+                <script src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
                 <meta name='description' content='Make your wedding unforgettable with a wide selection of stunning designs and spacious venues tailored for unique events.' />
                 <meta name='keywords' content='wedding halls, luxury venues, event booking, Saudi Arabia weddings, unique event spaces' />
 

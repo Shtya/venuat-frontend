@@ -1,84 +1,76 @@
-// components/SocialAuth.js
-import { useState } from 'react';
-import { auth, googleProvider, facebookProvider, appleProvider } from '@/config/firebase';
-import { signInWithPopup } from 'firebase/auth';
+import React, { useEffect } from 'react';
+import { auth, googleProvider, facebookProvider, signInWithPopup } from '@/config/firebase';
+import AxiosInstance from '@/config/Axios';
+import { useRouter } from '@/navigation';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { ImgApple, ImgFacebook, ImgGoogle } from '@/constants/imgs';
-import { useTranslations } from 'next-intl';
-import AxiosInstance from '@/config/Axios';
-
 
 const SocialAuth = () => {
-    const [error, setError] = useState(null);
-    const t = useTranslations()
+    const router = useRouter();
+    const t = useTranslations();
 
-    const handleGoogleSignIn = async () => {
+    useEffect(() => {
+        if (typeof window !== "undefined" && window.AppleID) {
+            window.AppleID.auth.init({
+                clientId: process.env.NEXT_PUBLIC_APPLE_CLIENT_ID,
+                scope: "name email",
+                redirectURI: process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI,
+                usePopup: true,
+            });
+        }
+    }, []);
+    
+
+    const handleSocialLogin = async (providerName) => {
         try {
-            const result = await signInWithPopup(auth, googleProvider);
-            const token = await result.user.getIdToken();
+            let provider;
+            let token;
 
+            if (providerName === 'google') {
+                provider = googleProvider;
+            } else if (providerName === 'facebook') {
+                provider = facebookProvider;
+            } else if (providerName === 'apple') {
+                const response = await window.AppleID.auth.signIn();
+                token = response.authorization.id_token;
+            }
 
-            const response = AxiosInstance.post(`/auth/firebase-signin`, {token : JSON.stringify({ token })}   )
-            const data = await response 
-            console.log('User data from backend:', data);
+            if (provider) {
+                const result = await signInWithPopup(auth, provider);
+                token = await result.user.getIdToken();
+            }
+
+            AxiosInstance.post(`/auth/${providerName}-login`, { token })
+                .then((res) => {
+                    const { accessToken, refreshToken, ...user } = res.data;
+                    localStorage.setItem('accessToken', accessToken);
+                    localStorage.setItem('refreshToken', refreshToken);
+                    localStorage.setItem('user', JSON.stringify(user));
+                    router.push('/');
+                })
+                .catch((err) => {
+                    console.error(`${providerName} Login Error:`, err?.response);
+                });
         } catch (error) {
-            setError(error.message);
+            console.error('Login Popup Error:', error);
         }
     };
-    
-    
-    const handleGoogleRegister = async () => {
-        try {
-          // Sign in with the selected provider (Google, Facebook, Apple)
-          const result = await signInWithPopup(auth, googleProvider);
-      
-          // Get the Firebase ID token
-          const token = await result.user.getIdToken();
-      
-          // Send the token to the NestJS backend for registration
-          const response = await AxiosInstance.post('/auth/firebase-register', { token });
-      
-          // Log the response from the backend
-          console.log('User data from backend:', response.data);
-      
-          // Handle successful registration (e.g., redirect or show success message)
-          if (response.data.accessToken) {
-            localStorage.setItem('accessToken', response.data.accessToken);
-            localStorage.setItem('refreshToken', response.data.refreshToken);
-      
-            // Redirect the user to the dashboard or home page
-            window.location.href = '/dashboard';
-          }
-        } catch (error) {
-          // Handle errors
-          setError(error.message || 'An error occurred during registration.');
-          console.error('Error during social registration:', error);
-        }
-      };
 
     return (
-        <div data-aos="fade-up" >
-            {/* <div className='h3 text-center my-[20px]'>{t('passWithSocial')}</div> */}
+        <div data-aos='fade-up'>
+            <div className='h3 text-center my-[20px]'>{t('passWithSocial')}</div>
             <div className='flex items-center gap-[10px] justify-center'>
-                {/* <div className='w-[40px] h-[40px] bg-gray-50 flex items-center justify-center shadow-md rounded-[50%] cursor-pointer' onClick={() => handleSocialSignIn(appleProvider)}>
+                <div onClick={() => handleSocialLogin('apple')} className='hover:scale-[1.2] duration-300 w-[50px] h-[50px] border border-[#eee] border-dashed bg-gray-50 flex items-center justify-center shadow-md rounded-[50%] cursor-pointer'>
                     <Image src={ImgApple} alt='Apple' width={25} height={25} />
                 </div>
-                <div className='w-[40px] h-[40px] bg-gray-50 flex items-center justify-center shadow-md rounded-[50%] cursor-pointer' onClick={() => handleSocialSignIn(facebookProvider)}>
+                <div onClick={() => handleSocialLogin('facebook')} className='hover:scale-[1.2] duration-300 w-[50px] h-[50px] border border-[#eee] border-dashed bg-gray-50 flex items-center justify-center shadow-md rounded-[50%] cursor-pointer'>
                     <Image src={ImgFacebook} alt='Facebook' width={25} height={25} />
                 </div>
-                <div className='w-[40px] h-[40px] bg-gray-50 flex items-center justify-center shadow-md rounded-[50%] cursor-pointer' onClick={() => handleSocialSignIn(googleProvider)}>
+                <div onClick={() => handleSocialLogin('google')} className='hover:scale-[1.2] duration-300 w-[50px] h-[50px] border border-[#eee] border-dashed bg-gray-50 flex items-center justify-center shadow-md rounded-[50%] cursor-pointer'>
                     <Image src={ImgGoogle} alt='Google' width={25} height={25} />
-                </div> */}
-
-
-                {/* <div onClick={()=> handleSocialSignIn(googleProvider)} > sign in google </div>
-                <div onClick={()=> handleSocialRegister(googleProvider)} > register google </div> */}
-
-                {/* <button onClick={handleGoogleSignIn}>Sign in with Google</button>
-                <button onClick={handleGoogleRegister}>Register with Google</button> */}
-
+                </div>
             </div>
-            {/* {error && <p className='text-red-500 text-center mt-4'>{error}</p>} */}
         </div>
     );
 };

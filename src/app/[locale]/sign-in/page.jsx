@@ -3,15 +3,13 @@ import Button from '@/components/atoms/button/Button'
 import Checkbox from '@/components/atoms/checkbox/Checkbox'
 import Input from '@/components/atoms/input/Input'
 import LayoutAuth from '@/components/molecules/layout/LayoutAuth'
-import { login } from '@/config/Axios'
+import SocialAuth from '@/components/page/auth/SocialAuth/SocialAuth'
 import { ImgEmail,ImgPassword } from '@/constants/imgs'
 import { ForgetPassword, SignUp } from '@/constants/links'
 import { onEnter } from '@/helper/onEnter'
 import { hookSignIn } from '@/hooks/hookSignIn'
 import { useTranslations } from 'next-intl'
-import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
 
 export default function page() {
 	const t = useTranslations()
@@ -37,5 +35,7 @@ export default function page() {
 
 					<Button isLoading={loading} dataAos="fade-up" onClick={()=> submit()} name={t("loginButton")}  classname="mt-[40px]"  />
 				</div>
+
+				<SocialAuth />
   		</LayoutAuth> )
 }
