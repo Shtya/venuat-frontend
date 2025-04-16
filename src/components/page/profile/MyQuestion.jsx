@@ -163,6 +163,7 @@ export default function MyQuestion() {
     onEnter(sendMessage);
 
     return (
+        <div>
         <div className='flex max-sm:!h-full sm:h-[60vh] max-sm:flex-col max-sm:gap-[15px] gap-[5px] filter  w-full text-sm'>
             {/* Sidebar */}
             <div className='w-[240px] max-sm:!w-full max-xl:w-[180px] rounded-tr-[5px] flex-none max-sm:!h-[300px] h-full bg-white overflow-y-auto overflow-x-hidden shadow-[0_4px_12px_rgba(0,0,0,0.06)]'>
@@ -189,7 +190,9 @@ export default function MyQuestion() {
                                       </div>
                                   </li>
                               ))
-                        : filteredData?.map(conv => (
+                        : filteredData?.length == 0 
+                            ? <div className="text-gray-400 text-center h-[300px] flex items-center justify-center opacity-55 w-full mt-10  text-[18px]">{t("no-conversations")}</div>
+                            : filteredData?.map(conv => (
                               <li key={conv.id} onClick={() => handleConversation(conv)} className={`cursor-pointer px-[10px] py-2 ${selectedId === conv.id ? 'bg-primary2 text-white font-medium ' : 'hover:bg-neutral-100 duration-300'}`}>
                                   <div className='flex items-center gap-[10px]'>
                                       <div className={`flex-none bg-[#ececec] ${selectedId === conv.id ? "!bg-primary3 text-primary1 " : ""} w-[40px] h-[40px] flex items-center justify-center rounded-full`}>
@@ -248,6 +251,9 @@ export default function MyQuestion() {
                 </div>}
 
             </div>
+        </div>
+
+
         </div>
     );
 }
