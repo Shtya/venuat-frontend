@@ -1,27 +1,21 @@
 {
+    "no-messages" : "Select a conversation to start chatting 💬" ,
+    "communications" : "Communication",
+    "send-message" : "send a message" ,
+    "booking-conversation" : "Booking Conversation {name} ",
+    "my-account" : "My Account",
+    "communication-Fail": "Failed to send the message. Please try again.",
+    "communication-success": "Message sent successfully.",
+    "sendMessageToVenue" : "send a messaage to this venue",
 
-    "privacy1" : "Loading Privacy Policy...",
-    "privacy2" : "Privacy Policy",
-    "necessaryLaws1" : "Loading necessary laws...",
-    "necessaryLaws2" : "Necessary laws",
-    "errorSubscribed" : "You Should login first of all",
+    "privacy1": "Loading Privacy Policy...",
+    "privacy2": "Privacy Policy",
+    "necessaryLaws1": "Loading necessary laws...",
+    "necessaryLaws2": "Necessary laws",
+    "errorSubscribed": "You Should login first of all",
     "subscriptionSuccess": "Thank you, {name}! We have accepted your subscription. You will receive our latest letters and updates directly to your email.",
 
-"userAlreadyIsSubscribed": "This email is already subscribed",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    "userAlreadyIsSubscribed": "This email is already subscribed",
 
     "dashboard": "Dashboard",
     "explore": "Explore",

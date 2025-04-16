@@ -31,10 +31,10 @@ const page = () => {
 
 
   return (
-    <main className=' max-lg:pt-[50px] min-h-[100vh] container'>
+    <main className=' max-lg:pt-[50px] min-h-[100vh] container '>
       <Breadcrumbs data={[ { name: 'profile', value: '' } ]}  />
 
-      <div className='grid grid-cols-[250px,1fr] gap-[30px] max-sm:grid-cols-1 ' >
+      <div className='grid grid-cols-[230px,1fr] gap-[20px] max-[750px]:grid-cols-1 ' >
         <Sidebar getMe={getMe} loading={loading} currentComponent={currentComponent} handleCurrentPage={handleCurrentPage} />
 
         {currentComponent == 1 && <MyInformation user={user} loadingInfo={loadingInfo} loadingPassword={loadingPassword} SubmitStep={SubmitStep} register={register} errors={errors} getValues={getValues} setValue={setValue} /> }

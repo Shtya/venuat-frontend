@@ -72,7 +72,7 @@ export default function RootLayout({ children, params: { locale } }) {
                 <meta name='twitter:image' content='https://example.com/twitter-image-wedding.jpg' />
              </Head>
 
-            <body className=' '>
+            <body className='bg-[#f6f7fbb5] '>
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <main>
                         <Layout> {children} </Layout>

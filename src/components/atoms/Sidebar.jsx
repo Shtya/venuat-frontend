@@ -67,7 +67,7 @@ export default function Sidebar({getMe , loading , currentComponent ,handleCurre
     
 
   return (
-	<div data-aos="fade-up" className='main-shadow h-fit pt-[20px] pb-[10px]  rounded-[20px] ' >
+	<div data-aos="fade-up" className='main-shadow border border-[#eee] h-fit pt-[20px] pb-[10px]  rounded-[5px] ' >
 		<div className='mx-auto bg-primary3 hover:bg-opacity-50  duration-200 cursor-pointer rounded-[50%] flex items-center justify-center relative w-[80px] h-[80px] ' >
 			
 			<label  htmlFor="upload" className='w-full cursor-pointer h-full flex items-center justify-center ' >
@@ -83,7 +83,11 @@ export default function Sidebar({getMe , loading , currentComponent ,handleCurre
 		</div>
 
 		<div className="h3 text-center mt-[10px] ">  { getMe?.full_name } </div>
-		<div className="h4 text-center  text-secondry3 max-[300px]:hidden ">  { getMe?.email } </div>
+		<div className="h5 px-[5px] text-center flex items-center flex-wrap justify-center  text-secondry3  "> 
+            <span> { getMe?.email?.split("@")[0] }</span>
+            <span>@</span>
+            <span> { getMe?.email?.split("@")[1] }</span>
+        </div>
 
 		<hr className=' my-[10px] border-t-[1px] border-primary3 ' />
 

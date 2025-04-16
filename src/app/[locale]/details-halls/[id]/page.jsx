@@ -14,7 +14,6 @@ import Arrow from '@/components/molecules/swiper/Arrow';
 
 const Page = ({params}) => {
   const t = useTranslations();
-
   const {venue, loading, policy , loadingPolicy , faqs ,loadingfaqs , Package  } = useDetailsHalls({id : params.id})
   
 

@@ -7,7 +7,7 @@ import React from 'react'
 export default function AskSomeThing({id}) {
 	const t = useTranslations()
 
-	const { register , loading , errors , trigger , clearErrors, setError, getValues, setValue, submit , watch, reset } = hookSendFaqs({id})
+	const { register , loading , errors , submit} = hookSendFaqs({id})
 
   return (
 	<div className=' h-fit max-w-[400px] mx-auto shadow-sm border-[#E1E6EF] border-[1px] p-[20px] py-[60px]  rounded-[8px] ' >

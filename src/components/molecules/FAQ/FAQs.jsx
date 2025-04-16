@@ -28,7 +28,7 @@ export default function FAQs({ unite, title, data, loading, cnTitle, cn }) {
     };
 
     return (
-        <div id='policies' className={`py-14 min-h-[100px] bg-[#fdfdfd] ${cn} max-w-[900px] w-full`}>
+        <div id='policies' className={`py-14 min-h-[100px]  ${cn} max-w-[900px] w-full`}>
             <div className='min-h-[100px] flex flex-col justify-center'>
                 {title && (
                     <h1 data-aos='fade-up' className={`font-bold mb-[20px] ${cnTitle ? cnTitle : 'h1'} `}>
