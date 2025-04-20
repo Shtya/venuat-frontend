@@ -95,11 +95,12 @@ import { Send, Search, User, Loader2 } from 'lucide-react';
 import AxiosInstance from '@/config/Axios';
 import { hookUser } from '@/hooks/hookUser';
 import { onEnter } from '@/helper/onEnter';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function MyQuestion() {
     const [selectedId, setSelectedId] = useState(2);
     const t = useTranslations()
+    const locale = useLocale()
     const [data, setData] = useState();
     const [currentChat, setcurrentChat] = useState();
     const [isLoading, setIsLoading] = useState(true);
@@ -201,14 +202,14 @@ export default function MyQuestion() {
                             ? <div className="text-gray-400 text-center h-[300px] flex items-center justify-center opacity-55 w-full mt-10  text-[18px]">{t("no-conversations")}</div>
                             : filteredData?.map(conv => (
                               <li key={conv.id} onClick={() => handleConversation(conv)} className={`cursor-pointer px-[10px] py-2 ${selectedId === conv.id ? 'bg-primary2 text-white font-medium ' : 'hover:bg-neutral-100 duration-300'}`}>
-                                  <div className='flex items-center gap-[10px]'>
+                                  <div className='flex  items-center gap-[10px]'>
                                       <div className={`flex-none bg-[#ececec] relative ${selectedId === conv.id ? "!bg-primary3 text-primary1 " : ""} w-[40px] h-[40px] flex items-center justify-center rounded-full`}>
                                           <img src="/user.png" alt='' className='w-[40px] h-[40px] rounded-full ' />
-                                          {conv?.unreadCount !== 0 && ( <span id={`notification-${conv?.id}`} className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold flex items-center justify-center w-5 h-5 rounded-full shadow-md" > {conv.unreadCount > 9 ? '9+' : conv.unreadCount} </span>)}
+                                          {conv?.unreadCount !== 0 && ( <span id={`notification-${conv?.id}`} className="absolute -top-1 rtl:-left-1 ltr:-right-1 bg-red-500 text-white text-xs font-semibold flex items-center justify-center w-5 h-5 rounded-full shadow-md" > {conv.unreadCount > 9 ? '9+' : conv.unreadCount} </span>)}
                                       </div>
 
                                       <div className='w-full'>
-                                          <div className={`text-gray-700 text-sm font-medium ${selectedId === conv.id ? "!text-white " : ""} `} > {conv?.venue?.name?.en}</div>
+                                          <div className={`text-gray-700 text-sm font-medium ${selectedId === conv.id ? "!text-white " : ""} `} > {conv?.venue?.name?.[locale]}</div>
                                           <div className={`text-gray-500 text-xs text-wrap ${selectedId === conv.id ? "!text-white !text-opacity-60 " : ""} `}>{conv?.reply?.length <= 20 ? conv?.reply : conv?.reply?.slice(0, 20) + '..'}</div>
                                       </div>
                                   </div>
