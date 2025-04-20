@@ -1,4 +1,6 @@
 {
+    "reservations" : "Reservations",
+    "messages" : "Messages",
     "no-conversations": "No conversations yet",      
     "no-messages" : "Select a conversation to start chatting 💬" ,
     "communications" : "Communication",

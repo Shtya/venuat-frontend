@@ -222,7 +222,13 @@ html {
 .flatpickr-day.endRange,
 .flatpickr-day.selected:focus,
 .flatpickr-day.selected:hover {
-  background: #1e328b !important; /* 💜 Your custom color */
+  background: #1e328b !important; 
   border-color: #1e328b !important;
   color: white;
+}
+
+
+.remove-notification{
+    scale: 0;
+    transition: .6s;
 }

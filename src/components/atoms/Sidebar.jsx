@@ -92,8 +92,8 @@ export default function Sidebar({getMe , loading , currentComponent ,handleCurre
 		<hr className=' my-[10px] border-t-[1px] border-primary3 ' />
 
 		<div onClick={()=> handleCurrentPage(1)} className={`h4 hover:bg-gray1 p-[10px] cursor-pointer duration-200 ${currentComponent == 1 && "text-primary1  !bg-primary3 border-r-[4px] border-primary1 "} `} > {t("personalInfo")} </div>
-		<div onClick={()=> handleCurrentPage(2)} className={`h4 hover:bg-gray1 mt-[2px] p-[10px] cursor-pointer duration-200 ${currentComponent == 2 && "text-primary1  !bg-primary3 border-r-[4px] border-primary1 "} `} > {t("bookHalls")} </div>
-		<div onClick={()=> handleCurrentPage(3)} className={`h4 hover:bg-gray1 mt-[2px] p-[10px] cursor-pointer duration-200 ${currentComponent == 3 && "text-primary1  !bg-primary3 border-r-[4px] border-primary1 "} `} > {t("sent_questions")} </div>
+		<div onClick={()=> handleCurrentPage(2)} className={`h4 hover:bg-gray1 mt-[2px] p-[10px] cursor-pointer duration-200 ${currentComponent == 2 && "text-primary1  !bg-primary3 border-r-[4px] border-primary1 "} `} > {t("reservations")} </div>
+		<div onClick={()=> handleCurrentPage(3)} className={`h4 hover:bg-gray1 mt-[2px] p-[10px] cursor-pointer duration-200 ${currentComponent == 3 && "text-primary1  !bg-primary3 border-r-[4px] border-primary1 "} `} > {t("messages")} </div>
 
 		<hr className=' my-[10px] border-t-[1px] border-primary3 ' />
 		<div onClick={()=> setisOpenPopup(true) } className={`h4 p-[10px] text-red-600 hover:bg-red-200 cursor-pointer hover:bg-opacity-60 duration-200  `} > {t("logout")} </div>

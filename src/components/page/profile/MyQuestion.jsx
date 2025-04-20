@@ -143,6 +143,12 @@ export default function MyQuestion() {
     const handleConversation = conv => {
         setSelectedId(conv?.id);
         setcurrentChat(conv);
+
+        AxiosInstance.patch(`communications/${conv.id}/mark-read/${conv?.from?.id}`)
+        const notificationIcon = document.getElementById(`notification-${conv?.id}`)
+        if(notificationIcon){
+            notificationIcon.classList.add("remove-notification")
+        }
     };
 
 
@@ -162,6 +168,7 @@ export default function MyQuestion() {
 
     onEnter(sendMessage);
 
+
     return (
         <div>
         <div className='flex max-sm:!h-full sm:h-[60vh] max-sm:flex-col max-sm:gap-[15px] gap-[5px] filter  w-full text-sm'>
@@ -169,7 +176,7 @@ export default function MyQuestion() {
             <div className='w-[240px] max-sm:!w-full max-xl:w-[180px] rounded-tr-[5px] flex-none max-sm:!h-[300px] h-full bg-white overflow-y-auto overflow-x-hidden shadow-[0_4px_12px_rgba(0,0,0,0.06)]'>
                 <div className='sticky sm:border-b sm:border-b-neutral-300 z-[10] top-0 h-[50px] w-full bg-[#f7f8fd] mb-[10px]'>
                     <Search className='absolute top-[50%] text-gray-500 rtl:right-[10px] ltr:left-[10px] translate-y-[-50%]' size={16} />
-                    <input type='text' placeholder='Search...' value={search} onChange={e => setSearch(e.target.value)} className='ltr:pl-[35px] bg-transparent text-gray-500 rtl:pr-[35px] outline-none h-full w-full text-sm focus:outline-none' />
+                    <input type='text' placeholder={t("search")} value={search} onChange={e => setSearch(e.target.value)} className='ltr:pl-[35px] bg-transparent text-gray-500 rtl:pr-[35px] outline-none h-full w-full text-sm focus:outline-none' />
                 </div>
 
                 <ul className=''>
@@ -195,9 +202,11 @@ export default function MyQuestion() {
                             : filteredData?.map(conv => (
                               <li key={conv.id} onClick={() => handleConversation(conv)} className={`cursor-pointer px-[10px] py-2 ${selectedId === conv.id ? 'bg-primary2 text-white font-medium ' : 'hover:bg-neutral-100 duration-300'}`}>
                                   <div className='flex items-center gap-[10px]'>
-                                      <div className={`flex-none bg-[#ececec] ${selectedId === conv.id ? "!bg-primary3 text-primary1 " : ""} w-[40px] h-[40px] flex items-center justify-center rounded-full`}>
-                                          <User />
+                                      <div className={`flex-none bg-[#ececec] relative ${selectedId === conv.id ? "!bg-primary3 text-primary1 " : ""} w-[40px] h-[40px] flex items-center justify-center rounded-full`}>
+                                          <img src="/user.png" alt='' className='w-[40px] h-[40px] rounded-full ' />
+                                          {conv?.unreadCount !== 0 && ( <span id={`notification-${conv?.id}`} className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold flex items-center justify-center w-5 h-5 rounded-full shadow-md" > {conv.unreadCount > 9 ? '9+' : conv.unreadCount} </span>)}
                                       </div>
+
                                       <div className='w-full'>
                                           <div className={`text-gray-700 text-sm font-medium ${selectedId === conv.id ? "!text-white " : ""} `} > {conv?.venue?.name?.en}</div>
                                           <div className={`text-gray-500 text-xs text-wrap ${selectedId === conv.id ? "!text-white !text-opacity-60 " : ""} `}>{conv?.reply?.length <= 20 ? conv?.reply : conv?.reply?.slice(0, 20) + '..'}</div>
@@ -226,6 +235,8 @@ export default function MyQuestion() {
                         </div>
                     )}
 
+                    {/* <span> {currentChat?.id}</span> */}
+
 
                     {currentChat?.reply && (
                         <div className={`w-fit max-w-xs p-3 ml-auto bg-[#005c4b] text-white rounded-[15px_15px_0_15px] `}>
@@ -235,7 +246,7 @@ export default function MyQuestion() {
                     )}
                     {currentChat?.replies?.map((msg, index) => (
                         <div key={index} className={`w-fit max-w-xs p-3 rounded-[15px] ${msg.type === 'sender' ? 'ml-auto bg-[#005c4b] text-white rounded-[15px_15px_0_15px]' : 'mr-auto bg-[#363636] text-white rounded-[15px_15px_15px_0]'}`}>
-                            <div className='text'>{msg.message}</div>
+                            <div className='text'>{msg.message}  </div>
                             <div className='timestamp text-xs mt-1 text-opacity-70'>{moment(msg.createdAt).format('hh:mm A')}</div>
                         </div>
                     ))}
