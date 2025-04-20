@@ -23,7 +23,7 @@ export default function Card({ grid , slice = 3 , showNoResultData , animation =
                 ) : data?.length > 0 ? (
                     data.slice(0, slice).map((e, i) => (
                         <div key={e.id} data-aos={animation && 'zoom-in'} data-aos-delay={`${i}00`} className='h-full pb-[50px] max-sm:pb-[50px] relative rounded-[30px] overflow-hidden w-full shadow-custom border-gray1 border-[1px]'>
-                            <img className='w-full bg-primary1 h-[220px]  object-cover' src={e?.venueGalleries?.[0]?.imgs[0] || ""} alt='' />
+                            <img  className='w-full bg-primary1 h-[220px]  object-cover' src={e?.venueGalleries?.[0]?.imgs[0] || ""} alt='' />
                             <div className='p-[20px]'>
                                 <Address_vesitor titleAddress={e?.name?.[locale]} location={`${e.property?.city.name} , ${e.property?.city?.country.name}`} titleVistor={t('visitors_count')} e={e} />
                                 <Rate_price empty={3} fill={2} rateTitle={t('rating')} ratings={e?.ratings} priceTitle={t('price2')} priceValue={e?.price} />

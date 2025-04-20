@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+
+[dir="rtl"] body {
+    font-family: var(--font-alexandria) !important;
+  }
+  
+  [dir="ltr"] body {
+    font-family: var(--font-open-sans) !important;
+  }
+  
+
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  
+  
+
+
 @layer components { 
     .h0 {
         @apply font-[600] text-secondry1;
@@ -194,3 +214,15 @@ html {
     z-index: 10;
   }
   
+
+
+  /* Custom style for selected date */
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange,
+.flatpickr-day.selected:focus,
+.flatpickr-day.selected:hover {
+  background: #1e328b !important; /* 💜 Your custom color */
+  border-color: #1e328b !important;
+  color: white;
+}

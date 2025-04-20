@@ -83,7 +83,7 @@ export default function Sidebar({getMe , loading , currentComponent ,handleCurre
 		</div>
 
 		<div className="h3 text-center mt-[10px] ">  { getMe?.full_name } </div>
-		<div className="h5 px-[5px] text-center flex items-center flex-wrap justify-center  text-secondry3  "> 
+		<div dir='ltr' className="h5 px-[5px] text-center flex items-center flex-wrap justify-center  text-secondry3  "> 
             <span> { getMe?.email?.split("@")[0] }</span>
             <span>@</span>
             <span> { getMe?.email?.split("@")[1] }</span>

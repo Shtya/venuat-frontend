@@ -5,22 +5,22 @@ import { NextIntlClientProvider, useMessages } from 'next-intl';
 import Layout from '@/components/molecules/layout/LayoutApp';
 import Head from 'next/head';
 
-import { Alexandria , Open_Sans } from 'next/font/google';
 
-// Load Alexandria font
+import { Alexandria } from 'next/font/google'
+import { Open_Sans } from 'next/font/google'
+
 const alexandria = Alexandria({
-  subsets: ['latin'],
+  subsets: ['arabic'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
   variable: '--font-alexandria',
-});
+})
 
-// Load Open Sans font
 const openSans = Open_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
-  style: ['italic', 'normal'],
+  style: ['normal', 'italic'],
   variable: '--font-open-sans',
-});
+})
 
 export const metadata = {
     title: 'Luxury Wedding Hall and Event Venue Booking Across Saudi Arabia',

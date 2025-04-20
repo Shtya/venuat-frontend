@@ -32,6 +32,7 @@ const Calendar = ({watch , dataAos , reverse , cnInput , label , cnLabel , trigg
     const ele = document.getElementById(KEY) 
     flatpickr(ele, {
       dateFormat: "Y-m-d",
+      minDate : 'today',
       defaultDate: watchKey || new Date(Date.now() + 86400000),
       onChange: (selectedDates) => {
         const date = selectedDates[0];

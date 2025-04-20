@@ -1,0 +1,129 @@
+@charset "UTF-8";
+.overflow-map {
+  -webkit-clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
+          clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
+}
+
+.active {
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%) !important;
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%) !important;
+}
+
+ul li.ar a {
+  font-family: "Alexandria" !important;
+}
+
+ul li.en a {
+  font-family: "Open Sans", sans-serif !important;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: 1540px !important;
+  width: 100%;
+  margin: auto;
+  padding: 0 20px;
+}
+
+body {
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+.display-none {
+  display: none !important;
+}
+
+.gradient {
+  background: linear-gradient(328.18deg, #1E328B -43.78%, rgba(8, 13, 37, 0) 101.06%);
+}
+
+.lightgray-border {
+  border: 1px solid lightgray !important;
+}
+
+.leaflet-bottom.leaflet-right, .leaflet-control-attribution.leaflet-control {
+  display: none !important;
+}
+
+.tabs .swiper-slide {
+  width: auto !important;
+}
+
+.fcc__unit_time {
+  gap: 3px !important;
+}
+
+.fcc__separator._2hRXr {
+  color: #1e328b;
+  margin-left: 6px !important;
+  margin-right: 6px !important;
+}
+
+.fcc__digit_block {
+  width: 35px !important;
+  height: 55px !important;
+  font-size: 20px !important;
+  border-radius: 10px !important;
+}
+.fcc__digit_block > div {
+  box-shadow: inset 0 -1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px hsla(0, 0%, 100%, 0.05) !important;
+}
+.fcc__digit_block > div > div {
+  box-shadow: inset 0 1px hsla(0, 0%, 100%, 0.05) !important;
+}
+.fcc__digit_block * {
+  box-shadow: none !important;
+  background: #1e328b !important;
+  border-bottom: none !important;
+  border-top: none !important;
+}
+
+.fullscreen {
+  width: 90vh !important;
+  height: 90vh !important;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9); /* بدء التصغير */
+  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease; /* حركة الانتقال */
+  z-index: 10000000000000000000000000000000000;
+}
+
+.fullscreen-map {
+  height: 100% !important;
+  transition: 0.3s ease; /* حركة الانتقال */
+}
+
+.fullscreen.active {
+  transform: translate(-50%, -50%) scale(1); /* تكبير إلى الوضع الكامل */
+}
+
+.leaflet-control-container .leaflet-top.leaflet-left {
+  bottom: 60px !important;
+  top: unset;
+}
+
+.leaflet-control-zoom.leaflet-bar.leaflet-control {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  border: none !important;
+}
+.leaflet-control-zoom.leaflet-bar.leaflet-control a {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}/*# sourceMappingURL=style.css.map */
