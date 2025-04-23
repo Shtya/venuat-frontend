@@ -61,13 +61,9 @@ const SocialAuth = () => {
         <div data-aos='fade-up'>
             <div className='h3 text-center my-[20px]'>{t('passWithSocial')}</div>
             <div className='flex items-center gap-[10px] justify-center'>
-                <div onClick={() => handleSocialLogin('apple')} className='hover:scale-[1.2] duration-300 w-[50px] h-[50px] border border-[#eee] border-dashed bg-gray-50 flex items-center justify-center shadow-md rounded-[50%] cursor-pointer'>
-                    <Image src={ImgApple} alt='Apple' width={25} height={25} />
-                </div>
-                <div onClick={() => handleSocialLogin('facebook')} className='hover:scale-[1.2] duration-300 w-[50px] h-[50px] border border-[#eee] border-dashed bg-gray-50 flex items-center justify-center shadow-md rounded-[50%] cursor-pointer'>
-                    <Image src={ImgFacebook} alt='Facebook' width={25} height={25} />
-                </div>
-                <div onClick={() => handleSocialLogin('google')} className='hover:scale-[1.2] duration-300 w-[50px] h-[50px] border border-[#eee] border-dashed bg-gray-50 flex items-center justify-center shadow-md rounded-[50%] cursor-pointer'>
+
+                <div onClick={() => handleSocialLogin('google')} className=' duration-300 w-[400px] h-[50px] border border-[#aaa/20] bg-gray-50 flex items-center justify-center shadow-sm hover:shadow-md rounded-[30px] cursor-pointer'>
+                    {t("log-with-gmail")}
                     <Image src={ImgGoogle} alt='Google' width={25} height={25} />
                 </div>
             </div>

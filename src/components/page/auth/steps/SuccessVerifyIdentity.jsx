@@ -25,7 +25,7 @@ export default function SuccessVerifyIdentity({ step , setstep }) {
         <div>
             <div data-aos="fade-up" className=' text-center h3 my-[20px] '> {t('identity_verified_message')}  </div>
             <Image data-aos="fade-up" className=' mx-auto my-[50px] '  src={"/assets/verified.png"} alt='' width={300} height={280}  />
-            <Button href="/sign-in" width="max-w-[400px] w-full mx-auto " dataAos={"fade-up"} onClick={()=> setstep(step + 1)} name={t("loginbtn")} />
+            <Button href="sign-in" width="max-w-[400px] w-full mx-auto " dataAos={"fade-up"} onClick={()=> setstep(step + 1)} name={t("loginbtn")} />
         </div>
     );
 }

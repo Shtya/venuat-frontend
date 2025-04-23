@@ -27,7 +27,7 @@ export default function Finish() {
             />
 
             <Button
-                href="/"
+                href=""
                 width="max-w-[300px] w-full mx-auto"
                 classname="mt-12"
                 name={t("home_page")}
