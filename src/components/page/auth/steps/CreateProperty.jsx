@@ -8,6 +8,7 @@ import TextArea from '@/components/atoms/input/TextArea';
 import { translated } from '@/config/translateText';
 import { Upload } from 'lucide-react';
 import FileUpload from '@/components/atoms/FileUpload';
+import Select_Search from '@/components/atoms/select/Select_Search';
 
 export default function CreateProperty({ previousStep , loading, watch, submit, errors, register , title, trigger , setValue }) {
     const t = useTranslations();
@@ -28,7 +29,7 @@ export default function CreateProperty({ previousStep , loading, watch, submit, 
 
             <form data-aos="fade-up" >
                 {/* City ID */}
-                <Select KEY='city_id' error={errors?.city_id} setValue={setValue} watch={watch} trigger={trigger} data={cities} place={t('city')} label={t('city')} cnSelect=' px-[10px] rounded-[8px] !border-[#E1E6EF] !border-[1px] ' />
+                <Select_Search KEY='city_id' error={errors?.city_id} setValue={setValue} watch={watch} trigger={trigger} data={cities} place={t('city')} label={t('city')} cnSelect=' px-[10px] rounded-[8px] !border-[#E1E6EF] !border-[1px] ' />
                 <Input error={errors?.name} register={register('name')} KEY={'name'} cnInput='!border-[#E1E6EF] !border-[1px] ' classname='mt-[20px] ' type={'text'} label={t('nameProperty')} place={t('namePropertyPlaceholder')} />
                 <TextArea register={register('description')} error={errors?.description} cnLabel={' !h5 mt-[20px]  '} cnInput={'!border-[#E1E6EF] !border-[1px] '} KEY='description.ar' label={t('descriptionProperty')} place={t('descriptionPropertyPlaceholder')} />
 

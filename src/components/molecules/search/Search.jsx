@@ -2,13 +2,18 @@ import Button from '@/components/atoms/button/Button'
 import Input from '@/components/atoms/input/Input'
 import Select from '@/components/atoms/select/Select'
 import { useTranslations } from 'next-intl'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Calendar from "@/components/atoms/calendar/Calendar"
 import { hookOccasion } from '@/hooks/hookOccasion'
 import { hookCity } from '@/hooks/hookCity'
 import { usePathname } from '@/navigation'
+import Select_Search from '@/components/atoms/select/Select_Search'
 
 export default function Search({dataAos , clearData , loading  , register, errors , trigger , setValue, submit , watch}) {
+
+
+	
+	
 	const {occasion  } = hookOccasion()
 	const { cities  } = hookCity()
 	const t = useTranslations()
@@ -20,13 +25,17 @@ export default function Search({dataAos , clearData , loading  , register, error
 			else setshowClear(false)
 	} ,[pathname])
 	
+
+
+
+
   return (
 	
 	<div data-aos={dataAos} className=' max-xl:py-[40px] main-shadow grid grid-cols-[1fr,400px] flex-wrap max-xl:grid-cols-[90%] max-xl:justify-center  max-lg:rounded-[10px] max-lg:grid-cols-1 max-lg:px-[70px] max-lg:py-[20px] max-sm:!p-[20px] max-lg:gap-[40px] items-center justify-between gap-[20px] rounded-[100px]  w-full my-[50px] shadow-blur  min-h-[140px] bg-white ' >
 		
 		<div className='grid grid-cols-4 max-lg:grid-cols-2 max-sm:grid-cols-1 items-center gap-[40px] max-lg:!p-0 ltr:xl:ml-[30px] rtl:xl:mr-[30px] ' >
 			<Calendar  KEY="date"   cnInput={""}    error={errors?.date} setValue={setValue}  watch={watch} trigger={trigger}  place={t("date")} classname={"w-full !px-0 "}  />
-			<Select  sendId={true}  KEY="city"      error={errors?.city} setValue={setValue}   watch={watch} trigger={trigger}  data={cities} place={t("city")}  icon={"/assets/location.svg"} />
+			<Select_Search  sendId={true}  KEY="city"      error={errors?.city} setValue={setValue}   watch={watch} trigger={trigger}  data={cities} place={t("city")}  icon={"/assets/location.svg"} />
 			<Input     KEY="visitor"   error={errors?.visitor} register={register("visitor")} rounded={false} classname="!border-b-transparent " icon={"/assets/users.svg"} type={"number"}  place={t("count_vistor")} />
 			<Select  sendId={true}  KEY="typeEvent" error={errors?.typeEvent} setValue={setValue} watch={watch} trigger={trigger} data={occasion} place={t("type_occasion")}  icon={"/assets/occasion.svg"} />
 

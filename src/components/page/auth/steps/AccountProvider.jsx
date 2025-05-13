@@ -23,6 +23,7 @@ export default function AccountProvider() {
     const {policiesFields , appendpolicies , removepolicies , faqsFields , appendfaqs , removefaqs , loading, step , previousStep , setstep , register, errors, fields, append, remove, trigger, clearErrors, getValues, setValue, submit, watch , equipmentFields, appendEquipment, removeEquipment } = hookProvider();
     const valPlace = watch('type_place');
 
+
     
     return (
         <div className=''>
@@ -32,7 +33,7 @@ export default function AccountProvider() {
             {step == 2 && <CreateProperty previousStep={previousStep} title='createPropertyButton' trigger={trigger} submit={submit} register={register} errors={errors} watch={watch}  loading={loading}  setValue={setValue} />}
 
             {step == 3 && <RadioLabel previousStep={previousStep} loading={loading} submit={submit} title='placeTitle' watch={watch} getValues={getValues} KEY={'type_place'}     data={PlaceData} step={step} setValue={setValue} />}
-            {step == 4 && <RadioLabel previousStep={previousStep} loading={loading} submit={submit} title='hallTitle' watch={watch} getValues={getValues} KEY={'is_multi_place'}  data={valPlace?.value == 'halls' ? CountPlaceData[0] : CountPlaceData[1]} step={step} setValue={setValue} />}
+            {step == 4 && <RadioLabel previousStep={previousStep} loading={loading} submit={submit} title={valPlace?.value == 'hall' ? 'hallTitle'  : "hotelTitle"} watch={watch} getValues={getValues} KEY={'is_multi_place'}  data={valPlace?.value == 'hall' ? CountPlaceData[0] : CountPlaceData[1]} step={step} setValue={setValue} />}
             
             
             {step == 5 && <Answer       previousStep={previousStep} loading={loading} submit={submit}  setValue={setValue} watch={watch} trigger={trigger} errors={errors} register={register} getValues={getValues} />}

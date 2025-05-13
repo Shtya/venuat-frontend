@@ -1,7 +1,7 @@
 'use client';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -12,15 +12,25 @@ import Address_vesitor from '@/components/atoms/card/Address_vesitor';
 import Rate_price from '@/components/atoms/card/Rate_price';
 import CardPlaceholder from '../placeholder/CardPlaceholder';
 import NotFound from '@/components/atoms/NotFound';
+import { useEffect, useRef } from 'react';
 
 export default function CardSlider({ isLoading , data }) {
+
     const t = useTranslations();
     const locale = useLocale()
+
     const config = {
-        modules: [Navigation, Pagination],
+        loop: true,
+        speed: 500,
+        slideToClickedSlide: true,
+        modules: [Navigation,Autoplay, Pagination],
         navigation: {
             prevEl: '.custom-prev',
             nextEl: '.custom-next',
+        },
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
         },
         pagination: { clickable: true },
         spaceBetween: 20,
@@ -31,16 +41,32 @@ export default function CardSlider({ isLoading , data }) {
         },
     };
 
+
+
+
+    const swiperRef = useRef(null);
+
+    useEffect(() => {
+        setTimeout(() => {
+            if (swiperRef.current && swiperRef.current.swiper) {
+                swiperRef.current.swiper.params.navigation.prevEl = '.custom-prev';
+                swiperRef.current.swiper.params.navigation.nextEl = '.custom-next';
+                swiperRef.current.swiper.navigation.init();
+                swiperRef.current.swiper.navigation.update();
+            }
+        }, 1000);
+    }, []);
+
     return (
-        <Swiper  {...config} className='mySwiper'>
-            {
+        <Swiper ref={swiperRef}  {...config} className='mySwiper'>
+            { 
             isLoading
               ? Array(3).fill(0).map((_, i) => <SwiperSlide key={i} > <CardPlaceholder index={i}  key={i} /> </SwiperSlide> )
               : data?.length > 0 ? 
                 data?.map((e, i) => (
                 <SwiperSlide key={e.id}  >
                     <div data-aos='zoom-in' data-aos-delay={`${i}00`} className='h-full pb-[80px] max-sm:pb-[50px] relative rounded-[30px] overflow-hidden w-full shadow-custom border-gray1 border-[1px]'>
-                        <img className='w-full bg-primary1 max-sm:max-h-[220px] max-h-[250px] object-cover ' src={e?.venueGalleries?.[0]?.imgs[0] || '/assets/test-img/notfound.png'} alt='' />
+                        <img className='w-full bg-primary1 max-sm:h-[220px] h-[250px] object-cover ' src={e?.venueGalleries?.[0]?.imgs[0] || '/assets/test-img/notfound.png'} alt='' />
                         <div className='p-[20px]'>
                             <Address_vesitor titleAddress={e?.name?.[locale]} location={`${e.property?.city.name} , ${e.property?.city?.country.name}`} titleVistor={t('visitors_count')} e={e} />
                             <Rate_price empty={3} fill={2} rateTitle={t('rating')} ratings={e?.ratings} priceTitle={t('price2')} priceValue={e?.price} />
@@ -62,6 +88,10 @@ export default function CardSlider({ isLoading , data }) {
                     </div>
                 </SwiperSlide>
             )) :  <NotFound /> }
+
+ {/* <button className="custom-prev2">Prev</button>
+    <button className="custom-next2">Next</button> */}
+
         </Swiper>
     );
 }

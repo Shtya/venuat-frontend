@@ -94,9 +94,10 @@ export const hookSearch = () => {
           setValue("city", searchParams.get("city") || "");
           setValue("typeEvent", searchParams.get("occasion") || ""); // "occasion" maps to typeEvent
           setValue("date", searchParams.get("date") || "");
-        if(searchParams.size)  submit()
+        if(searchParams.size > 1)  submit()
+        
       }
-    }, [searchParams, setValue]);
+    }, [searchParams, setValue , pathname ]);
 
 
 
