@@ -1,7 +1,5 @@
 import AxiosInstance from '@/config/Axios';
 import { Notification } from '@/config/Notification';
-import { useRouter } from '@/navigation';
-import { SignInSchema } from '@/schema/SignInSchema';
 import { SubscribeSchema } from '@/schema/SubscribeSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslations } from 'next-intl';
@@ -43,7 +41,6 @@ export const hookSubscribe = () => {
       if(user?.isSubscribed == true){
         const ele = document.getElementById("subscribe")
         if(ele) {
-          console.log(ele)
           ele?.classList?.add("bg-[#0000001A]")
         }
         setValue("subscribe" , user?.email)

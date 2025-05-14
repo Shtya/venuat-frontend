@@ -1,34 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import Amount from './Amount';
 import { useLocale, useTranslations } from 'next-intl';
-import AxiosInstance from '@/config/Axios';
-import { Notification } from '@/config/Notification';
 
-export default function AmountEquipments({ setValue, venue, data, style, disabled }) {
-    const t = useTranslations();
+export default function AmountEquipments({ setEquipments , data, style, disabled }) {
     const locale = useLocale();
     const [loading, setLoading] = useState(false);
 
     const handleUpdate = async (id, count) => {
-        setLoading(true);
+        const updated = data.map(item => {
+            if (item.id === id) {
+                return { ...item, count };
+            }
+            return item;
+        });
 
-        try {
-            const updatedData = { equipments: [{ equipmentId: id, count }] };
-            await AxiosInstance.put(`/venue-equipment/${venue?.id}/equipments`, updatedData);
-
-            // Notification(t("updated_Successfully"), 'success');
-            setValue('quantity', count); // Update the form value if needed
-        } catch (err) {
-            console.error(err);
-            Notification(t("update_failed"), 'error');
-        } finally {
-            setLoading(false);
-        }
+        setEquipments(updated);
     };
+
 
     return (
         <div>
-            {data?.map((e, i) => (
+            {data && data?.map((e, i) => (
                 <Amount
                     key={i}
                     style={style}

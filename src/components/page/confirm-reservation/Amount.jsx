@@ -20,7 +20,7 @@ export default function Amount({ style, disabled, name, price, quantity, id, onU
 
             <div className='flex items-center gap-[20px] justify-center'>
                 <button disabled={disabled} onClick={() => handle('+')} className={`   disabled:cursor-not-allowed disabled:bg-gray-200 disabled:border-gray-300 disabled:opacity-50 flex-none max-sm:w-[25px] max-sm:h-[25px] cursor-pointer hover:bg-primary3 duration-300 border-[1px] border-[#D9D9D9] w-[35px] h-[35px] flex items-center justify-center rounded-[50%]`}> <Image className='w-[15px]' src={ImgPlus} alt='' width={20} height={20} /> </button>
-                <span className='max-sm:text-[12px]'>{count}</span>
+                <span className='max-sm:text-[12px] '>{count}</span>
                 <button disabled={count == 0 ? true : disabled} onClick={() => handle('-')} className={` disabled:cursor-not-allowed disabled:bg-gray-200 disabled:border-gray-300 disabled:opacity-50 flex-none max-sm:w-[25px] max-sm:h-[25px] cursor-pointer hover:bg-primary3 duration-300 border-[1px] border-[#D9D9D9] w-[35px] h-[35px] flex items-center justify-center rounded-[50%] `}> <Image className='w-[15px]' src={ImgMunis} alt='' width={20} height={20} /> </button>
             </div>
             

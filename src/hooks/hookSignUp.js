@@ -93,7 +93,13 @@ export const hookSignUp = () => {
         }
         try {
             await AxiosInstance.post(`/auth/verify-otp`, { email: email, otp: code.join('') }).then(res => {
-                Notification(res.data?.message, 'success');
+                // Notification(res.data?.message, 'success');
+                Notification(t("welcome" , {name : res?.data?.full_name} ), "success");
+
+                localStorage.setItem('accessToken', res?.data?.accessToken);
+                localStorage.setItem('refreshToken', res?.data?.refreshToken);
+                localStorage.setItem('user', JSON.stringify(res.data));
+                
                 setTimeout(() => {
                     setstep(3);
                     updateStepInURL(3);

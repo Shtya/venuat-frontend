@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import AxiosInstance from '@/config/Axios';
 import { ContactUsSchema } from '@/schema/ContactUsSchema';
@@ -10,16 +10,29 @@ import { ReservationSchema } from '@/schema/ReservationSchema';
 import { hookUser } from './hookUser';
 import { Notification } from '@/config/Notification';
 import { useTranslations } from 'next-intl';
+import { useRouter } from '@/navigation';
+import { useGlobalContext } from '@/context/GlobalContext';
 
 export const hookConfirmReservation = ({ id }) => {
+    const router = useRouter()
     const t = useTranslations();
-    const [ startDate , setstartDate] = useState()
-    const [ endDate , setendDate] = useState()
+    const [startDate, setstartDate] = useState();
+    const [endDate, setendDate] = useState();
 
-    const schema = useMemo(() => ReservationSchema({ endDate }), [ endDate]);
+    const schema = useMemo(() => ReservationSchema({ endDate }), [endDate]);
 
-    const {  register,  trigger,  handleSubmit,  formState: { errors },  clearErrors,  setError,  getValues,  setValue,  watch,  reset, } = 
-        useForm({ resolver: yupResolver(schema) });
+    const {
+        register,
+        trigger,
+        handleSubmit,
+        formState: { errors },
+        clearErrors,
+        setError,
+        getValues,
+        setValue,
+        watch,
+        reset,
+    } = useForm({ resolver: yupResolver(schema) });
 
     const { user } = hookUser();
 
@@ -34,10 +47,8 @@ export const hookConfirmReservation = ({ id }) => {
             const response = await AxiosInstance.get(`/venues/${id}/reservation-venue${query}`);
             setVenue(response.data);
 
-            setstartDate(response?.data?.package?.start_date)
-            setendDate(response?.data?.package?.end_date)
-
-
+            setstartDate(response?.data?.package?.start_date);
+            setendDate(response?.data?.package?.end_date);
         } catch (error) {
             setErrorState(error.message || 'Failed to load venues');
         } finally {
@@ -47,46 +58,44 @@ export const hookConfirmReservation = ({ id }) => {
     };
 
     const searchParams = useSearchParams();
-    const [PackageId , setPackageId] = useState()
+    const [PackageId, setPackageId] = useState();
 
     useEffect(() => {
         const PackageId = searchParams.get('package');
-        setPackageId(PackageId)
+        setPackageId(PackageId);
         if (PackageId) {
             fetchVenues({ query: `?packageId=${PackageId}` });
         } else {
             fetchVenues({ query: '' });
         }
-
-        
     }, [id, searchParams.get('package')]);
 
-
-
-    //! whene change the count of quentity 
+    //! whene change the count of quentity
     const countChange = watch('quantity');
     useEffect(() => {
         if (countChange) {
-          fetchVenues({ query: `?packageId=${PackageId}` });
+            fetchVenues({ query: `?packageId=${PackageId}` });
         }
     }, [countChange]);
 
-
     const [loadingReservation, setLoadingReservation] = useState(false);
-    const [isSubmit , setIsSubmit] = useState(false);
-    useEffect(()=> {
+    const [isSubmit, setIsSubmit] = useState(false);
+    useEffect(() => {
         const firstErrorElement = document.querySelectorAll('.error')[0];
         if (firstErrorElement) {
             firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-    } ,[isSubmit , errors])
+    }, [isSubmit, errors]);
 
-    const [isOpenPopup , setisOpenPopup] = useState(false)
+    const [isOpenPopup, setisOpenPopup] = useState(false);
+    const [selectedPeriods, setSelectedPeriods] = useState({});
 
+    const [changeListen , setchangeListen] = useState(1)
+    const {Services , Equipments , subtotal , taxValue , totalWithTax , servicesPrice , equipmentsPrice , Days    , setPriceVenue  , setDays} = useGlobalContext()
+    
     const submit = handleSubmit(async data => {
-        setIsSubmit(true)
+        setIsSubmit(true);
 
-       
         const filteredPeriods = Object.fromEntries(
             Object.entries(data?.periods || {}).filter(([dateStr]) => {
                 const [day, month, year] = dateStr.split('/');
@@ -96,9 +105,9 @@ export const hookConfirmReservation = ({ id }) => {
                 const checkInDate = new Date(data?.check_in);
                 const checkOutDate = new Date(data?.check_out);
                 checkInDate.setHours(0, 0, 0, 0);
-                checkOutDate.setHours(0, 0, 0, 0);  
+                checkOutDate.setHours(0, 0, 0, 0);
                 return parsedDate >= checkInDate && parsedDate <= checkOutDate;
-            })
+            }),
         );
 
         const handleData = {
@@ -108,25 +117,36 @@ export const hookConfirmReservation = ({ id }) => {
             check_in: data?.check_in,
             check_out: data?.check_out,
             periods: filteredPeriods,
-            total_price: (data?.totalPriceAll * .15) + data?.totalPriceAll 
+            total_price: totalWithTax,
+            reservation_details : {
+                equipments : Equipments ,
+                services : Services ,
+                servicesPrice ,
+                equipmentsPrice ,
+                days : Days ,
+                subtotal ,
+                taxValue ,
+                totalWithTax ,
+            }
         };
-
-
-
-
-        if(PackageId) handleData.package = +PackageId
-    
+        if (PackageId) handleData.package = +PackageId;
 
         setLoadingReservation(true);
         await AxiosInstance.post(`/reservations`, handleData)
             .then(res => {
                 Notification(t('successReservation'), 'success');
-                setisOpenPopup(true)
-                setValue("periods" , {})
+                setisOpenPopup(true);
+                setValue('periods', {});
+                setSelectedPeriods({})
+                setchangeListen(changeListen+1)
+
+                setTimeout(() => {
+                    router.push('/my-account?page=2') 
+                }, 500);
             })
             .catch(err => console.log(err));
         setLoadingReservation(false);
     });
 
-    return { isOpenPopup , setisOpenPopup , loadingReservation, loadingPricing, venue: venue?.venue, Package: venue?.package, loading, errors, trigger, setValue, submit, watch };
+    return {selectedPeriods , changeListen , setSelectedPeriods, isOpenPopup, setisOpenPopup, loadingReservation, loadingPricing, venue: venue?.venue, Package: venue?.package, loading, errors, trigger, setValue, submit, watch };
 };

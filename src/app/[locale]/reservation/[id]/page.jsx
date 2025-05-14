@@ -19,12 +19,14 @@ import SuccesReservationPopup from '@/components/popupComponent/SuccesReservatio
 import Popup from '@/components/molecules/Popup';
 import RadioDate from '@/components/atoms/radio/RadioDate';
 import AxiosInstance from '@/config/Axios';
+import { useGlobalContext } from '@/context/GlobalContext';
 
 const Page = ({ params }) => {
     const t = useTranslations();
     const locale = useLocale();
-    const { isOpenPopup, setisOpenPopup, loadingReservation, loadingPricing, Package, venue, loading, errors, trigger, setValue, submit, watch } = hookConfirmReservation({ id: params.id });
+    const {selectedPeriods, setSelectedPeriods, changeListen , isOpenPopup, setisOpenPopup, loadingReservation, loadingPricing, Package, venue, loading, errors, trigger, setValue, submit, watch } = hookConfirmReservation({ id: params.id });
     const [minmize, setminimize] = useState(true);
+    const [disabled, setDisabled] = useState(true);
 
     const BreadcrumbsData = [
         { name: 'availableHalls', value: '/available-halls' },
@@ -36,14 +38,13 @@ const Page = ({ params }) => {
     const checkOut = watch('check_out');
 
     const [periods, setPeriods] = useState({});
-    const [selectedPeriods, setSelectedPeriods] = useState({});
-    const [totalPriceAll, setTotalPriceAll] = useState(0);
+    const {subtotal , taxValue , totalWithTax , servicesPrice , equipmentsPrice , Days    , setPriceVenue  , setDays} = useGlobalContext()
 
     useEffect(() => {
-        Object.entries(selectedPeriods).forEach( async ([day, value]) => {
-            setValue(`periods.${day?.split(":")[1].trim()}` , value )
+        Object.entries(selectedPeriods).forEach(async ([day, value]) => {
+            setValue(`periods.${day?.split(':')[1].trim()}`, value);
         });
-    }, [selectedPeriods]);
+    }, [selectedPeriods , checkIn , checkOut , changeListen ]);
 
     const { totalPrice, totalDays } = Object.entries(selectedPeriods).reduce(
         (acc, [day, id]) => {
@@ -62,24 +63,25 @@ const Page = ({ params }) => {
             if (!checkIn || !checkOut) return;
 
             AxiosInstance.get(`/venues/${params?.id}/periods/range?from=${checkIn}&to=${checkOut}`)
-            .then(response => {
-              setPeriods(response?.data);
-            })
-              .catch(error => { setPeriods({}); });
+                .then(response => {
+                    setPeriods(response?.data);
+                })
+                .catch(error => {
+                    setPeriods({});
+                });
         };
 
-       
-
         fetchPeriods();
-    }, [checkIn, checkOut]);
+    }, [checkIn, checkOut , changeListen ]);
 
 
+
+    
     useEffect(() => {
-      if(loading == false){
-        setValue("totalPriceAll" , totalPrice + (venue?.additionalServicesPrice * totalDays) + (venue?.additionalEquipmentsPrice * totalDays) )
-        setTotalPriceAll(totalPrice + (venue?.additionalServicesPrice * totalDays) + (venue?.additionalEquipmentsPrice * totalDays))
-      }
-    },[loading , totalPrice , loadingPricing])
+        setDays(totalDays)
+        setPriceVenue(totalPrice)
+    }, [loading, totalPrice, loadingPricing]);
+
 
     return (
         <main className='min-h-[100vh] !max-w-[1300px] container'>
@@ -121,7 +123,7 @@ const Page = ({ params }) => {
                                     <div key={i} id={`day_${e?.split(':')[1].trim()}`} className='space-y-2 relative '>
                                         <div className='flex items-center justify-between'>
                                             <div className='flex items-center gap-[5px]  font-medium text-primary1'>
-                                                <span className='text-sm font-semibold  '>{e?.split(':')[0]}</span> 
+                                                <span className='text-sm font-semibold  '>{e?.split(':')[0]}</span>
                                                 <span className='text-xs text-black mt-[3px] bg-neutral-200  px-[5px] py-[2px] rounded-[3px] '>{e?.split(':')[1]}</span> {/* 10/4 */}
                                             </div>
 
@@ -130,15 +132,17 @@ const Page = ({ params }) => {
 
                                         {periods?.[e]?.length >= 1 && (
                                             <RadioDate
-                                                phoneNumber= {venue?.phone}
+                                                changeListen={changeListen}
+                                                checkIn={checkIn}
+                                                checkOut={checkOut}
                                                 name={`day_${e}`}
-                                                id={`day_${e?.split(':')[1].trim()}`}
+                                                setDisabled={setDisabled}
                                                 options={periods[e]?.map(item => ({
                                                     label: `${item.from} - ${item.to}`,
                                                     price: item.price,
                                                     value: item.id,
-                                                    booked_dates : item.booked_dates,
-                                                    date : e?.split(':')[1].trim()
+                                                    booked_dates: item.booked_dates,
+                                                    date: e?.split(':')[1].trim(),
                                                 }))}
                                                 selected={selectedPeriods[e] || ''}
                                                 onChange={val => setSelectedPeriods(prev => ({ ...prev, [e]: val }))}
@@ -165,67 +169,42 @@ const Page = ({ params }) => {
                     <CircleChevronDown onClick={() => setminimize(!minmize)} className={` text-secondry3 cursor-pointer duration-500 ${!minmize && 'rotate-[-180deg]  '} `} size={35} />
                 </div>
 
-                <DetailsVenue setValue={setValue} Package={Package} venue={venue} loading={loading} cn={` ${minmize ? 'max-h-[2500px] opacity-100 ' : 'max-h-0 opacity-0 '} ease-in-out transition-all   duration-500 `} />
+                <DetailsVenue setValue={setValue} Package={Package} venue={venue} loading={loading} cn={` ${minmize ? 'max-h-[3500px] opacity-100 ' : 'max-h-0 opacity-0 '} ease-in-out transition-all   duration-500 `} />
 
+                <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'>
+                    <span>{t('hallPricePerDays', { days: Days })}</span>
+                    {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse  '></div> : <SAR cn={'font-[700] text-[18px]  text-primary1'} price={totalPrice.toFixed(2)} />}
+                </div>
 
+                <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'>
+                    <span>{t('additionalServices')}</span>
+                    {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <TotalDaysPrice totalDays={Days} price={servicesPrice} />}
+                </div>
 
-                <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'> 
-                  <span>{t('hallPricePerDays' , {days : totalDays} )}</span>           
-                  {loadingPricing 
-                      ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse  '></div> 
-                      : <SAR cn={'font-[700] text-[18px]  text-primary1'} price={totalPrice.toFixed(2)} />} 
-                  </div>
-                  
-
-
-                <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'> 
-                  <span>{t('additionalServices')}</span>  
-                    {loadingPricing 
-                        ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> 
-                        :  <TotalDaysPrice totalDays={totalDays} price={venue?.additionalServicesPrice} />
-                        } 
-                  </div>
-                  
-
+                <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'>
+                    <span>{t('additionalEquipment')}</span>
+                    {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <TotalDaysPrice totalDays={Days} price={equipmentsPrice} />}
+                </div>
 
                 <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'> 
-                  <span>{t('additionalEquipment')}</span> 
-                  {loadingPricing 
-                      ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> 
-                      :  <TotalDaysPrice totalDays={totalDays} price={venue?.additionalEquipmentsPrice} />
-                      } 
-                  </div>
-                  
-
-
-
-                {/* <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'> 
                   <span> {t('vatValue')} </span>          
                   {loadingPricing 
                       ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> 
-                      :  <TotalDaysPrice totalDays={totalDays} price={(totalPrice + +venue?.additionalServicesPrice + +venue?.additionalEquipmentsPrice) * 0.15} />
+                      :  <SAR cn={'font-[700] text-[18px]  text-primary1'} price={taxValue} />
                   } 
-                  </div> */}
-                  
-                <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'> 
-                  <span>{t('totalPrice')}</span>          
-                  {loadingPricing 
-                      ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> 
-                      : <SAR cn={'font-[700] text-[18px]  text-primary1'} price={totalPriceAll} /> 
-                      }  
                   </div>
 
-                  
-                  
-                <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'> 
-                  <span>{t('totalWithVat')}</span>
-                  {loadingPricing 
-                      ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> 
-                      : <SAR cn={'font-[700] text-[18px]  text-primary1'} price={totalPriceAll + ( totalPriceAll * .15)} />} 
-                  </div>
-                  
+                <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'>
+                    <span>{t('totalPrice')}</span>
+                    {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <SAR cn={'font-[700] text-[18px]  text-primary1'} price={subtotal} />}
+                </div>
 
-                <Button checkAuth={true} isLoading={loadingReservation} onClick={submit} name={t('payNow')} classname='max-w-[400px] w-full mx-auto mt-[60px] ' />
+                <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'>
+                    <span>{t('totalWithVat')}</span>
+                    {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <SAR cn={'font-[700] text-[18px]  text-primary1'} price={totalWithTax} />}
+                </div>
+
+                <Button checkAuth={true} isLoading={loadingReservation} disabled={disabled}  onClick={submit} name={t('payNow')} classname='max-w-[400px] w-full mx-auto mt-[60px] ' />
 
                 <div className='h3 text-center mt-[50px] mb-[10px] '> {t('poweredBy')} </div>
                 <div className='flex gap-[20px] justify-center items-center '>
@@ -241,33 +220,33 @@ const Page = ({ params }) => {
 
 export default Page;
 
-
 const TotalDaysPrice = ({ totalDays, price }) => {
-  const locale = useLocale();
-  const t = useTranslations();
+    const locale = useLocale();
+    const t = useTranslations();
 
-  const getDaysLabel = (count) => {
-    if (locale === "ar") {
-      return count === 1
-        ? "يوم"
-        : count === 2
-        ? "يومان"
-        : count <= 10
-        ? "أيام"
-        : "يومًا";
+    const getDaysLabel = count => {
+    if (locale === 'ar') {
+        if (count === 0) return 'لا أيام';
+        if (count === 1) return 'يوم';
+        if (count === 2) return 'يومان';
+        if (count <= 10) return 'أيام';
+        return 'يومًا';
     } else {
-      return count > 1 ? "days" : "day";
+        return count === 0 ? 'no days' : count > 1 ? 'days' : 'day';
     }
-  };
-
-  return (
-    <span className="flex items-center gap-1 capitalize">
-      <span className="text-[18px] font-semibold">{totalDays}</span>
-      <span className="text-xs  ">{getDaysLabel(totalDays)}</span>
-      <Asterisk size={13} className=" text-primary1 mt-[-10px] " />
-      <SAR price={price} cn="font-[700] text-[18px] text-primary1" />
-    </span>
-  );
 };
 
 
+    return (
+        <span className='flex items-center gap-1 capitalize'>
+            {
+                totalDays != 0 && <>
+                    <span className='text-sm font-semibold'>{totalDays}</span>
+                    <span className='text-sm  '>{getDaysLabel(totalDays)}</span>
+                    <Image src={'/assets/multiplication.png'} alt='' width={25} height={25} />
+                </> 
+            }
+            <SAR price={price} cn='font-[700] text-[18px] text-primary1' />
+        </span>
+    );
+};

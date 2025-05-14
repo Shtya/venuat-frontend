@@ -1,4 +1,13 @@
 {
+    
+    "browse" : "تصفح القاعات",
+    "reservation_days": "أيام الحجز",
+    "Date": "التاريخ",
+    "day": "اليوم",
+    "Price": "السعر",
+    "vat": "القيمة المضافة",
+    "price_with_vat": "السعر مع القيمة المضافة",
+    "not-availabel" : "ليس متاحا",
     "hotelTitle" : "هل انت صاحب فندق واحد ام عدة فنادق ؟",
     "log-with-gmail" : "تسجيل الدخول بالبريد الالكتروني",
     "reservations" : "الحجوزات",
@@ -538,7 +547,7 @@
     "did_not_receive_code": "لم أحصل على الرمز",
     "verify": "تحقق",
 
-    "identity_verified_message": "تم التأكد من هويتك، يمكنك استكمال البيانات بنجاح",
+    "identity_verified_message": "تم التأكد من هويتك، يمكنك تصفح القاعات الان",
     "complete_data": "استكمال البيانات",
     "sent_questions": "الأسئلة المرسلة",
 

@@ -15,6 +15,7 @@ const Calendar = ({watch , dataAos , reverse , cnInput , label , cnLabel , trigg
   const watchKey = watch?.(KEY)
   useEffect(() => {
     const today = format(new Date(Date.now() + 86400000), "yyyy-MM-dd");
+    // const today = format(new Date(2025, 4, 26), "yyyy-MM-dd");
   
     if (watchKey) {
       trigger?.(KEY);

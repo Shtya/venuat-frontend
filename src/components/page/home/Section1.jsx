@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import Button from '../../atoms/button/Button';
+import ImageWithSkeleton from '@/components/atoms/ImageWithSkeleton';
 
 export default function Section1({ venue, loading }) {
     const t = useTranslations();
@@ -34,25 +35,16 @@ export default function Section1({ venue, loading }) {
 
     return (
         <div className='h-fit'>
-            {loading ? ( // ✅ Show placeholder while loading
-                <div className='grid grid-cols-[1fr,1fr] max-lg:grid-cols-1 gap-[20px]'>
-                    <div className='bg-gray-300 animate-pulse rounded-[30px] w-full h-[500px] ' />
-                    <div className='grid grid-cols-2 max-[400px]:grid-cols-1 gap-[20px]'>
-                        {Array(4).fill(0).map((_, i) => (
-                                <div key={i} className='bg-gray-300 animate-pulse rounded-[30px] max-md:h-[200px] h-full w-full' />
-                            ))}
-                    </div>
-                </div>
-            ) : (
+           
                 <div className='grid grid-cols-2 max-md:grid-cols-1 gap-[20px]'>
-                    <img data-aos='zoom-in'  className='rounded-[30px] h-[600px] overflow-hidden bg-[#eee] border-[1px] border-[#eee] ' src={imgs?.[0]} alt='' width={750} height={650} />
+                    <ImageWithSkeleton  className=' h-[600px] object-cover  ' src={imgs?.[0]} alt='' width={750} height={650} />
                     <div className='grid grid-cols-2 max-[400px]:grid-cols-1 gap-[20px]'>
                         {Array(4).fill(0).map((e, i) => (
-                            <img data-aos='zoom-out' data-aos-delay={`${i}00`} className=' bg-[#eee] border-[1px] border-[#eee]  rounded-[30px] max-md:h-[200px] h-[287px] w-full object-cover' key={i} src={imgs?.[i+2]} alt='' width={350} height={280} />
+                            <ImageWithSkeleton  className='    max-md:h-[200px] h-[287px] w-full object-cover' key={i} src={imgs?.[i+2]} alt='' width={350} height={280} />
                         ))}
                     </div>
                 </div>
-            )}
+            
 
             <div className='bar md:shadow-custom mt-[20px] flex flex-wrap gap-[20px] justify-between items-center border-b-[1px] border-b-primary3   '>
                 <ul data-aos='fade-up' className='flex flex-wrap items-center gap-[20px] max-md:gap-x-[10px] max-md:gap-y-[0px] h-full '>

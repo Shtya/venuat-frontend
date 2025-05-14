@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Amount from './Amount';
 import { useLocale, useTranslations } from 'next-intl';
-import Checkbox from '@/components/atoms/checkbox/Checkbox';
 import Divider from '@/components/atoms/Divider';
-import { ensureYourHalls, services } from '@/Dummy/dummy';
 import AmountSkeleton from '@/components/atoms/Skelton/AmountSkeleton';
-import SAR from '@/components/atoms/SAR';
 import AmountServices from './AmountServices';
 import AmountEquipments from './AmountEquipments';
+import { useGlobalContext } from '@/context/GlobalContext';
 
-export default function DetailsVenue({setValue , cn, venue , Package , loading }) {
+export default function DetailsVenue({cn, venue , Package , loading }) {
     const t = useTranslations();
-    const locale = useLocale();
-    const [Services , setServices] = useState(null)
-    const [Equipments , setEquipments] = useState(null)
+    const {Services , setServices ,  Equipments , setEquipments} = useGlobalContext()
     const [disabled , setdisabled] = useState(false)
 
     useEffect(()=> {
@@ -85,7 +80,7 @@ export default function DetailsVenue({setValue , cn, venue , Package , loading }
             )}
 
             
-            <AmountServices setValue={setValue} venue={venue} data={Services} disabled={disabled}  style={style.body} />
+            <AmountServices setServices={setServices}  data={Services} disabled={disabled}  style={style.body} />
 			{Services?.length > 0 && <Divider classname={"mt-[50px]"} />}
 
 
@@ -97,21 +92,10 @@ export default function DetailsVenue({setValue , cn, venue , Package , loading }
                 </div>
             )}
 
-            <AmountEquipments setValue={setValue} venue={venue} data={Equipments} disabled={disabled}  style={style.body} />
+            <AmountEquipments setEquipments={setEquipments} data={Equipments} disabled={disabled}  style={style.body} />
             {Equipments?.length > 0 && <Divider classname={"my-[50px]"} />}
 
 
-            {/* <div  className=' mt-[40px] mb-[20px] font-medium text-secondry3 '> {t('additionalFeature')}  </div>
-            <div className='grid max-sm:grid-cols-1 grid-cols-2  gap-x-[100px] gap-y-[20px]  '>
-                {venue?.venueFeatures?.map((e, i) => (
-                    <div  key={i} className='  flex items-center justify-between gap-[10px]'>
-                        <div> <Checkbox disabled={true} checked={true} cn='!mt-0' KEY={`Feature-${e.id}`} label={e?.feature?.feature_name?.[locale]} /> </div>
-                        <div className='h3 text-primary1 '> <SAR price={e.price || 0} />  </div>
-                    </div>
-                ))}
-            </div>
-
-            <Divider classname='my-[30px]' /> */}
         </div>
     );
 }
