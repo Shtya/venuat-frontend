@@ -8,7 +8,7 @@ import Popup from '@/components/molecules/Popup';
 import { Info, Send } from 'lucide-react';
 import { Link } from '@/navigation';
 
-export function formatHour(hour) {
+export function formatHour(hour  ) {
     const h = parseInt(hour, 10);
     if (isNaN(h) || h < 0 || h > 23) return 'Invalid hour';
 
@@ -18,13 +18,12 @@ export function formatHour(hour) {
 
     return (
         <div className='rtl:flex-row-reverse flex justify-center gap-[5px] '>
-            {' '}
             <span> {paddedHour} </span> <span> {period} </span>{' '}
         </div>
     );
 }
 
-export default function HallReservation({}) {
+export default function HallReservation() {
     const t = useTranslations();
     const locale = useLocale();
     const [isOpenPopup, setisOpenPopup] = useState(false);

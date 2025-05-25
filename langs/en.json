@@ -1,5 +1,10 @@
 {
-    "browse" : "Browse the Venues",
+    "browse": "Browse the Venues",
+    "title_timer_before": "Starts In",
+    "title_timer_running": "Time Remaining",
+    "Hours": "Hours",
+    "Minutes": "Minutes",
+    "Seconds": "Seconds",
 
     "reservation_days": "Reservation Days",
     "Date": "Date",

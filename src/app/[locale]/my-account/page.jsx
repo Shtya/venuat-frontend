@@ -38,7 +38,7 @@ const page = () => {
         <Sidebar getMe={getMe} loading={loading} currentComponent={currentComponent} handleCurrentPage={handleCurrentPage} />
 
         {currentComponent == 1 && <MyInformation user={user} loadingInfo={loadingInfo} loadingPassword={loadingPassword} SubmitStep={SubmitStep} register={register} errors={errors} getValues={getValues} setValue={setValue} /> }
-        {currentComponent == 2 && <HallReservation getMe={getMe} loading={loading}  /> }
+        {currentComponent == 2 && <HallReservation   /> }
         {currentComponent == 3 && <MyQuestion faqs={faqs} loadingfaqs={loadingfaqs} /> }
       </div>
     </main>

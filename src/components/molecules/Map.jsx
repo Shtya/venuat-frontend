@@ -58,9 +58,9 @@ const Map = ({ showName=true , center, zoom , Fetch , click, setValue, data , se
     useEffect(() => {
         
         const PinHTML = `
-            <div class="relative w-10 h-10 flex items-center justify-center">
-                <div class="absolute w-20 h-20 bg-blue-500 opacity-20 rounded-full animate-ping"></div>
-                <div class="w-[10px] h-[10px] bg-blue-700 rounded-full"></div>
+            <div className="relative w-10 h-10 flex items-center justify-center">
+                <div className="absolute w-20 h-20 bg-blue-500 opacity-20 rounded-full animate-ping"></div>
+                <div className="w-[10px] h-[10px] bg-blue-700 rounded-full"></div>
             </div>
             `;
 

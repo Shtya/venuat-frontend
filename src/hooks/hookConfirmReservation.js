@@ -1,7 +1,6 @@
 'use client';
 
 import AxiosInstance from '@/config/Axios';
-import { ContactUsSchema } from '@/schema/ContactUsSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -16,23 +15,11 @@ import { useGlobalContext } from '@/context/GlobalContext';
 export const hookConfirmReservation = ({ id }) => {
     const router = useRouter()
     const t = useTranslations();
-    const [startDate, setstartDate] = useState();
     const [endDate, setendDate] = useState();
 
     const schema = useMemo(() => ReservationSchema({ endDate }), [endDate]);
 
-    const {
-        register,
-        trigger,
-        handleSubmit,
-        formState: { errors },
-        clearErrors,
-        setError,
-        getValues,
-        setValue,
-        watch,
-        reset,
-    } = useForm({ resolver: yupResolver(schema) });
+    const { register, trigger, handleSubmit, formState: { errors }, clearErrors, setError, getValues, setValue, watch, reset, } = useForm({ resolver: yupResolver(schema) });
 
     const { user } = hookUser();
 
@@ -46,8 +33,6 @@ export const hookConfirmReservation = ({ id }) => {
         try {
             const response = await AxiosInstance.get(`/venues/${id}/reservation-venue${query}`);
             setVenue(response.data);
-
-            setstartDate(response?.data?.package?.start_date);
             setendDate(response?.data?.package?.end_date);
         } catch (error) {
             setErrorState(error.message || 'Failed to load venues');
@@ -148,5 +133,5 @@ export const hookConfirmReservation = ({ id }) => {
         setLoadingReservation(false);
     });
 
-    return {selectedPeriods , changeListen , setSelectedPeriods, isOpenPopup, setisOpenPopup, loadingReservation, loadingPricing, venue: venue?.venue, Package: venue?.package, loading, errors, trigger, setValue, submit, watch };
+    return {selectedPeriods , PackageId  , changeListen , setSelectedPeriods, isOpenPopup, setisOpenPopup, loadingReservation, loadingPricing, venue: venue?.venue, Package: venue?.package, loading, errors, trigger, setValue, submit, watch };
 };

@@ -59,7 +59,7 @@ export const useDetailsHalls = ({id}) => {
 
     const fetchPackage = async () => {
         try {
-            const response = await AxiosInstance.get(`venue-packages/${id}/venue`);
+            const response = await AxiosInstance.get(`venue-packages/${id}/venue?status=current`);
             setPackage(response.data);
 
         } catch (error) {

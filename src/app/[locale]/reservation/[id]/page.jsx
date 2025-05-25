@@ -20,11 +20,12 @@ import Popup from '@/components/molecules/Popup';
 import RadioDate from '@/components/atoms/radio/RadioDate';
 import AxiosInstance from '@/config/Axios';
 import { useGlobalContext } from '@/context/GlobalContext';
+import { formatHour } from '@/components/page/profile/HallReservation';
 
 const Page = ({ params }) => {
     const t = useTranslations();
     const locale = useLocale();
-    const {selectedPeriods, setSelectedPeriods, changeListen , isOpenPopup, setisOpenPopup, loadingReservation, loadingPricing, Package, venue, loading, errors, trigger, setValue, submit, watch } = hookConfirmReservation({ id: params.id });
+    const {PackageId , selectedPeriods, setSelectedPeriods, changeListen , isOpenPopup, setisOpenPopup, loadingReservation, loadingPricing, Package, venue, loading, errors, trigger, setValue, submit, watch } = hookConfirmReservation({ id: params.id });
     const [minmize, setminimize] = useState(true);
     const [disabled, setDisabled] = useState(true);
 
@@ -61,8 +62,12 @@ const Page = ({ params }) => {
     useEffect(() => {
         const fetchPeriods = async () => {
             if (!checkIn || !checkOut) return;
-
-            AxiosInstance.get(`/venues/${params?.id}/periods/range?from=${checkIn}&to=${checkOut}`)
+            let url ;
+            PackageId 
+                ? url = `/venues/${params?.id}/periods/range?from=${checkIn}&to=${checkOut}&packageId=${PackageId}`
+                : url = `/venues/${params?.id}/periods/range?from=${checkIn}&to=${checkOut}` ;
+            
+                AxiosInstance.get(url)
                 .then(response => {
                     setPeriods(response?.data);
                 })
@@ -127,7 +132,7 @@ const Page = ({ params }) => {
                                                 <span className='text-xs text-black mt-[3px] bg-neutral-200  px-[5px] py-[2px] rounded-[3px] '>{e?.split(':')[1]}</span> {/* 10/4 */}
                                             </div>
 
-                                            {periods?.[e]?.length < 1 && <span className='inline-block px-4 py-2 text-sm font-normal text-gray-800 bg-gray-200 rounded-full border border-gray-300'>Not Available</span>}
+                                            {periods?.[e]?.length < 1 && <span className='inline-block px-4 py-2 text-sm font-normal text-gray-800 bg-gray-200 rounded-full border border-gray-300'> {t("not-availabel")} </span>}
                                         </div>
 
                                         {periods?.[e]?.length >= 1 && (
@@ -138,7 +143,7 @@ const Page = ({ params }) => {
                                                 name={`day_${e}`}
                                                 setDisabled={setDisabled}
                                                 options={periods[e]?.map(item => ({
-                                                    label: `${item.from} - ${item.to}`,
+                                                    label: <div className='text-nowrap flex items-center gap-[5px] flex-wrap text-sm ' > {formatHour(item.from)} - {formatHour(item.to)} </div>,
                                                     price: item.price,
                                                     value: item.id,
                                                     booked_dates: item.booked_dates,
@@ -153,7 +158,7 @@ const Page = ({ params }) => {
                             </div>
 
                             <Address_vesitor titleAddress={venue?.name?.[locale]} titleVistor={t('visitors_count')} e={venue} />
-                            <Rate_price rateTitle={t('rating')} ratings={venue?.ratings} priceTitle={t('price2')} priceValue={totalPrice} />
+                            <Rate_price rateTitle={t('rating')} ratings={venue?.ratings} />
                         </div>
 
                         <img data-aos='zoom-out' className='max-lg:order-[-1] max-lg:mx-auto max-lg:mb-[20px] rounded-[30px] w-full max-w-[500px] rtl:mr-auto ltr:ml-auto bg-neutral-100 max-sm:max-h-[220px] max-h-[350px] object-contain' src={venue?.venueGalleries?.[0]?.imgs[0]} alt='' width={250} height={250} />

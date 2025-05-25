@@ -25,7 +25,7 @@ export default function Rate_price({ rateTitle, ratings , priceTitle, priceValue
                 </div>
             </div>} */}
 
-            {priceValue != 0 &&<div className={` ${rateTitle ? "flex-col" : " gap-[10px] "}  flex gap-[5px] max-sm:flex-row  `}>
+            {priceValue && priceValue != 0 &&<div className={` ${rateTitle ? "flex-col" : " gap-[10px] "}  flex gap-[5px] max-sm:flex-row  `}>
                 <div className='text-[17px] max-md:text-[15px]  font-[600]'> {priceTitle} </div>
                 <div className='h2 text-primary1 font-[600] '> <SAR price={priceValue} /> </div>
             </div>}

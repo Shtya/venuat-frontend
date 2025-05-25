@@ -11,10 +11,7 @@ export const ReservationSchema = ({ endDate }) => {
       .date()
       .required("reservation-error2")
       .min(yup.ref('check_in'), "reservation-error3")
-      .when([], {
-        is: () => !!endDate,
-        then: (schema) => schema.max(new Date(endDate), "reservation-error4"),
-      }),
+      
 
   });
 };

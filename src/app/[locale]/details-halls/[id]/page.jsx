@@ -14,7 +14,7 @@ import Arrow from '@/components/molecules/swiper/Arrow';
 
 const Page = ({params}) => {
   const t = useTranslations();
-  const {venue, loading, policy , loadingPolicy , faqs ,loadingfaqs , Package  } = useDetailsHalls({id : params.id})
+  const {venue, loading, policy , loadingPolicy , faqs ,loadingfaqs , loadingPackage  , Package  } = useDetailsHalls({id : params.id})
   
 
   return (
@@ -34,7 +34,7 @@ const Page = ({params}) => {
             <Arrow />
         </div>
       
-      <CardPackage checkAuth={true} data={venue?.venue} Package={Package} loading={loading} />
+      <CardPackage checkAuth={true} data={venue?.venue} Package={Package} loading={loadingPackage} />
 
       <div data-aos="fade-up" className='h1 font-[700] my-[30px] '> {t('halls_you_may_like')} </div>
       <Card  id={"similar_halls"} data={venue?.similarVenues} isLoading={loading} />
