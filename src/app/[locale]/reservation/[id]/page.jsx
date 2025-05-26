@@ -51,7 +51,8 @@ const Page = ({ params }) => {
         (acc, [day, id]) => {
             const selectedItem = periods[day]?.find(p => p.id === id);
             if (selectedItem?.price) {
-                acc.totalPrice += selectedItem.price;
+                if(PackageId) acc.totalPrice += selectedItem.package_price || 0;
+                    else acc.totalPrice += selectedItem.price;
                 acc.totalDays += 1;
             }
             return acc;
@@ -144,7 +145,7 @@ const Page = ({ params }) => {
                                                 setDisabled={setDisabled}
                                                 options={periods[e]?.map(item => ({
                                                     label: <div className='text-nowrap flex items-center gap-[5px] flex-wrap text-sm ' > {formatHour(item.from)} - {formatHour(item.to)} </div>,
-                                                    price: item.price,
+                                                    price: PackageId ? item?.package_price  : item.price  ,
                                                     value: item.id,
                                                     booked_dates: item.booked_dates,
                                                     date: e?.split(':')[1].trim(),
@@ -183,12 +184,12 @@ const Page = ({ params }) => {
 
                 <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'>
                     <span>{t('additionalServices')}</span>
-                    {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <TotalDaysPrice totalDays={Days} price={servicesPrice} />}
+                    {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <TotalDaysPrice totalDays={Days} price={servicesPrice / Days} />}
                 </div>
 
                 <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'>
                     <span>{t('additionalEquipment')}</span>
-                    {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <TotalDaysPrice totalDays={Days} price={equipmentsPrice} />}
+                    {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <TotalDaysPrice totalDays={Days} price={equipmentsPrice/ Days} />}
                 </div>
 
                 <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'> 

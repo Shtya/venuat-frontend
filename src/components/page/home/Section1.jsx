@@ -37,10 +37,10 @@ export default function Section1({ venue, loading }) {
         <div className='h-fit'>
            
                 <div className='grid grid-cols-2 max-md:grid-cols-1 gap-[20px]'>
-                    <ImageWithSkeleton  className=' h-[600px] object-cover  ' src={imgs?.[0]} alt='' width={750} height={650} />
+                    <ImageWithSkeleton  loading={loading} className=' h-[600px] object-cover  ' src={imgs?.[0]} alt='' width={750} height={650} />
                     <div className='grid grid-cols-2 max-[400px]:grid-cols-1 gap-[20px]'>
                         {Array(4).fill(0).map((e, i) => (
-                            <ImageWithSkeleton  className='    max-md:h-[200px] h-[287px] w-full object-cover' key={i} src={imgs?.[i+2]} alt='' width={350} height={280} />
+                            <ImageWithSkeleton loading={loading} className='    max-md:h-[200px] h-[287px] w-full object-cover' key={i} src={imgs?.[i+2]} alt='' width={350} height={280} />
                         ))}
                     </div>
                 </div>
