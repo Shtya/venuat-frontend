@@ -50,6 +50,7 @@ export const metadata = {
 
 export default function RootLayout({ children, params: { locale } }) {
     const messages = useMessages();
+    
 
     return (
         <html lang={locale} dir={locale == 'en' ? 'ltr' : 'rtl'} className={`${alexandria.variable} ${openSans.variable}`} >
