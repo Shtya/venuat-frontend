@@ -184,12 +184,12 @@ const Page = ({ params }) => {
 
                 <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'>
                     <span>{t('additionalServices')}</span>
-                    {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <TotalDaysPrice totalDays={Days} price={servicesPrice / Days} />}
+                    {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <TotalDaysPrice totalDays={Days} price={servicesPrice / Days || 0} />}
                 </div>
 
                 <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'>
                     <span>{t('additionalEquipment')}</span>
-                    {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <TotalDaysPrice totalDays={Days} price={equipmentsPrice/ Days} />}
+                    {loadingPricing ? <div className='h-4 bg-gray-200 rounded w-20 animate-pulse'></div> : <TotalDaysPrice totalDays={Days} price={equipmentsPrice/ Days || 0} />}
                 </div>
 
                 <div className='h2 my-[10px] flex items-center justify-between gap-[10px] flex-wrap'> 

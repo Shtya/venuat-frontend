@@ -114,7 +114,10 @@ export const hookConfirmReservation = ({ id }) => {
                 totalWithTax ,
             }
         };
-        if (PackageId) handleData.package = +PackageId;
+        if (PackageId) {
+            handleData.package = +PackageId;
+            handleData.reservation_details.package = +PackageId
+        }
 
         setLoadingReservation(true);
         await AxiosInstance.post(`/reservations`, handleData)

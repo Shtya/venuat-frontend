@@ -36,17 +36,17 @@ const BookingDetails = ({ data, loading, open }) => {
                         <tbody>
                             {Object.entries(data?.periods || {}).map(([date, periodId], i) => {
                                 // Find the matching period detail by the periodId
-                                const detail = data?.period_details?.find(p => p.id === periodId);
+                                const e = data?.period_details?.find(p => p.id === periodId);
 
                                 return (
                                     <tr key={i}>
                                         <td className='border border-primary3 text-center px-2 py-1'>{date}</td>
-                                        <td className='border border-primary3 text-center px-2 py-1'>{formatHour(detail?.from)}</td>
-                                        <td className='border border-primary3 text-center px-2 py-1'>{formatHour(detail?.to)}</td>
+                                        <td className='border border-primary3 text-center px-2 py-1'>{formatHour(e?.from)}</td>
+                                        <td className='border border-primary3 text-center px-2 py-1'>{formatHour(e?.to)}</td>
                                         <td className='border border-primary3 text-center px-2 py-1'>
-                                            <SAR cnAll='justify-center scale-[.9]' price={detail?.price} />
+                                            <SAR cnAll='justify-center scale-[.9]' price={data?.reservation_details?.package  ? e?.package_price : e?.price} />
                                         </td>
-                                        <td className='border border-primary3 text-center px-2 py-1 capitalize'>{detail?.day}</td>
+                                        <td className='border border-primary3 text-center px-2 py-1 capitalize'>{e?.day}</td>
                                     </tr>
                                 );
                             })}
