@@ -21,7 +21,7 @@ export const GlobalProvider = ({ children }) => {
 
     const equipmentsPrice = Equipments && Equipments?.reduce((acc, curr) => {  const itemPrice = Number(curr.price) * Number(curr.count); return acc + itemPrice; }, 0);
     const servicesPrice = Services && Services?.reduce((acc, curr) => {  const itemPrice = Number(curr.price) * Number(curr.count); return acc + itemPrice; }, 0);
-    const subtotal = equipmentsPrice + servicesPrice + priceVenue;
+    const subtotal = (equipmentsPrice * Days) + (servicesPrice * Days) + priceVenue;
     const taxValue = subtotal * taxRate;
     const totalWithTax = subtotal + taxValue;
     

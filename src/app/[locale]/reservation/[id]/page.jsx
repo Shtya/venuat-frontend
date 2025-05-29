@@ -144,7 +144,7 @@ const Page = ({ params }) => {
                                                 name={`day_${e}`}
                                                 setDisabled={setDisabled}
                                                 options={periods[e]?.map(item => ({
-                                                    label: <div className='text-nowrap flex items-center gap-[5px] flex-wrap text-sm ' > {formatHour(item.from)} - {formatHour(item.to)} </div>,
+                                                    label: <div className='text-nowrap flex items-center gap-[5px] flex-wrap text-sm ' > {formatHour(item.from)} - {formatHour(item.to) } </div>,
                                                     price: PackageId ? item?.package_price  : item.price  ,
                                                     value: item.id,
                                                     booked_dates: item.booked_dates,

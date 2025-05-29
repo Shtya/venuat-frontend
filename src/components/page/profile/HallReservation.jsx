@@ -10,7 +10,7 @@ import { Link } from '@/navigation';
 
 export function formatHour(hour  ) {
     const h = parseInt(hour, 10);
-    if (isNaN(h) || h < 0 || h > 23) return 'Invalid hour';
+    if (isNaN(h) || h < 0 || h > 24) return 'Invalid hour';
 
     const period = h >= 12 ? 'PM' : 'AM';
     const hour12 = h % 12 === 0 ? 12 : h % 12;
