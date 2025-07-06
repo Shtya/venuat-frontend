@@ -79,54 +79,127 @@ export default function Navbar() {
     }, [user, path]);
 
     return (
-        <nav className={` navbar z-[1000] sticky top-0 ${place ? (isScrolled ? 'bg-black ' : 'h-0') : 'bg-white'}  `}>
-            <div className={`lg:hidden fixed z-[1000] w-full top-0 flex items-center justify-between px-[20px]  ${place ? (isScrolled ? 'bg-[#000]' : 'h-[80px') : 'bg-white '} `}>
-                <div className='flex items-center gap-[10px] '>
-                    <Image onClick={handleToggle} className=' cursor-pointer hover:text-primary1' src={`/assets/${show == 'fixed' ? 'close' : `${place ? 'menu-white' : 'menu'}`}.svg`} alt='' width={25} height={25} />
-                    <DropdownLang color={place ? 'text-white' : 'text-secondry1'} />
-                </div>
-                <Link href='/'>
-                    <Image src={`/assets/${place ? 'logo-white' : 'logo'}.svg`} alt='' width={130} height={60} />
-                </Link>
-            </div>
+        <nav className={`navbar z-[1000] sticky top-0 ${place ? (isScrolled ? 'bg-black' : 'h-0') : 'bg-white shadow-sm'}`}>
+    {/* Mobile Header */}
+    <div className={` lg:hidden fixed z-[1000] w-full top-0 flex items-center justify-between px-5 py-4 ${place ? (isScrolled ? 'bg-black' : 'h-20') : 'bg-white shadow-md'}`}>
+        <div className='flex items-center gap-3'>
+            <Image 
+                onClick={handleToggle} 
+                className='cursor-pointer hover:opacity-80 transition-opacity' 
+                src={`/assets/${show === 'fixed' ? 'close' : `${place ? 'menu-white' : 'menu'}`}.svg`} 
+                alt='menu' 
+                width={25} 
+                height={25} 
+            />
+            <DropdownLang color={place ? 'text-white' : 'text-secondary1'} />
+        </div>
+        <Link href='/'>
+            <Image 
+                src={`/assets/${place ? 'logo-white' : 'logo'}.svg`} 
+                alt='logo' 
+                width={130} 
+                height={60}
+                className='transition-transform hover:scale-105'
+            />
+        </Link>
+    </div>
 
-            <div className={` max-lg:${show}  duratino-300  ${place ? 'max-lg:bg-secondry1' : 'max-lg:bg-primary3'}  max-lg:z-[100] max-lg:inset-0 max-lg:h-[100vh] max-lg:top-0 max-lg:flex-col max-lg:justify-center max-lg:items-start max-lg:gap-[20px] border-b-[1px]   border-b-primary3 container ${isScrolled ? 'min-h-[80px]' : 'min-h-[130px]'} duration-300 w-full flex items-center justify-between`}>
-                <div className={style.item + 'max-lg:mt-[-180px]'}>
-                    <Link className='max-lg:hidden' href='/'>
-                        <Image src={`/assets/${place ? 'logo-white' : 'logo'}.svg`} alt='' width={100} height={40} />
+    {/* Main Navbar Content */}
+    <div className={`
+        max-lg:backdrop-blur-md max-lg:!bg-black/80 
+        max-lg:${show} 
+        transition-all duration-300 ease-in-out
+        ${place ? 'max-lg:bg-secondary1' : 'max-lg:bg-primary3'}  
+        max-lg:z-[100] max-lg:inset-0 max-lg:h-screen max-lg:top-0 
+        max-lg:flex-col max-lg:justify-center max-lg:items-start max-lg:gap-5 
+        max-lg:px-8 max-lg:py-12
+        border-b border-opacity-10 ${place ? 'border-white' : 'border-primary3'}
+        container 
+        ${isScrolled ? 'min-h-20' : 'min-h-32'} 
+        w-full flex items-center justify-between
+    `}>
+        <div className='flex items-center gap-10 max-lg:flex-col max-lg:items-start max-lg:gap-8 max-lg:mt-[-180px]'>
+            <Link className='max-lg:hidden hover:opacity-90 transition-opacity' href='/'>
+                <Image 
+                    src={`/assets/${place ? 'logo-white' : 'logo'}.svg`} 
+                    alt='logo' 
+                    width={100} 
+                    height={40}
+                />
+            </Link>
+            
+            <ul className='flex items-center gap-8 max-lg:flex-col max-lg:items-start max-lg:gap-6'>
+                {links?.map((e, i) => (
+                    <Link 
+                        className={`
+                            relative transition-all duration-200
+                            ${e?.cn} 
+                            ${place ? 'text-white hover:text-primary3' : 'text-secondary1 hover:text-primary1'}
+                            ${path === e.value ? `font-semibold after:w-[60%] ${place ? 'text-primary3' : 'text-primary1'}` : 'after:w-0'}
+                            after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2
+                            after:rounded-full after:h-0.5
+                            after:transition-all after:duration-300
+                            ${place ? 'after:bg-primary3' : 'after:bg-primary1'}
+                            after:bottom-[-4px]
+                            hover:after:w-[60%]
+                        `} 
+                        href={e.value} 
+                        key={i}
+                    >
+                        {e.name}
                     </Link>
-                    <ul className={style.item}>
-                        {links?.map((e, i) => (
-                            <Link className={` ${e?.cn} ${place ? 'hover:text-primary3 text-white ' : 'hover:text-primary1 text-secondry1 '}  ${path == e.value ? `font-semibold after:w-[60%] ${place ? 'text-primary3' : 'text-primary1'} ` : ' after:w-0 '} after:duration-300  relative after:absolute after:left-[50%] after:translate-x-[-50%]  after:rounded-[10px] after:h-[3px]  ${place ? 'after:bg-primary3' : 'after:bg-primary1'} after:bottom-[-8px] `} href={e.value} key={i}>
-                                {e.name}
-                            </Link>
-                        ))}
-                    </ul>
-                </div>
+                ))}
+            </ul>
+        </div>
 
-                <div className={style.item}>
-                    <DropdownLang color={place ? 'text-white' : 'text-secondry1'} classname='max-lg:hidden' />
-                    {user ? (
-                        <Link href={MyAccount} className=' items-center cursor-pointer grid grid-cols-[35px,1fr] gap-[5px] '>
-                            <div className='w-[35px] h-[35px] flex items-center justify-center rounded-[50%] bg-primary3 border-[1px] border-gray-200 '>
-                                <Image className='rounded-full overflow-hidden  w-full h-full p-[2px] ' src={user?.avatar || ImgUserPrimary} alt='' width={20} height={20} />
-                            </div>
-                            <div className=' max-lg:flex gap-[5px] '>
-                                <div className={`h4 max-lg:h3 lg:text-[12px] ${place ? 'text-white' : 'text-secondry1'} font-[500]`}> {t('hello')} </div>
-                                <div className={`h4 max-lg:h3 ${place ? 'text-white' : 'text-secondry1'} capitalize `}> {user?.full_name?.split(' ')[0]} </div>
-                            </div>
-                        </Link>
-                    ) : (
-                        <Link href={SignIn} className={`${place ? 'text-white' : 'text-secondry1'}`}>
-                            {t('login')}
-                        </Link>
-                    )}
+        <div className='flex items-center gap-6 max-lg:flex-col max-lg:items-start max-lg:gap-5'>
+            <DropdownLang 
+                color={place ? 'text-white' : 'text-secondary1'} 
+                classname='max-lg:hidden' 
+            />
+            
+            {user ? (
+                <Link 
+                    href={MyAccount} 
+                    className='flex items-center gap-2 cursor-pointer group'
+                >
+                    <div className='w-9 h-9 flex items-center justify-center rounded-full bg-primary3 border border-gray-200 overflow-hidden group-hover:ring-2 group-hover:ring-primary1 transition-all'>
+                        <Image 
+                            className='w-full h-full object-cover'
+                            src={user?.avatar || ImgUserPrimary} 
+                            alt='user avatar' 
+                            width={36} 
+                            height={36} 
+                        />
+                    </div>
+                    <div className='flex flex-col max-lg:gap-1'>
+                        <div className={`text-xs ${place ? 'text-white' : 'text-secondary1'} font-medium opacity-80`}>
+                            {t('hello')}
+                        </div>
+                        <div className={`text-sm ${place ? 'text-white' : 'text-secondary1'} font-semibold capitalize  transition-colors`}>
+                            {user?.full_name?.split(' ')[0]}
+                        </div>
+                    </div>
+                </Link>
+            ) : (
+                <Link 
+                    href={SignIn} 
+                    className={`${place ? 'text-white' : 'text-secondary1'} hover:text-primary1 transition-colors px-3 py-1 rounded-lg ${place ? 'hover:bg-white hover:bg-opacity-10' : 'hover:bg-gray-100'}`}
+                >
+                    {t('login')}
+                </Link>
+            )}
 
-                    <Button href={'/sign-up/provider?step=1'} showIcon={true} name={t('add_your_hall_now')} />
-                </div>
-            </div>
+            <Button 
+                href={'/sign-up/provider?step=1'} 
+                showIcon={true} 
+                name={t('add_your_hall_now')} 
+                className='hover:shadow-lg transition-shadow'
+            />
+        </div>
+    </div>
 
-            <hr className=' lg:hidden mb-[90px] ' />
-        </nav>
+    <hr className='lg:hidden mb-24 border-none' />
+</nav>
     );
 }

@@ -31,5 +31,5 @@ export const hookBooking = () => {
         fetchBooking();
     }, []);
 
-    return {  booking, loading  };
+    return {  booking, loading , setBooking  };
 };

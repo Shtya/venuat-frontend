@@ -13,14 +13,15 @@ export const GlobalProvider = ({ children }) => {
     
 
     const taxRate = 0.15; // 15%
-    const [Services , setServices] = useState(null)
-    const [Equipments , setEquipments] = useState(null)
+    const [Services , setServices] = useState(0)
+    const [Equipments , setEquipments] = useState(0)
     const [Days , setDays] = useState(0)
     const [priceVenue , setPriceVenue] = useState(0)
 
 
-    const equipmentsPrice = Equipments && Equipments?.reduce((acc, curr) => {  const itemPrice = Number(curr.price) * Number(curr.count); return acc + itemPrice; }, 0);
-    const servicesPrice = Services && Services?.reduce((acc, curr) => {  const itemPrice = Number(curr.price) * Number(curr.count); return acc + itemPrice; }, 0);
+    const equipmentsPrice = Equipments && Equipments?.reduce((acc, curr) => {  const itemPrice = Number(curr.price) * Number(curr.count); return acc + itemPrice; }, 0) || 0;
+    const servicesPrice = Services && Services?.reduce((acc, curr) => {  const itemPrice = Number(curr.price) * Number(curr.count); return acc + itemPrice; }, 0) || 0;
+    
     const subtotal = (equipmentsPrice * Days) + (servicesPrice * Days) + priceVenue;
     const taxValue = subtotal * taxRate;
     const totalWithTax = subtotal + taxValue;

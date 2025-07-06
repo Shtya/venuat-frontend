@@ -1,9 +1,8 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import Button from '../../atoms/button/Button';
-import Starts from '../../atoms/start/Starts';
 import Address_vesitor from '@/components/atoms/card/Address_vesitor';
 import Rate_price from '@/components/atoms/card/Rate_price';
 import CardPlaceholder from '../placeholder/CardPlaceholder';

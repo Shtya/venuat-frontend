@@ -72,7 +72,7 @@ export default function DetailsVenue({cn, venue , Package , loading }) {
     return (
         <div className={`${cn}`}>
             {Services?.length > 0 && (
-                <div className={style.head}>
+                <div className={`${style.head}   `}>
                     <span className=' font-medium text-secondry3 '> {t('additionalServices')} </span>
                     <span  className='text-center font-medium text-secondry3 '> {t('quantity')} </span>
                     <span  className='max-w-[70px] w-full ltr:ml-auto rtl:mr-auto font-medium text-secondry3 '> {t('price2')} </span>
