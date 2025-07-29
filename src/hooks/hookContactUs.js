@@ -30,10 +30,10 @@ export const hookContactUs = () => {
           setValue("fullName" , null)
           setValue("message" , null)
           checkEndpoint()
+          Notification(t('contact_us_success'), 'success');
         })
         .catch(err => console.log(err))
         .finally(()=>{
-            Notification(t('contact_us_success'), 'success');
             setLoading(false);
         });
 });

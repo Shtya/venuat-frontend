@@ -1,12 +1,11 @@
 import ProgressSteps from '@/components/atoms/progress/ProgressSteps';
 import RadioLabel from '@/components/atoms/radio/RadioLabel';
-import { CountPlaceData, PlaceData, ServicesData } from '@/Dummy/dummy';
+import { CountPlaceData, PlaceData  } from '@/Dummy/dummy';
 import { hookProvider } from '@/hooks/hookProvider';
-import React, { useState } from 'react';
+import React  from 'react';
 import Answer from './Answer';
 import MapComponent from './Map';
-import Services from './Services';
-import SelectServices from './SelectServices';
+ import SelectServices from './SelectServices';
 import InformationAboutHall from './InformationAboutHall';
 import AddFaqs from './AddFaqs';
 import GalleryHall from './GallaryHall';

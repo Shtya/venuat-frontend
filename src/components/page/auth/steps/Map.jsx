@@ -28,7 +28,7 @@ useEffect(()=> {
         <div  >
 			<div className="h2 mt-[20px] mb-[30px] text-center "> {t("mapTitle")} </div>
 
-            <MAP Fetch={true} zoom={20} click={false}  setValue={setValue} />
+            <MAP Fetch={true} zoom={13} click={false}  setValue={setValue} />
             {errors?.lat && <div className='error w-full text-center text-[16px] mt-[10px]  '> {t(errors?.lat?.message)} </div>}
             
 			

@@ -10,7 +10,7 @@ export default function DetailsVenue({cn, venue , Package , loading }) {
     const t = useTranslations();
     const {Services , setServices ,  Equipments , setEquipments} = useGlobalContext()
     const [disabled , setdisabled] = useState(false)
-
+ 
     useEffect(()=> {
         if(venue){
             if(Package){

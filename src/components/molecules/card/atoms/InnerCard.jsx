@@ -25,36 +25,31 @@ function formatTime(time) {
 export default function InnerCard({ activeAos=true , e, i, data, btnName }) {
     const t = useTranslations();
     const locale = useLocale();
-    const [showServ, setshowServ] = useState(false);
-    const [showEquip, setshowEquip] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(0);
+    //  const [timeLeft, setTimeLeft] = useState(0);
 
-    useEffect(() => {
-        const endDate = new Date(e.end_date).getTime();
+    // useEffect(() => {
+    //     const endDate = new Date(e.end_date).getTime();
 
-        const timer = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = endDate - now;
-            if (distance <= 0) {
-                clearInterval(timer);
-                setTimeLeft(0);
-            } else {
-                setTimeLeft(distance);
-            }
-        }, 1000);
-        return () => clearInterval(timer);
+    //     const timer = setInterval(() => {
+    //         const now = new Date().getTime();
+    //         const distance = endDate - now;
+    //         if (distance <= 0) {
+    //             clearInterval(timer);
+    //             setTimeLeft(0);
+    //         } else {
+    //             setTimeLeft(distance);
+    //         }
+    //     }, 1000);
+    //     return () => clearInterval(timer);
 
-    }, [e.end_date]);
-
-    if (timeLeft <= 0) return null;
-
+    // }, [e.end_date]);
 
     
     return (
         <div {...(activeAos ? { 'data-aos': 'zoom-in', 'data-aos-delay': `${i}00` } : {})}  className='h-full pb-[80px] max-sm:pb-[50px] relative rounded-[20px] overflow-hidden w-full shadow-custom border-gray1 border-[1px]'>
             <div className='w-full relative bg-primary1 max-sm:max-h-[220px] max-h-[250px] overflow-hidden ' >
                 <img className='w-full h-full object-cover' src={data?.venueGalleries?.[0]?.imgs[0] || '/assets/test-img/notfound.png'} alt='' />
-                <div className=' font-[700] tracking-[1px] text-white bg-primary1 bg-opacity-60 backdrop-blur-[4px] absolute ltr:right-[10px] rtl:left-[10px] bottom-0  rounded-[20px] px-[15px] py-[8px] mb-2 text-center'> {formatTime(timeLeft)} </div>
+                {/* <div className=' font-[700] tracking-[1px] text-white bg-primary1 bg-opacity-60 backdrop-blur-[4px] absolute ltr:right-[10px] rtl:left-[10px] bottom-0  rounded-[20px] px-[15px] py-[8px] mb-2 text-center'> {formatTime(timeLeft)} </div> */}
             </div>
             <div className='p-[20px]'>
 

@@ -55,7 +55,7 @@ const Select = ({ cnSelect, showIcons, loading, label, cnLabel, sendId, dataAos,
     }, []);
 
     return (
-        <div ref={selectRef} data-aos={dataAos} className={`${classname} duration-500 relative select flex  flex-col gap-[5px]  w-full `}>
+        <div ref={selectRef} data-aos={dataAos} className={`${classname}  duration-500 relative select flex  flex-col gap-[5px]  w-full `}>
             {label && (
                 <label htmlFor={KEY} className={`h5 ${cnLabel}`}>
                     {label}
@@ -66,9 +66,9 @@ const Select = ({ cnSelect, showIcons, loading, label, cnLabel, sendId, dataAos,
                 {
                     showIcons 
                     ? Icon ? <img src={Icon?.url} alt={""}  className={` bg-[#f9fbfc] rounded-[6px] w-full p-[10px] shadow-[4px_4px_10px_rgba(0,0,0,0.1),_-4px_-4px_10px_rgba(255,255,255,0.8)] cursor-pointer hover:shadow-lg duration-300 max-w-full ltr:mr-[30px] rtl:ml-[30px] h-[35px] object-contain`} /> : place
-                    :  <div className='flex items-center gap-[9px] P-12  '>
+                    :  <div className='  w-full flex items-center gap-[9px] P-12  '>
                         {icon && <Image className='' src={icon} alt='' width={20} height={20} />}
-                        <div className={`h5 ${val?.name ? 'text-secondry2 ' : 'text-secondry3'} `}> {isObject(val?.name) ? val?.name?.[locale] : val?.name || place} </div>
+                        <div className={` max-w-[200px] truncate h5 ${val?.name ? 'text-secondry2 ' : 'text-secondry3'} `}> {isObject(val?.name) ? val?.name?.[locale] : val?.name || place} </div>
                     </div>
                 }
                 <Image src={`/assets/down.svg`} className={`${show ? 'rotate-[180deg]' : ''} w-[12px] h-[12px] duration-300 `} alt='' width={25} height={25} />

@@ -57,7 +57,6 @@ export default function Sidebar({ getMe, loading, currentComponent, handleCurren
   const [isOpenPopup, setisOpenPopup] = useState(false);
 
   const handleLogout = () => {
-    // Remove any stored authentication tokens or user data
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('user');

@@ -25,10 +25,7 @@ export default function CardPackage({ loading , data , Package , btnName }) {
             1100: { slidesPerView: 3 },
         }
     };
-
-    // Filter out expired packages
-    // const validPackages = Package?.filter(e => !e?.end_date || new Date(e.end_date) > new Date());
-
+ 
     // Hide arrows if no valid packages are present
     useEffect(() => {
         const arrow = document.querySelector('.arrow-package');

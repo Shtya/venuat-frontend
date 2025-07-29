@@ -108,7 +108,7 @@ export const hookProvider = () => {
 
     //! sign up  
     const SignUp = async (data) => {
-        const handleData = {
+         const handleData = {
             full_name: data?.name,
             email: data?.email,
             password: data?.password,
@@ -120,7 +120,6 @@ export const hookProvider = () => {
         setloading(true);
     
         try {
-            // Step 1: Sign up the user
             const signUpResponse = await AxiosInstance.post(`/auth/signup`, handleData);
             Notification(signUpResponse.data?.message, 'success');
             
@@ -139,11 +138,11 @@ export const hookProvider = () => {
             localStorage.setItem('refreshToken', signInResponse.data?.refreshToken); 
             
             ChagneStep(2);
+            setValue("name" , null )
         } catch (err) {
             Notification(err.response?.data?.message || 'An error occurred', 'error');
         } finally {
             setloading(false);
-            setValue("name" , null )
         }
     };
 

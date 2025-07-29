@@ -38,9 +38,8 @@ export default function AcceptConditions({previousStep , watch , loading : loadi
   return (
 	<div data-aos="fade-up" >
 		<TextArea policy={data?.settings?.policies} loading={loading}  classname={"mt-0 !mb-[50px]  "}  title={t("titleCondition")} desc={t("descCondition")}  />
-		<Checkbox  watch={watch} cn='!mt-0' cnLabel={"text-secondry1 !font-[600] !h3  "}  setValue={setValue}  KEY={KEY} label={t("acceptCondition")} />
+		<Checkbox  watch={watch} href={"/terms-and-conditions"} cn='!mt-0' cnLabel={"text-secondry1 !font-[600] !h3  "}  setValue={setValue}  KEY={KEY} label={t("acceptCondition")} />
 	
-
 		<Button isLoading={loadingPolicesSend} disabled={next} width=" mx-auto max-w-[400px] w-full"  onClick={submit} classname='mt-[50px] ' name={t("containue")} />
 		<Button width=" mx-auto max-w-[400px] w-full"  onClick={previousStep} classname='mt-[10px] ' outline={true} name={t("return")} />
 	</div>

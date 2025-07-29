@@ -18,8 +18,7 @@ import DetailsVenue from '@/components/page/confirm-reservation/DetailsVenue';
 import SAR from '@/components/atoms/SAR';
 import Rate_priceSkeleton from '@/components/atoms/Skelton/Rate_priceSkeleton';
 import Address_vesitorSkeleton from '@/components/atoms/Skelton/Address_vesitorSkeleton';
-import CountdownTimer from '@/components/atoms/CountdownTimer';
-import SuccesReservationPopup from '@/components/popupComponent/SuccesReservationPopup';
+ import SuccesReservationPopup from '@/components/popupComponent/SuccesReservationPopup';
 import Popup from '@/components/molecules/Popup';
 import RadioDate from '@/components/atoms/radio/RadioDate';
 
@@ -317,8 +316,7 @@ const ReservationConfirmationPage = ({ params }) => {
         </div>
       )}
 
-      {/* {!loading && reservationPackage && <CountdownTimer package={reservationPackage} />} */}
-
+ 
       <div className="max-w-full mt-[80px] mx-auto">
         <DetailsSection minimized={minimized} setMinimized={setMinimized} t={t} setValue={setValue} reservationPackage={reservationPackage} venue={venue} loading={loading} />
 
@@ -429,7 +427,7 @@ const DetailsSection = ({ minimized, setMinimized, t, setValue, reservationPacka
       <ChevronDown className={`text-gray-500 transition-all duration-300 ${!minimized ? 'rotate-180' : ''}`} size={24} />
     </div>
 
-    <DetailsVenue setValue={setValue} package={reservationPackage} venue={venue} loading={loading} cn={`${minimized ? 'max-h-[3500px] opacity-100' : 'max-h-0 opacity-0'} ease-in-out transition-all duration-500`} />
+    <DetailsVenue setValue={setValue} Package={reservationPackage} venue={venue} loading={loading} cn={`${minimized ? 'max-h-[3500px] opacity-100' : 'max-h-0 opacity-0'} ease-in-out transition-all duration-500`} />
   </>
 );
 

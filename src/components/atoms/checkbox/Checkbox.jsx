@@ -1,9 +1,12 @@
 'use client';
+import { useRouter } from '@/navigation';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
-const Checkbox = ({ checked , disabled , watch, dataAos, cn, KEY, label, setValue, cnLabel, loading }) => {
+const Checkbox = ({ checked , disabled , href , watch, dataAos, cn, KEY, label, setValue, cnLabel, loading }) => {
     const [isChecked, setIsChecked] = useState(checked || false);
+    const navigate = useRouter()
+
 
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
@@ -33,7 +36,10 @@ const Checkbox = ({ checked , disabled , watch, dataAos, cn, KEY, label, setValu
                 </>
             )}
             <label htmlFor={KEY} className={`cursor-pointer text-base font-[500] text-gray-700 ${cnLabel} ${loading ? 'opacity-50' : ''}`}>
-                {loading ? <div className='w-[100px] h-[10px] bg-gray-300 animate-pulse rounded-[4px]'></div> : label}
+                {loading ? <div className='w-[100px] h-[10px] bg-gray-300 animate-pulse rounded-[4px]'></div> 
+                : <div onClick={()=> href && navigate.push(href) } className={`  ${href && " hover:underline "}  `} > {label} </div>
+                
+                }
             </label>
         </div>
     );

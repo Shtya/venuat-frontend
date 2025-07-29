@@ -13,7 +13,7 @@ const Map = dynamic(() => import('@/components/molecules/Map'), { ssr: false });
 
 const page = () => {
     const t = useTranslations();
-    const { venue, loading , clearData , loadingSubmit , handlePagination , register, errors, trigger, setValue, submit, watch  } = hookSearch();
+    const { venue, loading , clearData , loadingSubmit , handlePagination , register, errors, control ,trigger, setValue, submit, watch  } = hookSearch();
 
     const [showFilter, setshowFilter] = useState(false);
     const filterRef = useRef(null); // Reference to the filter container
@@ -51,7 +51,7 @@ const page = () => {
                     </div>
 
                     <Map data={venue?.data} zoom={4} Fetch={true}  />
-                    <Filter loading={loading} venue={venue} trigger={trigger } setValue={setValue} watch={watch} />
+                    <Filter control={control} loading={loading} venue={venue} trigger={trigger } setValue={setValue} watch={watch} />
                 </div>
 
                 <div>
