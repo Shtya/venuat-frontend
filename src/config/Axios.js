@@ -2,8 +2,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Notification } from './Notification';
 
-const baseUrl = 'http://localhost:8081/api/v1';
-
+// const baseUrl = 'http://localhost:8081/api/v1';
+const baseUrl = 'https://api.venuat.com/api/v1';
 const getToken = () => localStorage.getItem('accessToken');
 const getRefreshToken = () => localStorage.getItem('refreshToken');
 
