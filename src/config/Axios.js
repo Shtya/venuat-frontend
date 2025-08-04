@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { Notification } from './Notification';
 
 // export const base = "http://localhost:8081/"
-const base = "https://api.venuat.com/"
+export const base = "https://api.venuat.com/"
 
 const baseUrl = base + 'api/v1';
 const getToken = () => localStorage.getItem('accessToken');

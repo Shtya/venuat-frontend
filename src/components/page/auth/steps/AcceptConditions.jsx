@@ -5,9 +5,9 @@ import Button from '@/components/atoms/button/Button';
 
 import { onEnter } from '@/helper/onEnter';
 import React, { useEffect, useState } from 'react';
- import { hookSetting } from '@/hooks/hookSettings';
+import { hookSetting } from '@/hooks/hookSettings';
 import { base } from '@/config/Axios';
- 
+
 export default function AcceptConditions({ previousStep, watch, loading: loadingPolicesSend, submit, KEY = 'accetpCondition', setValue }) {
   const t = useTranslations();
 
@@ -33,11 +33,7 @@ export default function AcceptConditions({ previousStep, watch, loading: loading
   const handleDownloadPdf = () => {
     if (data?.settings?.contractPdfUrl) {
       const fileUrl = `${base}${data.settings.contractPdfUrl}`;
-
-      const link = document.createElement('a');
-      link.href = fileUrl;
-      link.download = 'PDF Contract'; // File name for the downloaded file
-      link.click();
+      window.open(fileUrl, '_blank', 'noopener');
     }
   };
 
@@ -53,7 +49,7 @@ export default function AcceptConditions({ previousStep, watch, loading: loading
           </button>
         )}
       </div>
- 
+
       {/* <Checkbox  watch={watch} href={"/terms-and-conditions"} cn='!mt-0' cnLabel={"text-secondry1 !font-[600] !h3  "}  setValue={setValue}  KEY={KEY} label={t("acceptCondition")} /> */}
 
       <Button isLoading={loadingPolicesSend} disabled={next} width=" mx-auto max-w-[400px] w-full" onClick={submit} classname="mt-[50px] " name={t('containue')} />

@@ -156,8 +156,7 @@ const handlePagination = async (page) => {
   }
     const queryString = new URLSearchParams(querys).toString();
 
-  console.log(queryString);
-
+ 
 
   // Now fetch venues with the updated query
   await fetchVenues({ page, query: queryString });
