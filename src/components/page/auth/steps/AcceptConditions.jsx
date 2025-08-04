@@ -1,5 +1,5 @@
 import TextArea from '../../home/TextArea';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Checkbox from '@/components/atoms/checkbox/Checkbox';
 import Button from '@/components/atoms/button/Button';
 
@@ -10,6 +10,7 @@ import { base } from '@/config/Axios';
 
 export default function AcceptConditions({ previousStep, watch, loading: loadingPolicesSend, submit, KEY = 'accetpCondition', setValue }) {
   const t = useTranslations();
+  const locale = useLocale()
 
   const { data, loading } = hookSetting();
   onEnter(submit);
@@ -31,7 +32,11 @@ export default function AcceptConditions({ previousStep, watch, loading: loading
   }, []);
 
   const handleDownloadPdf = () => {
-    if (data?.settings?.contractPdfUrl) {
+    if(locale == "en" && data?.settings?.contractPdfUrl_en){
+      const fileUrl = `${base}${data.settings.contractPdfUrl_en}`;
+      window.open(fileUrl, '_blank', 'noopener');
+    }
+    if (locale == "ar" && data?.settings?.contractPdfUrl) {
       const fileUrl = `${base}${data.settings.contractPdfUrl}`;
       window.open(fileUrl, '_blank', 'noopener');
     }
