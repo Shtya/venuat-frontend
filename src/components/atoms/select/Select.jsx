@@ -67,7 +67,7 @@ const Select = ({ cnSelect, showIcons, loading, label, cnLabel, sendId, dataAos,
                     showIcons 
                     ? Icon ? <img src={Icon?.url} alt={""}  className={` bg-[#f9fbfc] rounded-[6px] w-full p-[10px] shadow-[4px_4px_10px_rgba(0,0,0,0.1),_-4px_-4px_10px_rgba(255,255,255,0.8)] cursor-pointer hover:shadow-lg duration-300 max-w-full ltr:mr-[30px] rtl:ml-[30px] h-[35px] object-contain`} /> : place
                     :  <div className='  w-full flex items-center gap-[9px] P-12  '>
-                        {icon && <Image className='' src={icon} alt='' width={20} height={20} />}
+                        {icon && <img className='' src={icon} alt='' width={20} height={20} />}
                         <div className={` max-w-[200px] truncate h5 ${val?.name ? 'text-secondry2 ' : 'text-secondry3'} `}> {isObject(val?.name) ? val?.name?.[locale] : val?.name || place} </div>
                     </div>
                 }

@@ -34,7 +34,7 @@ const page = () => {
                     {dataSetting?.specialVenues?.length > 0 && <div data-aos='zoom-out' className='h4 mt-[100px] text-center'> {t('mostPlace')}  </div>}
                     {dataSetting?.specialVenues?.length > 0 && <div data-aos='zoom-out' data-aos-delay={200} className='h1 mb-[40px] text-center text-primary1 '> {t('recentHighlights')}  </div>}
                     <CardGrid2_1 isLoading={loadingSetting} data={dataSetting?.specialVenues} />
-                    <Button dataAos='zoom-out' href={'/available-halls'} name={t('browse_all')} outline={true} classname={'!max-w-[300px]  mx-auto mt-[50px] '} />
+                    {dataSetting?.specialVenues?.length > 0 && <Button dataAos='zoom-out' href={'/available-halls'} name={t('browse_all')} outline={true} classname={'!max-w-[300px]  mx-auto mt-[50px] '} />}
 
 
                     {dataSetting?.bestRatedVenues?.length > 0 && <div className='flex items-center justify-between  mt-[100px] mb-[40px]'>
@@ -42,7 +42,7 @@ const page = () => {
                         <Arrow />
                     </div>}
                     <CardSlider isLoading={loadingSetting} data={dataSetting?.bestRatedVenues} />
-                    <Button href={'/available-halls'} dataAos={'zoom-out'} name={t('browse_all')} outline={true} classname={'!max-w-[300px]  mx-auto mt-[50px] '} />
+                    {dataSetting?.bestRatedVenues?.length > 0 && <Button href={'/available-halls'} dataAos={'zoom-out'} name={t('browse_all')} outline={true} classname={'!max-w-[300px]  mx-auto mt-[50px] '} />}
                 </div>
             </div>
         </main>

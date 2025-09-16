@@ -48,11 +48,11 @@ export default function AcceptConditions({ previousStep, watch, loading: loading
 
       <div className="flex items-center gap-2 mt-4">
         <Checkbox watch={watch} cn="!mt-0" cnLabel={'text-secondry1 !font-[600] !h3'} setValue={setValue} KEY={KEY} />
-        {data?.settings?.contractPdfUrl && (
+        {/* {data?.settings?.contractPdfUrl && ( */}
           <button type="button" onClick={handleDownloadPdf} className="cursor-pointer text-base font-[500] text-gray-700 underline  hover:text-blue-800">
             {t('acceptCondition')}
           </button>
-        )}
+        {/* )} */}
       </div>
 
       {/* <Checkbox  watch={watch} href={"/terms-and-conditions"} cn='!mt-0' cnLabel={"text-secondry1 !font-[600] !h3  "}  setValue={setValue}  KEY={KEY} label={t("acceptCondition")} /> */}
