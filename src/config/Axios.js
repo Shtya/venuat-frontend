@@ -2,8 +2,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Notification } from './Notification';
 
-export const base = "http://localhost:8081/"
-// export const base = "https://api.venuat.com/"
+// export const base = "http://localhost:8081/"
+export const base = process.env.NEXT_PUBLIC_BASE_URL
 
 const baseUrl = base + 'api/v1';
 const getToken = () => localStorage.getItem('accessToken');
