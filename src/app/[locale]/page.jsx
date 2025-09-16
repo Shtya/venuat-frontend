@@ -27,7 +27,7 @@ const page = () => {
                     <div data-aos='zoom-out' className='h1 mb-[20px] text-center '>
                         {t('chooseVenue')}
                     </div>
-                    <TabsHome isLoading={loadingOccasion} setindextab={setoccasionId} data={occasion} classname={'my-[30px] mb-[50px] '} />
+                    {venues?.length > 0 && <TabsHome isLoading={loadingOccasion} setindextab={setoccasionId} data={occasion} classname={'my-[30px] mb-[50px] '} />}
                     <Card isLoading={loading} indextab={occasionId} data={venues} />
 
 
